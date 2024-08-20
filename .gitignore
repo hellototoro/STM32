@@ -3,3 +3,4 @@ cube_ws/
 old/
 
 *build/
+STM32.code-workspace
