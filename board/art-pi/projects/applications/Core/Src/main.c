@@ -441,7 +441,7 @@ void StartDefaultTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    printf("[info applications]Hello World!\r\n");
+    printf("[info application]Hello World!\r\n");
     osDelay(1000);
     HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
   }
