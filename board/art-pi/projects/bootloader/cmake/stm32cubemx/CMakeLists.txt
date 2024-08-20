@@ -48,6 +48,7 @@ target_sources(stm32cubemx INTERFACE
     ../../Core/Src/system_stm32h7xx.c
     ../../Core/Src/sysmem.c
     ../../Core/Src/syscalls.c
+    ../../Core/Src/w25qxx.c
     ../../startup_stm32h750xx.s
 )
 

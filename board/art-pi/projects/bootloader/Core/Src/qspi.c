@@ -26,7 +26,7 @@
 #include "stm32h7xx_hal.h"
 #include "memory.h"
 #include "memory_msp.h"
-#include "mt25tl01g/mt25tl01g.h"
+#include "w25qxx.h"
 
 #if (CODE_AREA == USE_QSPI) || (BINARY_AREA == USE_SPI_NOR)
 /** @addtogroup QSPI
