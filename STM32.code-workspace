@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"name": "applications",
+			"path": "board/art-pi/projects/applications"
+		},
+		{
+			"name": "bootloader",
+			"path": "board/art-pi/projects/bootloader"
+		}
+	],
+	"settings": {
+		"cmake.languageSupport.dotnetPath": "C:\\Program Files\\dotnet\\dotnet.exe",
+		"files.associations": {
+			"*.h": "c",
+			"*.c": "c",
+			"*.cpp": "cpp",
+			"*.hpp": "cpp",
+			"*.s": "asm",
+			"cstddef": "c"
+		}
+	}
+}
