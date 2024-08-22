@@ -57,6 +57,7 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define SDRAM_BANK_ADDR (0xC0000000UL)
 #define TP_RST_Pin GPIO_PIN_3
 #define TP_RST_GPIO_Port GPIOD
 #define LED_RED_Pin GPIO_PIN_15
