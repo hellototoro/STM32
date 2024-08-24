@@ -11,7 +11,7 @@
 #include "main.h"
 
 #define SDRAM_TIMEOUT                    ((uint32_t)0xFFFF)
-#define REFRESH_COUNT                    ((uint32_t)0x0603)   /* SDRAM refresh counter */
+#define REFRESH_COUNT                    ((uint32_t)917)   /* SDRAM refresh counter */
 
 /* parameters for sdram peripheral */
 /* Bank1 or Bank2 */
@@ -68,6 +68,7 @@ extern FMC_SDRAM_CommandTypeDef command;
 
 void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram, FMC_SDRAM_CommandTypeDef *Command);
 void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset);
-int sdram_test(void);
+int sdram_test_rt(void);
+int sdram_test_st(void);
 
 #endif /* __SDRAM_H_ */

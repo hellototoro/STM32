@@ -124,47 +124,10 @@ int main(void)
   MX_FMC_Init();
   /* USER CODE BEGIN 2 */
   Ili9481_init();
-  /* Program the SDRAM external device */
+
   SDRAM_Initialization_Sequence(&hsdram1, &command);
-  sdram_test();
-  /*##-2- SDRAM memory read/write access #####################################*/
-  
-  /* Fill the buffer to write */
-  // Fill_Buffer(aTxBuffer, BUFFER_SIZE, 0xA244250F);
-  
-    /* Fill the Read buffer */
-  // Fill_Buffer(aRxBuffer, BUFFER_SIZE, 0xBBBBBBBB);
-  
-  /* Write data to the SDRAM memory */
-  // for (uwIndex = 0; uwIndex < BUFFER_SIZE; uwIndex++)
-  // {
-  //   *(__IO uint32_t*) (SDRAM_BANK_ADDR + WRITE_READ_ADDR + 4*uwIndex) = aTxBuffer[uwIndex];
-  // }
-
-  /* Read back data from the SDRAM memory */
-  // for (uwIndex = 0; uwIndex < BUFFER_SIZE; uwIndex++)
-  // {
-  //   aRxBuffer[uwIndex] = *(__IO uint32_t*) (SDRAM_BANK_ADDR + WRITE_READ_ADDR + 4*uwIndex);
-  // }
-
-  /*##-3- Checking data integrity ############################################*/
-  
-  // for (uwIndex = 0; (uwIndex < BUFFER_SIZE) && (uwWriteReadStatus == 0); uwIndex++)
-  // {
-  //   if (aRxBuffer[uwIndex] != aTxBuffer[uwIndex])
-  //   {
-  //     uwWriteReadStatus++;
-  //   }
-  // }
-  
-  // if (uwWriteReadStatus != PASSED)
-  // {
-  //   printf("SDRAM--------------------NG!\r\n");
-  // }
-  // else
-  // {
-  //   printf("SDRAM--------------------OK!\r\n");
-  // }
+  sdram_test_rt();
+  sdram_test_st();
 
   /* USER CODE END 2 */
 
@@ -367,8 +330,8 @@ static void MX_LTDC_Init(void)
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
   pLayerCfg.Alpha = 127;
   pLayerCfg.Alpha0 = 0;
-  pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
-  pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
+  pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
+  pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
   pLayerCfg.FBStartAdress = 0;
   pLayerCfg.ImageWidth = 0;
   pLayerCfg.ImageHeight = 0;
@@ -386,8 +349,8 @@ static void MX_LTDC_Init(void)
   pLayerCfg1.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
   pLayerCfg1.Alpha = 127;
   pLayerCfg1.Alpha0 = 0;
-  pLayerCfg1.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
-  pLayerCfg1.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
+  pLayerCfg1.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
+  pLayerCfg1.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
   pLayerCfg1.FBStartAdress = 0;
   pLayerCfg1.ImageWidth = 0;
   pLayerCfg1.ImageHeight = 0;
@@ -475,16 +438,16 @@ static void MX_FMC_Init(void)
   hsdram1.Init.RowBitsNumber = FMC_SDRAM_ROW_BITS_NUM_13;
   hsdram1.Init.MemoryDataWidth = FMC_SDRAM_MEM_BUS_WIDTH_16;
   hsdram1.Init.InternalBankNumber = FMC_SDRAM_INTERN_BANKS_NUM_4;
-  hsdram1.Init.CASLatency = FMC_SDRAM_CAS_LATENCY_2;
+  hsdram1.Init.CASLatency = FMC_SDRAM_CAS_LATENCY_3;
   hsdram1.Init.WriteProtection = FMC_SDRAM_WRITE_PROTECTION_DISABLE;
   hsdram1.Init.SDClockPeriod = FMC_SDRAM_CLOCK_PERIOD_2;
   hsdram1.Init.ReadBurst = FMC_SDRAM_RBURST_ENABLE;
   hsdram1.Init.ReadPipeDelay = FMC_SDRAM_RPIPE_DELAY_0;
   /* SdramTiming */
   SdramTiming.LoadToActiveDelay = 2;
-  SdramTiming.ExitSelfRefreshDelay = 8;
+  SdramTiming.ExitSelfRefreshDelay = 9;
   SdramTiming.SelfRefreshTime = 6;
-  SdramTiming.RowCycleDelay = 6;
+  SdramTiming.RowCycleDelay = 8;
   SdramTiming.WriteRecoveryTime = 4;
   SdramTiming.RPDelay = 2;
   SdramTiming.RCDDelay = 2;

@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include "sdram.h"
 
-#define BUFFER_SIZE         ((uint32_t)32)
+#define BUFFER_SIZE         ((uint32_t)0x1000)
 #define WRITE_READ_ADDR     ((uint32_t)0x0800)
 
 FMC_SDRAM_CommandTypeDef command;
@@ -105,7 +105,7 @@ void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
   }
 }
 
-int sdram_test(void)
+int sdram_test_rt(void)
 {
     int i = 0;
     uint32_t start_time = 0, time_cast = 0;
@@ -141,4 +141,46 @@ int sdram_test(void)
     }
 
     return 1;
+}
+
+int sdram_test_st(void)
+{
+  /*##-2- SDRAM memory read/write access #####################################*/
+  
+  /* Fill the buffer to write */
+  Fill_Buffer(aTxBuffer, BUFFER_SIZE, 0xA244250F);
+  
+    /* Fill the Read buffer */
+  Fill_Buffer(aRxBuffer, BUFFER_SIZE, 0xBBBBBBBB);
+  
+  /* Write data to the SDRAM memory */
+  for (uwIndex = 0; uwIndex < BUFFER_SIZE; uwIndex++)
+  {
+    *(__IO uint32_t*) (SDRAM_BANK_ADDR + WRITE_READ_ADDR + 4*uwIndex) = aTxBuffer[uwIndex];
+  }
+
+  /* Read back data from the SDRAM memory */
+  for (uwIndex = 0; uwIndex < BUFFER_SIZE; uwIndex++)
+  {
+    aRxBuffer[uwIndex] = *(__IO uint32_t*) (SDRAM_BANK_ADDR + WRITE_READ_ADDR + 4*uwIndex);
+  }
+
+  /*##-3- Checking data integrity ############################################*/
+  
+  for (uwIndex = 0; (uwIndex < BUFFER_SIZE) && (uwWriteReadStatus == 0); uwIndex++)
+  {
+    if (aRxBuffer[uwIndex] != aTxBuffer[uwIndex])
+    {
+      uwWriteReadStatus++;
+    }
+  }
+  
+  if (uwWriteReadStatus != PASSED)
+  {
+    printf("SDRAM--------------------NG!\r\n");
+  }
+  else
+  {
+    printf("SDRAM--------------------OK!\r\n");
+  }
 }
