@@ -406,14 +406,7 @@ static void HAL_FMC_MspInit(void){
   /** Initializes the peripherals clock
   */
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_FMC;
-    PeriphClkInitStruct.PLL2.PLL2M = 2;
-    PeriphClkInitStruct.PLL2.PLL2N = 64;
-    PeriphClkInitStruct.PLL2.PLL2P = 2;
-    PeriphClkInitStruct.PLL2.PLL2Q = 2;
-    PeriphClkInitStruct.PLL2.PLL2R = 4;
-    PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_3;
-    PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOWIDE;
-    PeriphClkInitStruct.FmcClockSelection = RCC_FMCCLKSOURCE_PLL2;
+    PeriphClkInitStruct.FmcClockSelection = RCC_FMCCLKSOURCE_D1HCLK;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
       Error_Handler();
@@ -438,10 +431,10 @@ static void HAL_FMC_MspInit(void){
   PG2   ------> FMC_A12
   PF5   ------> FMC_A5
   PF4   ------> FMC_A4
-  PC0   ------> FMC_SDNWE
   PC2   ------> FMC_SDNE0
   PC3   ------> FMC_SDCKE0
   PE10   ------> FMC_D7
+  PH5   ------> FMC_SDNWE
   PF13   ------> FMC_A7
   PF14   ------> FMC_A8
   PE9   ------> FMC_D6
@@ -497,12 +490,19 @@ static void HAL_FMC_MspInit(void){
   GPIO_InitStruct.Alternate = GPIO_AF12_FMC;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_3;
+  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF12_FMC;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  GPIO_InitStruct.Pin = GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF12_FMC;
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
   /* USER CODE BEGIN FMC_MspInit 1 */
 
@@ -548,10 +548,10 @@ static void HAL_FMC_MspDeInit(void){
   PG2   ------> FMC_A12
   PF5   ------> FMC_A5
   PF4   ------> FMC_A4
-  PC0   ------> FMC_SDNWE
   PC2   ------> FMC_SDNE0
   PC3   ------> FMC_SDCKE0
   PE10   ------> FMC_D7
+  PH5   ------> FMC_SDNWE
   PF13   ------> FMC_A7
   PF14   ------> FMC_A8
   PE9   ------> FMC_D6
@@ -587,7 +587,9 @@ static void HAL_FMC_MspDeInit(void){
                           |GPIO_PIN_5|GPIO_PIN_4|GPIO_PIN_13|GPIO_PIN_14
                           |GPIO_PIN_12|GPIO_PIN_15|GPIO_PIN_11);
 
-  HAL_GPIO_DeInit(GPIOC, GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_3);
+  HAL_GPIO_DeInit(GPIOC, GPIO_PIN_2|GPIO_PIN_3);
+
+  HAL_GPIO_DeInit(GPIOH, GPIO_PIN_5);
 
   /* USER CODE BEGIN FMC_MspDeInit 1 */
 

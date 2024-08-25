@@ -10,7 +10,6 @@
 #define BUFFER_SIZE         ((uint32_t)0x1000)
 #define WRITE_READ_ADDR     ((uint32_t)0x0800)
 
-FMC_SDRAM_CommandTypeDef command;
 uint32_t aTxBuffer[BUFFER_SIZE];
 uint32_t aRxBuffer[BUFFER_SIZE];
 /* Status variables */
@@ -33,9 +32,11 @@ typedef enum {PASSED = 0, FAILED = !PASSED} TestStatus_t;
   * @param  Command: Pointer to SDRAM command structure
   * @retval None
   */
-void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram, FMC_SDRAM_CommandTypeDef *Command)
+void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram)
 {
   __IO uint32_t tmpmrd =0;
+  FMC_SDRAM_CommandTypeDef _command = {0}, *Command = &_command;
+
   /* Step 1:  Configure a clock configuration enable command */
   Command->CommandMode = FMC_SDRAM_CMD_CLK_ENABLE;
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;;
@@ -84,25 +85,7 @@ void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram, FMC_SDRAM_Comman
 
   /* Step 6: Set the refresh rate counter */
   /* Set the device refresh rate */
-  HAL_SDRAM_ProgramRefreshRate(hsdram, REFRESH_COUNT); 
-
-}
-/**
-  * @brief  Fills buffer with user predefined data.
-  * @param  pBuffer: pointer on the buffer to fill
-  * @param  uwBufferLenght: size of the buffer to fill
-  * @param  uwOffset: first value to fill on the buffer
-  * @retval None
-  */
-void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
-{
-  uint32_t tmpIndex = 0;
-
-  /* Put in global buffer different values */
-  for (tmpIndex = 0; tmpIndex < uwBufferLenght; tmpIndex++ )
-  {
-    pBuffer[tmpIndex] = tmpIndex + uwOffset;
-  }
+  HAL_SDRAM_ProgramRefreshRate(hsdram, SDRAM_REFRESH_COUNT); 
 }
 
 int sdram_test_rt(void)
@@ -141,6 +124,24 @@ int sdram_test_rt(void)
     }
 
     return 1;
+}
+
+/**
+  * @brief  Fills buffer with user predefined data.
+  * @param  pBuffer: pointer on the buffer to fill
+  * @param  uwBufferLenght: size of the buffer to fill
+  * @param  uwOffset: first value to fill on the buffer
+  * @retval None
+  */
+void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
+{
+  uint32_t tmpIndex = 0;
+
+  /* Put in global buffer different values */
+  for (tmpIndex = 0; tmpIndex < uwBufferLenght; tmpIndex++ )
+  {
+    pBuffer[tmpIndex] = tmpIndex + uwOffset;
+  }
 }
 
 int sdram_test_st(void)

@@ -63,10 +63,7 @@
 #define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
 
-
-extern FMC_SDRAM_CommandTypeDef command;
-
-void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram, FMC_SDRAM_CommandTypeDef *Command);
+void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram);
 void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset);
 int sdram_test_rt(void);
 int sdram_test_st(void);

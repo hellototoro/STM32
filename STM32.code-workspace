@@ -7,6 +7,10 @@
 		{
 			"name": "bootloader",
 			"path": "board/art-pi/projects/bootloader"
+		},
+		{
+			"name": "applications_test_boot_from_internal_flash",
+			"path": "board/art-pi/projects/applications_test_boot_from_internal_flash"
 		}
 	],
 	"settings": {
@@ -17,7 +21,8 @@
 			"*.cpp": "cpp",
 			"*.hpp": "cpp",
 			"*.s": "asm",
-			"cstddef": "c"
+			"cstddef": "c",
+			"compare": "c"
 		}
 	}
 }
