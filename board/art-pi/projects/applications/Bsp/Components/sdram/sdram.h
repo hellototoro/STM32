@@ -10,6 +10,8 @@
 
 #include "main.h"
 
+// #define SDRAM_TEST
+
 #define SDRAM_TIMEOUT                    ((uint32_t)0xFFFF)
 #define REFRESH_COUNT                    ((uint32_t)917)   /* SDRAM refresh counter */
 
@@ -64,8 +66,10 @@
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
 
 void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram);
+#ifdef SDRAM_TEST
 void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset);
 int sdram_test_rt(void);
 int sdram_test_st(void);
+#endif
 
 #endif /* __SDRAM_H_ */

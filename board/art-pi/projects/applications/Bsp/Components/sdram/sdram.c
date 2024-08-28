@@ -7,18 +7,6 @@
 #include <stdio.h>
 #include "sdram.h"
 
-#define BUFFER_SIZE         ((uint32_t)0x1000)
-#define WRITE_READ_ADDR     ((uint32_t)0x0800)
-
-uint32_t aTxBuffer[BUFFER_SIZE];
-uint32_t aRxBuffer[BUFFER_SIZE];
-/* Status variables */
-__IO uint32_t uwWriteReadStatus = 0;
-
-/* Counter index */
-uint32_t uwIndex = 0;
-typedef enum {PASSED = 0, FAILED = !PASSED} TestStatus_t;
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 /**
   * @brief  Perform the SDRAM exernal memory inialization sequence
@@ -88,9 +76,10 @@ void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram)
   HAL_SDRAM_ProgramRefreshRate(hsdram, SDRAM_REFRESH_COUNT); 
 }
 
+#ifdef SDRAM_TEST
 int sdram_test_rt(void)
 {
-    int i = 0;
+    uint32_t i = 0;
     uint32_t start_time = 0, time_cast = 0;
     char data_width = 2;
     uint16_t data = 0;
@@ -103,7 +92,7 @@ int sdram_test_rt(void)
         *(__IO uint16_t *)(SDRAM_BANK_ADDR + i * data_width) = (uint16_t)0x5555;
     }
     time_cast = HAL_GetTick() - start_time;
-    printf("Write data success, total time: %d.%03dS.\r\n", time_cast / 1000,
+    printf("Write data success, total time: %ld.%03ldS.\r\n", time_cast / 1000,
           time_cast % 1000 / ((1000 * 1 + 999) / 1000));
 
     /* read data */
@@ -125,6 +114,19 @@ int sdram_test_rt(void)
 
     return 1;
 }
+
+
+#define BUFFER_SIZE         ((uint32_t)0x1000)
+#define WRITE_READ_ADDR     ((uint32_t)0x0800)
+
+uint32_t aTxBuffer[BUFFER_SIZE];
+uint32_t aRxBuffer[BUFFER_SIZE];
+/* Status variables */
+__IO uint32_t uwWriteReadStatus = 0;
+
+/* Counter index */
+uint32_t uwIndex = 0;
+typedef enum {PASSED = 0, FAILED = !PASSED} TestStatus_t;
 
 /**
   * @brief  Fills buffer with user predefined data.
@@ -184,4 +186,7 @@ int sdram_test_st(void)
   {
     printf("SDRAM--------------------OK!\r\n");
   }
+  return 0;
 }
+
+#endif
