@@ -22,7 +22,8 @@
 			"*.hpp": "cpp",
 			"*.s": "asm",
 			"cstddef": "c",
-			"compare": "c"
+			"compare": "c",
+			"typeinfo": "c"
 		}
 	}
 }

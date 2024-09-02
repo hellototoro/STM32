@@ -50,6 +50,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     Bsp/Components/ili9481/Ili9481.c
     Bsp/Components/sdram/sdram.c
+    Bsp/Components/sdcard/sdcard_test.c
 )
 
 # Add include paths
@@ -57,6 +58,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
     Bsp/Components/ili9481
     Bsp/Components/sdram
+    Bsp/Components/sdcard
 )
 
 # Add project symbols (macros)
