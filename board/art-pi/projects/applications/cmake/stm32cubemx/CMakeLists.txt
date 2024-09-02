@@ -28,7 +28,14 @@ target_include_directories(stm32cubemx INTERFACE
 
 target_sources(stm32cubemx INTERFACE
     ../../Core/Src/main.c
+    ../../Core/Src/gpio.c
     ../../Core/Src/freertos.c
+    ../../Core/Src/fmc.c
+    ../../Core/Src/i2c.c
+    ../../Core/Src/ltdc.c
+    ../../Core/Src/memorymap.c
+    ../../Core/Src/sdmmc.c
+    ../../Core/Src/usart.c
     ../../Core/Src/stm32h7xx_it.c
     ../../Core/Src/stm32h7xx_hal_msp.c
     ../../Core/Src/stm32h7xx_hal_timebase_tim.c

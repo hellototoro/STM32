@@ -1,8 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file   fatfs.h
-  * @brief  Header for fatfs applications
+  * File Name          : FMC.h
+  * Description        : This file provides code for the configuration
+  *                      of the FMC peripheral.
   ******************************************************************************
   * @attention
   *
@@ -17,35 +18,42 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __fatfs_H
-#define __fatfs_H
+#ifndef __FMC_H
+#define __FMC_H
 #ifdef __cplusplus
  extern "C" {
 #endif
 
-#include "ff.h"
-#include "ff_gen_drv.h"
-#include "sd_diskio.h" /* defines SD_Driver as external */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
 
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
+
 /* USER CODE END Includes */
 
-extern uint8_t retSD; /* Return value for SD */
-extern char SDPath[4]; /* SD logical drive path */
-extern FATFS SDFatFS; /* File system object for SD logical drive */
-extern FIL SDFile; /* File object for SD */
+extern SDRAM_HandleTypeDef hsdram1;
 
-void MX_FATFS_Init(void);
+/* USER CODE BEGIN Private defines */
+
+/* USER CODE END Private defines */
+
+void MX_FMC_Init(void);
+void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef* hsdram);
+void HAL_SDRAM_MspDeInit(SDRAM_HandleTypeDef* hsdram);
 
 /* USER CODE BEGIN Prototypes */
-extern osMessageQId ConnectionEvent;
-
-
-void FS_AppThread(void const * argument);
 
 /* USER CODE END Prototypes */
+
 #ifdef __cplusplus
 }
 #endif
-#endif /*__fatfs_H */
+#endif /*__FMC_H */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
