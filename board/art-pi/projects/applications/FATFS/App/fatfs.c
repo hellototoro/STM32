@@ -32,10 +32,8 @@ typedef enum {
 
 osMessageQId ConnectionEvent;
 
-extern void sdcard_test(void);
-
-void DetectSDCardEntry(void const * argument);
-void FS_FileOperations(void);
+static void DetectSDCardEntry(void const * argument);
+static void FS_FileOperations(void);
 
 /* USER CODE END Variables */
 
@@ -81,8 +79,6 @@ void FS_AppThread(void const * argument)
         if (event.status == osEventMessage) {
             switch (event.value.v) {
                 case CARD_CONNECTED:
-                    BSP_SD_Init();
-                    sdcard_test();
                     FS_FileOperations();
                     break;
 

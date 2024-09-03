@@ -31,8 +31,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-#include "Ili9481.h"
-#include "sdram.h"
 
 /* USER CODE END Includes */
 
@@ -123,13 +121,6 @@ int main(void)
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   printf("[info application]Hello main!\r\n");
-  Ili9481_init();
-  SDRAM_Initialization_Sequence(&hsdram1);
-
-  #ifdef SDRAM_TEST
-  sdram_test_rt();
-  sdram_test_st();
-  #endif
 
   /* USER CODE END 2 */
 
@@ -297,6 +288,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
+  printf("Error_Handler\r\n");
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
@@ -318,6 +310,7 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  printf("Wrong parameters value: file %s on line %ld\r\n", file, line);
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

@@ -21,6 +21,7 @@
 #include "ltdc.h"
 
 /* USER CODE BEGIN 0 */
+#include "Ili9481.h"
 
 /* USER CODE END 0 */
 
@@ -79,6 +80,7 @@ void MX_LTDC_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN LTDC_Init 2 */
+  Ili9481_init();
 
   /* USER CODE END LTDC_Init 2 */
 

@@ -22,6 +22,7 @@
 #include "fmc.h"
 
 /* USER CODE BEGIN 0 */
+#include "sdram.h"
 
 /* USER CODE END 0 */
 
@@ -69,6 +70,11 @@ void MX_FMC_Init(void)
   }
 
   /* USER CODE BEGIN FMC_Init 2 */
+  SDRAM_Initialization_Sequence(&hsdram1);
+  #ifdef SDRAM_TEST
+  sdram_test_rt();
+  sdram_test_st();
+  #endif
 
   /* USER CODE END FMC_Init 2 */
 }
