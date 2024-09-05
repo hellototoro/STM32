@@ -35,6 +35,7 @@ extern "C" {
 extern I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN Private defines */
+extern I2C_HandleTypeDef *I2C_Handle;
 
 /* USER CODE END Private defines */
 

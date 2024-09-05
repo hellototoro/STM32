@@ -26,6 +26,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "fatfs.h"
+#include "app_touchgfx.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -110,7 +112,10 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   osThreadDef(uSDThread, FS_AppThread, osPriorityNormal, 0, 8 * configMINIMAL_STACK_SIZE);
-  osThreadCreate(osThread(uSDThread), NULL); 
+  osThreadCreate(osThread(uSDThread), NULL);
+
+  osThreadDef(TouchGFXThread, TouchGFX_Task, osPriorityNormal, 0, 4096);
+  osThreadCreate(osThread(TouchGFXThread), NULL);
   /* USER CODE END RTOS_THREADS */
 
 }

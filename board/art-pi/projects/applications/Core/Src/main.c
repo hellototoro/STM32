@@ -19,6 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "crc.h"
+#include "dma2d.h"
 #include "fatfs.h"
 #include "i2c.h"
 #include "ltdc.h"
@@ -27,10 +29,11 @@
 #include "usart.h"
 #include "gpio.h"
 #include "fmc.h"
+#include "app_touchgfx.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
+#include "print.h"
 
 /* USER CODE END Includes */
 
@@ -65,11 +68,6 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int __io_putchar(int ch)
-{
-  HAL_UART_Transmit(&huart4, (uint8_t *)&ch, 1, 0xFFFF);
-  return ch;
-}
 
 /* USER CODE END 0 */
 
@@ -119,6 +117,11 @@ int main(void)
   MX_FMC_Init();
   MX_SDMMC1_SD_Init();
   MX_FATFS_Init();
+  MX_CRC_Init();
+  MX_DMA2D_Init();
+  MX_TouchGFX_Init();
+  /* Call PreOsInit function */
+  MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
   printf("[info application]Hello main!\r\n");
 

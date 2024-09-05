@@ -32,10 +32,6 @@ set(touchgfx_include_DIRS
     ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/include
     ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/include/common
     ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/common/include
-
-    ${root_tgfx_dir}/App
-    ${root_tgfx_dir}/Target
-    ${root_tgfx_dir}/Target/generated
 )
 
 # Search all source files in to be part of the build
@@ -45,9 +41,6 @@ file(GLOB_RECURSE graphics_core_generated_SRCS
     ${root_tgfx_dir}/generated/*.cpp
     ${root_tgfx_dir}/gui/*.cpp
     ${root_tgfx_dir}/gui/*.c
-    ${root_tgfx_dir}/App/*.c
-    ${root_tgfx_dir}/Target/*.cpp
-    ${root_tgfx_dir}/Target/*.c
 )
 
 set(graphics_core_generated_SRCS ${graphics_core_generated_SRCS})
@@ -57,11 +50,17 @@ list(FILTER touchgfx_include_DIRS EXCLUDE REGEX ".*/simulator/.*")
 
 target_include_directories(stm32cubemx INTERFACE
     ../../Core/Inc
+    ../../FATFS/Target
+    ../../FATFS/App
+    ../../TouchGFX/App
+    ../../TouchGFX/target/generated
+    ../../TouchGFX/target
     ../../Drivers/STM32H7xx_HAL_Driver/Inc
     ../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy
     ../../Middlewares/Third_Party/FreeRTOS/Source/include
     ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
     ../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+    ../../Middlewares/Third_Party/FatFs/src
     ../../Drivers/CMSIS/Device/ST/STM32H7xx/Include
     ../../Drivers/CMSIS/Include
     ${touchgfx_include_DIRS}
@@ -69,11 +68,34 @@ target_include_directories(stm32cubemx INTERFACE
 
 target_sources(stm32cubemx INTERFACE
     ../../Core/Src/main.c
+    ../../Core/Src/gpio.c
     ../../Core/Src/freertos.c
+    ../../Core/Src/crc.c
+    ../../Core/Src/dma2d.c
+    ../../Core/Src/fmc.c
+    ../../Core/Src/i2c.c
+    ../../Core/Src/ltdc.c
+    ../../Core/Src/memorymap.c
+    ../../Core/Src/sdmmc.c
+    ../../Core/Src/usart.c
     ../../Core/Src/stm32h7xx_it.c
     ../../Core/Src/stm32h7xx_hal_msp.c
     ../../Core/Src/stm32h7xx_hal_timebase_tim.c
+    ../../FATFS/Target/bsp_driver_sd.c
+    ../../FATFS/Target/sd_diskio.c
+    ../../FATFS/Target/fatfs_platform.c
+    ../../FATFS/App/fatfs.c
+    ../../TouchGFX/target/TouchGFXHAL.cpp
+    ../../TouchGFX/target/STM32TouchController.cpp
+    ../../TouchGFX/target/TouchGFXGPIO.cpp
+    ../../TouchGFX/target/generated/TouchGFXConfiguration.cpp
+    ../../TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp
+    ../../TouchGFX/target/generated/STM32DMA.cpp
+    ../../TouchGFX/target/generated/OSWrappers.cpp
+    ../../TouchGFX/App/app_touchgfx.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c
@@ -95,11 +117,20 @@ target_sources(stm32cubemx INTERFACE
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dsi.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_delayblock.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c
     ../../Core/Src/system_stm32h7xx.c
+    ../../Middlewares/Third_Party/FatFs/src/diskio.c
+    ../../Middlewares/Third_Party/FatFs/src/ff.c
+    ../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
+    ../../Middlewares/Third_Party/FatFs/src/option/syscall.c
+    ../../Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
     ../../Middlewares/Third_Party/FreeRTOS/Source/croutine.c
     ../../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
     ../../Middlewares/Third_Party/FreeRTOS/Source/list.c

@@ -79,7 +79,7 @@ void FS_AppThread(void const * argument)
         if (event.status == osEventMessage) {
             switch (event.value.v) {
                 case CARD_CONNECTED:
-                    FS_FileOperations();
+                    // FS_FileOperations();
                     break;
 
                 case CARD_DISCONNECTED:
