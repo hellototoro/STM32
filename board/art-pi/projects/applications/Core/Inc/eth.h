@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    memorymap.h
+  * @file    eth.h
   * @brief   This file contains all the function prototypes for
-  *          the memorymap.c file
+  *          the eth.c file
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __MEMORYMAP_H__
-#define __MEMORYMAP_H__
+#ifndef __ETH_H__
+#define __ETH_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,9 +33,13 @@ extern "C" {
 
 /* USER CODE END Includes */
 
+extern ETH_HandleTypeDef heth;
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
+
+void MX_ETH_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
@@ -45,5 +49,5 @@ extern "C" {
 }
 #endif
 
-#endif /* __MEMORYMAP_H__ */
+#endif /* __ETH_H__ */
 

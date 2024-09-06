@@ -71,13 +71,18 @@ target_sources(stm32cubemx INTERFACE
     ../../Core/Src/gpio.c
     ../../Core/Src/freertos.c
     ../../Core/Src/crc.c
+    ../../Core/Src/dcmi.c
     ../../Core/Src/dma2d.c
+    ../../Core/Src/eth.c
+    ../../Core/Src/fdcan.c
     ../../Core/Src/fmc.c
     ../../Core/Src/i2c.c
     ../../Core/Src/ltdc.c
     ../../Core/Src/memorymap.c
     ../../Core/Src/sdmmc.c
+    ../../Core/Src/spi.c
     ../../Core/Src/usart.c
+    ../../Core/Src/usb_otg.c
     ../../Core/Src/stm32h7xx_it.c
     ../../Core/Src/stm32h7xx_hal_msp.c
     ../../Core/Src/stm32h7xx_hal_timebase_tim.c
@@ -111,7 +116,11 @@ target_sources(stm32cubemx INTERFACE
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dcmi.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma2d.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_fdcan.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_fmc.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sdram.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc.c
@@ -121,10 +130,15 @@ target_sources(stm32cubemx INTERFACE
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_delayblock.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd_ex.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd_ex.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c
     ../../Core/Src/system_stm32h7xx.c
     ../../Middlewares/Third_Party/FatFs/src/diskio.c
     ../../Middlewares/Third_Party/FatFs/src/ff.c

@@ -95,9 +95,9 @@ void Ili9481_init(void)
     SPI_WriteData(0x10);
 
     SPI_WriteComm(0x36);
-    SPI_WriteData(0x88);
+    SPI_WriteData(0x80); //0x88
     SPI_WriteComm(0x3A);
-    SPI_WriteData(0x66);
+    SPI_WriteData(0x66); //0x55
 
     SPI_WriteComm(0x2A);
     SPI_WriteData(0x00);

@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    memorymap.h
+  * @file    dcmi.h
   * @brief   This file contains all the function prototypes for
-  *          the memorymap.c file
+  *          the dcmi.c file
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __MEMORYMAP_H__
-#define __MEMORYMAP_H__
+#ifndef __DCMI_H__
+#define __DCMI_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,9 +33,13 @@ extern "C" {
 
 /* USER CODE END Includes */
 
+extern DCMI_HandleTypeDef hdcmi;
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
+
+void MX_DCMI_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
@@ -45,5 +49,5 @@ extern "C" {
 }
 #endif
 
-#endif /* __MEMORYMAP_H__ */
+#endif /* __DCMI_H__ */
 
