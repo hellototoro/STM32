@@ -74,7 +74,7 @@ void Ili9481_init(void)
     SPI_WriteData(0x02);
     SPI_WriteData(0x01);
 
-    SPI_WriteComm(0xC5);
+    SPI_WriteComm(0xC5); //Frame Rate and Inversion Control
     SPI_WriteData(0x00);
 
     SPI_WriteComm(0xC8);
@@ -92,10 +92,10 @@ void Ili9481_init(void)
     SPI_WriteData(0x00);
 
     SPI_WriteComm(0xB4);
-    SPI_WriteData(0x10);
+    SPI_WriteData(0x10); //RGB interface
 
     SPI_WriteComm(0x36);
-    SPI_WriteData(0x80); //0x88
+    SPI_WriteData(0x88); //0x88 48 28 08
     SPI_WriteComm(0x3A);
     SPI_WriteData(0x66); //0x55
 

@@ -26,6 +26,7 @@
             "gdbPath":"${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin/arm-none-eabi-gdb",            
             "serverArgs": [
                 "-m","0",
+                "--extload","${workspaceFolder}\\..\\..\\ExternalLoader\\ART-Pi_W25Q64.stldr",
             ],
             //"preLaunchTask": "Build + Flash"
             /* If you use external loader, add additional arguments */

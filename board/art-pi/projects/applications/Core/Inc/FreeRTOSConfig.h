@@ -137,6 +137,17 @@ standard names. */
 
 /* USER CODE BEGIN Defines */
 /* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */
+
+/* 获取系统运行时间 */
+#define RUN_TIME_VIEW 1
+#if RUN_TIME_VIEW
+#include "tim.h"
+#define configRECORD_STACK_HIGH_ADDRESS 1
+#define configUSE_TRACE_FACILITY        1
+#define configGENERATE_RUN_TIME_STATS   1
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()  HAL_TIM_Base_Start(&htim5)
+#define portGET_RUN_TIME_COUNTER_VALUE()          __HAL_TIM_GET_COUNTER(&htim5)
+#endif
 /* USER CODE END Defines */
 
 #endif /* FREERTOS_CONFIG_H */

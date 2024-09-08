@@ -81,6 +81,7 @@ target_sources(stm32cubemx INTERFACE
     ../../Core/Src/memorymap.c
     ../../Core/Src/sdmmc.c
     ../../Core/Src/spi.c
+    ../../Core/Src/tim.c
     ../../Core/Src/usart.c
     ../../Core/Src/usb_otg.c
     ../../Core/Src/stm32h7xx_it.c
