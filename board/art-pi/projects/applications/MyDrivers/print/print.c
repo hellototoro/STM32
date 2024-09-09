@@ -8,9 +8,13 @@
   */
 #include <stdarg.h>
 #include "print.h"
+#include "cmsis_os.h"
 
 #include "usart.h"
 UART_HandleTypeDef *UartHandle = &huart4;
+
+static osSemaphoreId console_mutex_id = NULL;
+static osSemaphoreDef(console_mutex);
 
 #ifdef __GNUC__
 /* With GCC, small printf (option LD Linker->Libraries->Small printf
@@ -39,7 +43,7 @@ PUTCHAR_PROTOTYPE
   return ch;
 }
 
-#define RT_CONSOLEBUF_SIZE 128
+#define RT_CONSOLEBUF_SIZE 128 * 5
 #define rt_inline                   static __inline
 
 #define RT_PRINTF_PRECISION
@@ -481,6 +485,7 @@ int32_t rt_vsnprintf(char       *buf,
 
         case 'X':
             flags |= LARGE;
+            /* fall through */
         case 'x':
             base = 16;
             break;
@@ -554,7 +559,12 @@ void rt_kprintf(const char *fmt, ...)
     va_list args;
     size_t length;
     static char rt_log_buf[RT_CONSOLEBUF_SIZE];
+    if (console_mutex_id == NULL)
+    {
+        console_mutex_id = osSemaphoreCreate(osSemaphore(console_mutex), 1);
+    }
 
+    osSemaphoreWait(console_mutex_id, osWaitForever);
     va_start(args, fmt);
     /* the return value of vsnprintf is the number of bytes that would be
      * written to buffer had if the size of the buffer been sufficiently
@@ -565,6 +575,15 @@ void rt_kprintf(const char *fmt, ...)
     if (length > RT_CONSOLEBUF_SIZE - 1)
         length = RT_CONSOLEBUF_SIZE - 1;
 
-    HAL_UART_Transmit(UartHandle, (uint8_t *)rt_log_buf, length, 0xFFFF);
+    // HAL_UART_Transmit(UartHandle, (uint8_t *)rt_log_buf, length, 0xFFFF);
+    HAL_UART_Transmit_DMA(UartHandle, (uint8_t*)rt_log_buf, length);
     va_end(args);
+}
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart == UartHandle)
+    {
+        osSemaphoreRelease(console_mutex_id);
+    }
 }

@@ -72,6 +72,7 @@ target_sources(stm32cubemx INTERFACE
     ../../Core/Src/freertos.c
     ../../Core/Src/crc.c
     ../../Core/Src/dcmi.c
+    ../../Core/Src/dma.c
     ../../Core/Src/dma2d.c
     ../../Core/Src/eth.c
     ../../Core/Src/fdcan.c

@@ -21,6 +21,7 @@
 #include "cmsis_os.h"
 #include "crc.h"
 #include "dcmi.h"
+#include "dma.h"
 #include "dma2d.h"
 #include "eth.h"
 #include "fatfs.h"
@@ -121,6 +122,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_UART4_Init();
   MX_LTDC_Init();
   MX_I2C1_Init();
@@ -306,6 +308,14 @@ void MPU_Config(void)
   MPU_InitStruct.Number = MPU_REGION_NUMBER2;
   MPU_InitStruct.BaseAddress = 0x90000000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_8MB;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER3;
+  MPU_InitStruct.BaseAddress = 0x24000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */
