@@ -148,6 +148,13 @@ standard names. */
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()  HAL_TIM_Base_Start(&htim5)
 #define portGET_RUN_TIME_COUNTER_VALUE()          __HAL_TIM_GET_COUNTER(&htim5)
 #endif
+
+#define configUSE_CLI 1
+#if configUSE_CLI
+/* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */
+#define configAPPLICATION_PROVIDES_cOutputBuffer  1
+#define configCOMMAND_INT_MAX_OUTPUT_SIZE         200
+#endif
 /* USER CODE END Defines */
 
 #endif /* FREERTOS_CONFIG_H */

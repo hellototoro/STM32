@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "fatfs.h"
 #include "app_touchgfx.h"
+#include "app_cli.h"
 
 /* USER CODE END Includes */
 
@@ -116,6 +117,8 @@ void MX_FREERTOS_Init(void) {
 
   osThreadDef(TouchGFXThread, TouchGFX_Task, osPriorityNormal, 0, 4096);
   osThreadCreate(osThread(TouchGFXThread), NULL);
+
+  consolseTaskInit();
   /* USER CODE END RTOS_THREADS */
 
 }

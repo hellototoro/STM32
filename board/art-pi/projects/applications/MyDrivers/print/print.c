@@ -34,16 +34,34 @@ void _sys_exit(int x)
   * @param  None
   * @retval None
   */
-PUTCHAR_PROTOTYPE
+__INLINE PUTCHAR_PROTOTYPE
 {
-  /* Place your implementation of fputc here */
-  /* e.g. write a character to the USART1 and Loop until the end of transmission */
-  HAL_UART_Transmit(UartHandle, (uint8_t *)&ch, 1, 0xFFFF);
+    /* Place your implementation of fputc here */
+    /* e.g. write a character to the USART1 and Loop until the end of transmission */
 
-  return ch;
+    UartHandle->Instance->TDR = (uint8_t)(ch & 0xFFU);
+    // Wait for the transmit buffer to be empty
+    while (!(__HAL_UART_GET_FLAG(UartHandle, UART_FLAG_TXE)));// UART_FLAG_TXE
+
+    return ch;
 }
 
-#define RT_CONSOLEBUF_SIZE 128 * 5
+int _write(int file, char *data, int len)
+{
+    UNUSED(file);
+    // Transmit data using UART2
+    for (int i = 0; i < len; i++)
+    {
+        // Send the character
+         UartHandle->Instance->TDR = (uint8_t)data[i];
+        // Wait for the transmit buffer to be empty
+        while (!(__HAL_UART_GET_FLAG(UartHandle, UART_FLAG_TC)));// UART_FLAG_TXE
+    }
+    return len;
+}
+
+#if USE_RT_PRINT
+#define RT_CONSOLEBUF_SIZE 128
 #define rt_inline                   static __inline
 
 #define RT_PRINTF_PRECISION
@@ -587,3 +605,5 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
         osSemaphoreRelease(console_mutex_id);
     }
 }
+
+#endif

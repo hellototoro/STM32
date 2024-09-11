@@ -54,6 +54,10 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Bsp/Components/ft5xx6/Ft5xx6.cpp
     MyDrivers/hw_iic/hw_iic.cpp
     MyDrivers/print/print.c
+    Middlewares/Third_Party/FreeRTOS/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.c
+    FreeRTOS_CLI/app_cli.c
+    FreeRTOS_CLI/cli_commands.c
+    # FreeRTOS_CLI/serial.c
 )
 
 # Add include paths
@@ -65,6 +69,8 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     Bsp/Components/ft5xx6
     MyDrivers/hw_iic
     MyDrivers/print
+    Middlewares/Third_Party/FreeRTOS/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI
+    FreeRTOS_CLI
 )
 
 # Add project symbols (macros)
