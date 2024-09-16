@@ -52,6 +52,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Bsp/Components/sdram/sdram.c
     Bsp/Components/sdcard/sdcard_test.c
     Bsp/Components/ft5xx6/Ft5xx6.cpp
+    Bsp/Components/w25qxx/w25qxx.c
     MyDrivers/hw_iic/hw_iic.cpp
     MyDrivers/print/print.c
     Middlewares/Third_Party/FreeRTOS/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.c
@@ -67,6 +68,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     Bsp/Components/sdram
     Bsp/Components/sdcard
     Bsp/Components/ft5xx6
+    Bsp/Components/w25qxx
     MyDrivers/hw_iic
     MyDrivers/print
     Middlewares/Third_Party/FreeRTOS/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI

@@ -84,6 +84,8 @@ void Error_Handler(void);
 #define LCD_MOSI_GPIO_Port GPIOB
 #define CAM_RESET_Pin GPIO_PIN_3
 #define CAM_RESET_GPIO_Port GPIOA
+#define SPI_FLASH_CS_Pin GPIO_PIN_4
+#define SPI_FLASH_CS_GPIO_Port GPIOA
 #define LCD_SCK_Pin GPIO_PIN_0
 #define LCD_SCK_GPIO_Port GPIOB
 
