@@ -12,42 +12,6 @@ target_compile_definitions(stm32cubemx INTERFACE
     $<$<CONFIG:Debug>:DEBUG>
 )
 
-# Root TouchGFX folder - depends on where CMakeLists.txt is located
-set(root_tgfx_dir ../../TouchGFX)
-
-# Setup all necessary include directories
-# These are used by compiler to search for C or C++ headers
-set(touchgfx_include_DIRS
-
-    # Application includes
-    ${root_tgfx_dir}/gui/include
-    ${root_tgfx_dir}/generated/gui_generated/include
-    ${root_tgfx_dir}/generated/images/include
-    ${root_tgfx_dir}/generated/bitmaps/include
-    ${root_tgfx_dir}/generated/fonts/include
-    ${root_tgfx_dir}/generated/texts/include
-    ${root_tgfx_dir}/generated/videos/include
-
-    # When running simulator but project started as STM32 project
-    ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/include
-    ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/include/common
-    ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/common/include
-)
-
-# Search all source files in to be part of the build
-# Use the GLOB to scan everything in the gui and generated folders
-# These are essential for generic TouchGFX build
-file(GLOB_RECURSE graphics_core_generated_SRCS
-    ${root_tgfx_dir}/generated/*.cpp
-    ${root_tgfx_dir}/gui/*.cpp
-    ${root_tgfx_dir}/gui/*.c
-)
-
-set(graphics_core_generated_SRCS ${graphics_core_generated_SRCS})
-
-list(FILTER graphics_core_generated_SRCS EXCLUDE REGEX ".*/simulator/.*")
-list(FILTER touchgfx_include_DIRS EXCLUDE REGEX ".*/simulator/.*")
-
 target_include_directories(stm32cubemx INTERFACE
     ../../Core/Inc
     ../../FATFS/Target
@@ -58,12 +22,11 @@ target_include_directories(stm32cubemx INTERFACE
     ../../Drivers/STM32H7xx_HAL_Driver/Inc
     ../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy
     ../../Middlewares/Third_Party/FreeRTOS/Source/include
-    ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
+    ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
     ../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
     ../../Middlewares/Third_Party/FatFs/src
     ../../Drivers/CMSIS/Device/ST/STM32H7xx/Include
     ../../Drivers/CMSIS/Include
-    ${touchgfx_include_DIRS}
 )
 
 target_sources(stm32cubemx INTERFACE
@@ -154,20 +117,18 @@ target_sources(stm32cubemx INTERFACE
     ../../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
     ../../Middlewares/Third_Party/FreeRTOS/Source/tasks.c
     ../../Middlewares/Third_Party/FreeRTOS/Source/timers.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c
+    ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
     ../../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
     ../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
     ../../Core/Src/sysmem.c
     ../../Core/Src/syscalls.c
     ../../startup_stm32h750xx.s
-    ${graphics_core_generated_SRCS}
 )
 
 target_link_directories(stm32cubemx INTERFACE
 )
 
 target_link_libraries(stm32cubemx INTERFACE
-    ${CMAKE_SOURCE_DIR}/Middlewares/ST/touchgfx/lib/core/cortex_m7/gcc/libtouchgfx-float-abi-hard.a
 )
 
 # Validate that STM32CubeMX code is compatible with C standard

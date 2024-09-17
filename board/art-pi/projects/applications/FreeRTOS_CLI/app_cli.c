@@ -130,8 +130,12 @@ void consolseTaskInit(void)
 {
     HAL_UART_Receive_IT(&huart4, (uint8_t *)&huart4.Instance->RDR, 1);
     //start the command line task
-    osThreadDef(cliTask, StartCliTask, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 4);
-    cliTaskHandle = osThreadCreate(osThread(cliTask), NULL);
+    static const osThreadAttr_t cliTask_attributes = {
+        .name = "cliTask",
+        .stack_size = configMINIMAL_STACK_SIZE * 4,
+        .priority = (osPriority_t) osPriorityNormal,
+    };
+    cliTaskHandle =  osThreadNew(StartCliTask, NULL, &cliTask_attributes);
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)

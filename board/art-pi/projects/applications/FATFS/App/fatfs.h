@@ -39,10 +39,10 @@ extern FIL SDFile; /* File object for SD */
 void MX_FATFS_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-extern osMessageQId ConnectionEvent;
+extern osMessageQueueId_t ConnectionEvent;
 
 
-void FS_AppThread(void const * argument);
+void FS_AppThread(void * argument);
 
 /* USER CODE END Prototypes */
 #ifdef __cplusplus

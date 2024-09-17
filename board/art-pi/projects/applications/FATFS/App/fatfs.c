@@ -30,9 +30,9 @@ typedef enum {
     CARD_STATUS_CHANGED,
 } SD_ConnectionStateTypeDef;
 
-osMessageQId ConnectionEvent;
+osMessageQueueId_t ConnectionEvent;
 
-static void DetectSDCardEntry(void const * argument);
+static void DetectSDCardEntry(void * argument);
 static void FS_FileOperations(void);
 
 /* USER CODE END Variables */
@@ -65,21 +65,24 @@ uint8_t BSP_SD_IsDetected(void)
     return BSP_PlatformIsDetected() ? SD_NOT_PRESENT : SD_PRESENT;
 }
 
-void FS_AppThread(void const * argument)
+void FS_AppThread(void * argument)
 {
     (void) argument;
-    osEvent event;
+    osStatus_t status;
+    SD_ConnectionStateTypeDef state;
 
-    osThreadDef(DetectSDCard, DetectSDCardEntry, osPriorityNormal, 0, 2 * configMINIMAL_STACK_SIZE);
-    osThreadId DetectSDCardHandle = osThreadCreate(osThread(DetectSDCard), NULL);
-    (void) DetectSDCardHandle;
-
+    static const osThreadAttr_t detectSDCard_attributes = {
+        .name = "detectSDCardTask",
+        .stack_size = configMINIMAL_STACK_SIZE * 2,
+        .priority = (osPriority_t) osPriorityNormal,
+    };
+    osThreadNew(DetectSDCardEntry, NULL, &detectSDCard_attributes);
     for(;;) {
-        event = osMessageGet( ConnectionEvent, osWaitForever );
-        if (event.status == osEventMessage) {
-            switch (event.value.v) {
+        status = osMessageQueueGet( ConnectionEvent, &state, NULL, osWaitForever );
+        if (status == osOK) {
+            switch (state) {
                 case CARD_CONNECTED:
-                    // FS_FileOperations();
+                    FS_FileOperations();
                     break;
 
                 case CARD_DISCONNECTED:
@@ -92,7 +95,7 @@ void FS_AppThread(void const * argument)
     }
 }
 
-void DetectSDCardEntry(void const * argument)
+void DetectSDCardEntry(void * argument)
 {
     (void) argument;
     SD_ConnectionStateTypeDef state = CARD_DISCONNECTED;
@@ -100,10 +103,10 @@ void DetectSDCardEntry(void const * argument)
     for(;;) {
         if ((BSP_SD_IsDetected() == SD_PRESENT) && (state == CARD_DISCONNECTED)) {
             state = CARD_CONNECTED;
-            osMessagePut(ConnectionEvent, CARD_CONNECTED, osWaitForever);
+            osMessageQueuePut(ConnectionEvent, &state, 0, osWaitForever);
         } else if ((BSP_SD_IsDetected() == SD_NOT_PRESENT) && (state == CARD_CONNECTED)) {
             state = CARD_DISCONNECTED;
-            osMessagePut(ConnectionEvent, CARD_DISCONNECTED, osWaitForever);
+            osMessageQueuePut(ConnectionEvent, &state, 0, osWaitForever);
         }
         osDelay(500);
     }

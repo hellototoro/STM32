@@ -13,9 +13,6 @@
 #include "usart.h"
 UART_HandleTypeDef *UartHandle = &huart4;
 
-static osSemaphoreId console_mutex_id = NULL;
-static osSemaphoreDef(console_mutex);
-
 #ifdef __GNUC__
 /* With GCC, small printf (option LD Linker->Libraries->Small printf
    set to 'Yes') calls __io_putchar() */
@@ -72,6 +69,10 @@ int _write(int file, char *data, int len)
 #define LEFT        (1 << 4)    /* left justified */
 #define SPECIAL     (1 << 5)    /* 0x */
 #define LARGE       (1 << 6)    /* use 'ABCDEF' instead of 'abcdef' */
+
+
+static osSemaphoreId console_mutex_id = NULL;
+osSemaphoreDef(console_mutex);
 
 /* private function */
 #define isdigit(c)  ((unsigned)((c) - '0') < 10)
