@@ -48,6 +48,12 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+osThreadId_t WiFi_TaskHandle;
+const osThreadAttr_t WiFi_Task_attributes = {
+  .name = "WiFi_Task",
+  .stack_size = 2048 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
@@ -60,6 +66,7 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
+extern void WiFiTask(void *argument);
 
 /* USER CODE END FunctionPrototypes */
 
@@ -103,7 +110,7 @@ void MX_FREERTOS_Init(void) {
   /* add threads, ... */
   static const osThreadAttr_t sdcard_attributes = {
     .name = "sdcardTask",
-    .stack_size = configMINIMAL_STACK_SIZE * 4,
+    .stack_size = configMINIMAL_STACK_SIZE * 2,
     .priority = (osPriority_t) osPriorityNormal,
   };
   osThreadNew(FS_AppThread, NULL, &sdcard_attributes);
@@ -114,6 +121,8 @@ void MX_FREERTOS_Init(void) {
     .priority = (osPriority_t) osPriorityNormal,
   };
   osThreadNew(TouchGFX_Task, NULL, &touchGFX_attributes);
+
+  WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
 
   consolseTaskInit();
   /* USER CODE END RTOS_THREADS */

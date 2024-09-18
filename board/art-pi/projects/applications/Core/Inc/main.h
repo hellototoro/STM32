@@ -68,8 +68,9 @@ void Error_Handler(void);
 #define TP_IRQ_GPIO_Port GPIOG
 #define WIFI_HOST_WAKE_Pin GPIO_PIN_3
 #define WIFI_HOST_WAKE_GPIO_Port GPIOE
-#define WIFI_REG_ON_Pin GPIO_PIN_13
-#define WIFI_REG_ON_GPIO_Port GPIOC
+#define WIFI_HOST_WAKE_EXTI_IRQn EXTI3_IRQn
+#define WIFI_WL_REG_ON_Pin GPIO_PIN_13
+#define WIFI_WL_REG_ON_GPIO_Port GPIOC
 #define LED_BLUE_Pin GPIO_PIN_8
 #define LED_BLUE_GPIO_Port GPIOI
 #define BT_WAKE_Pin GPIO_PIN_10
@@ -80,6 +81,8 @@ void Error_Handler(void);
 #define BT_HOST_WAKE_GPIO_Port GPIOC
 #define LCD_CS_Pin GPIO_PIN_3
 #define LCD_CS_GPIO_Port GPIOH
+#define USER_KEY1_Pin GPIO_PIN_4
+#define USER_KEY1_GPIO_Port GPIOH
 #define LCD_MOSI_Pin GPIO_PIN_2
 #define LCD_MOSI_GPIO_Port GPIOB
 #define CAM_RESET_Pin GPIO_PIN_3

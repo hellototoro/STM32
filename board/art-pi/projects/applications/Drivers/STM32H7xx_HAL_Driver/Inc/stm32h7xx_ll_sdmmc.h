@@ -543,9 +543,11 @@ typedef struct
   * @{
   */
 #define SDMMC_TRANSFER_MODE_BLOCK             ((uint32_t)0x00000000U)
+#define SDMMC_TRANSFER_MODE_MULTIBYTE         SDMMC_DCTRL_DTMODE_0
 #define SDMMC_TRANSFER_MODE_STREAM            SDMMC_DCTRL_DTMODE_1
 
 #define IS_SDMMC_TRANSFER_MODE(MODE) (((MODE) == SDMMC_TRANSFER_MODE_BLOCK) || \
+                                      ((MODE) == SDMMC_TRANSFER_MODE_MULTIBYTE) || \
                                       ((MODE) == SDMMC_TRANSFER_MODE_STREAM))
 /**
   * @}

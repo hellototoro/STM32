@@ -28,9 +28,6 @@ using namespace touchgfx;
 
 namespace
 {
-// Use the section "TouchGFX_Framebuffer" in the linker script to specify the placement of the buffer
-LOCATION_PRAGMA_NOLOAD("TouchGFX_Framebuffer")
-uint32_t frameBuf[(320 * 480 * 3 + 3) / 4] LOCATION_ATTRIBUTE_NOLOAD("TouchGFX_Framebuffer");
 static uint16_t lcd_int_active_line;
 static uint16_t lcd_int_porch_line;
 }
@@ -41,7 +38,7 @@ void TouchGFXGeneratedHAL::initialize()
     registerEventListener(*(Application::getInstance()));
     registerTaskDelayFunction(&OSWrappers::taskDelay);
     setFrameRefreshStrategy(HAL::REFRESH_STRATEGY_OPTIM_SINGLE_BUFFER_TFT_CTRL);
-    setFrameBufferStartAddresses((void*)frameBuf, (void*)0, (void*)0);
+    setFrameBufferStartAddresses((void*)0xC0000000, (void*)0, (void*)0);
 }
 
 void TouchGFXGeneratedHAL::configureInterrupts()

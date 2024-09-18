@@ -11,6 +11,9 @@
 		{
 			"name": "applications_test_boot_from_internal_flash",
 			"path": "board/art-pi/projects/applications_test_boot_from_internal_flash"
+		},
+		{
+			"path": "board/art-pi/projects/applications_test_boot_from_qflash"
 		}
 	],
 	"settings": {

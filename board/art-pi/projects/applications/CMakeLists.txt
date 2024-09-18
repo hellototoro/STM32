@@ -95,6 +95,12 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     FreeRTOS_CLI/app_cli.c
     FreeRTOS_CLI/cli_commands.c
     # FreeRTOS_CLI/serial.c
+    Core/Src/wifi_task.c
+
+    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/43438A1_bin.c
+    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/43438A1-mfgtest_bin.c
+    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/43438A1_clm_blob.c
+    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/43438A1-mfgtest_clm_blob.c
     ${graphics_core_generated_SRCS}
 )
 
@@ -110,6 +116,11 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     MyDrivers/print
     Middlewares/Third_Party/FreeRTOS/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI
     FreeRTOS_CLI
+
+    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438
+    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438
+    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/nvram/COMPONENT_43438/COMPONENT_AW-CU427-P
+    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/nvram_deprecated/TARGET_CYW9P62S2_M2BASE_4373
     ${touchgfx_include_DIRS}
 )
 
@@ -117,6 +128,9 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined symbols
     USE_FULL_ASSERT
+    # Enable using CY_HAL for rtos-abstraction
+    CY_USING_HAL
+    CYBSP_WIFI_CAPABLE
 )
 
 # Add linked libraries
