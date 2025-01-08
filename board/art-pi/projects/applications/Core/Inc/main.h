@@ -79,18 +79,18 @@ void Error_Handler(void);
 #define BT_RST_N_GPIO_Port GPIOI
 #define BT_HOST_WAKE_Pin GPIO_PIN_0
 #define BT_HOST_WAKE_GPIO_Port GPIOC
-#define LCD_CS_Pin GPIO_PIN_3
-#define LCD_CS_GPIO_Port GPIOH
+#define LCD_SCK_Pin GPIO_PIN_0
+#define LCD_SCK_GPIO_Port GPIOJ
 #define USER_KEY1_Pin GPIO_PIN_4
 #define USER_KEY1_GPIO_Port GPIOH
-#define LCD_MOSI_Pin GPIO_PIN_2
-#define LCD_MOSI_GPIO_Port GPIOB
+#define LCD_CS_Pin GPIO_PIN_15
+#define LCD_CS_GPIO_Port GPIOI
+#define LCD_MOSI_Pin GPIO_PIN_1
+#define LCD_MOSI_GPIO_Port GPIOJ
 #define CAM_RESET_Pin GPIO_PIN_3
 #define CAM_RESET_GPIO_Port GPIOA
 #define SPI_FLASH_CS_Pin GPIO_PIN_4
 #define SPI_FLASH_CS_GPIO_Port GPIOA
-#define LCD_SCK_Pin GPIO_PIN_0
-#define LCD_SCK_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

@@ -169,16 +169,17 @@
       "Width": 320,
       "Height": 480
     },
-    "SelectedColorDepth": 24,
+    "SelectedColorDepth": 16,
     "StartupScreenName": "screen",
     "SelectedStartupLanguage": "GB",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",
     "UIPath": ".",
     "AvailableColorDepths": [
-      24
+      16
     ],
     "AvailableLCDs": {
-      "24": "LCD24bpp"
+      "24": "LCD24bpp",
+      "16": "LCD16bpp"
     },
     "AvailableSections": [
       "ExtFlashSection",
@@ -192,8 +193,8 @@
     ],
     "PhysicalButtons": [],
     "FrameworkFeatures": {
-      "LCD24bpp": {
-        "Id": "LCD24bpp",
+      "LCD16bpp": {
+        "Id": "LCD16bpp",
         "IsEnabled": true
       }
     },
@@ -217,5 +218,5 @@
     "OptionalComponents": [],
     "AdditionalFeatures": []
   },
-  "Version": "4.24.0"
+  "Version": "4.24.1"
 }

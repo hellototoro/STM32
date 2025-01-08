@@ -7,6 +7,7 @@ add_library(stm32cubemx INTERFACE)
 enable_language(C CXX ASM)
 
 target_compile_definitions(stm32cubemx INTERFACE 
+	USE_PWR_LDO_SUPPLY 
 	USE_HAL_DRIVER 
 	STM32H750xx
     $<$<CONFIG:Debug>:DEBUG>
@@ -107,6 +108,8 @@ target_sources(stm32cubemx INTERFACE
     ../../TouchGFX/target/generated/STM32DMA.cpp
     ../../TouchGFX/target/generated/OSWrappers.cpp
     ../../TouchGFX/App/app_touchgfx.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc_ex.c
@@ -131,18 +134,20 @@ target_sources(stm32cubemx INTERFACE
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_fdcan.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_fmc.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nor.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sram.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nand.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sdram.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dsi.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_delayblock.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd_ex.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mmc.c
+    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mmc_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c
     ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd.c

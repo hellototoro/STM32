@@ -487,7 +487,7 @@ cy_rslt_t cyhal_sdio_bulk_transfer(cyhal_sdio_t* obj, cyhal_sdio_transfer_type_t
             }
             else
             {
-                config.TransferMode  = SDMMC_TRANSFER_MODE_MULTIBYTE; /* multibyte data transfer mode */
+                config.TransferMode  = SDMMC_DCTRL_DTMODE_0; /* multibyte data transfer mode */
                 config.DataLength    = length;
                 config.DataBlockSize =  0;
             }
