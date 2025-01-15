@@ -36,6 +36,7 @@
      PA14 (JTCK/SWCLK)   ------> DEBUG_JTCK-SWCLK
      PC14-OSC32_IN (OSC32_IN)   ------> RCC_OSC32_IN
      PA13 (JTMS/SWDIO)   ------> DEBUG_JTMS-SWDIO
+     PA8   ------> RCC_MCO_1
      PH1-OSC_OUT (PH1)   ------> RCC_OSC_OUT
      PH0-OSC_IN (PH0)   ------> RCC_OSC_IN
 */
@@ -58,7 +59,10 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOF_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(TP_RST_GPIO_Port, TP_RST_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOD, TP_RST_Pin|CAM_RST_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOH, SCCB_SCL_Pin|SCCB_SDA_Pin|SPI_PANEL_RST_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
@@ -67,13 +71,22 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(WIFI_WL_REG_ON_GPIO_Port, WIFI_WL_REG_ON_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOI, LED_BLUE_Pin|LCD_CS_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOI, LED_BLUE_Pin|LCD_SPI_MOSI_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOI, BT_WAKE_Pin|BT_RST_N_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOJ, LCD_SCK_Pin|LCD_MOSI_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOJ, LCD_SPI_SCK_Pin|LCD_SPI_CS_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(SPI_PANEL_SCK_GPIO_Port, SPI_PANEL_SCK_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, SPI_PANEL_RS_Pin|SPI_PANEL_MOSI_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(SPI_PANEL_CS_GPIO_Port, SPI_PANEL_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(CAM_RESET_GPIO_Port, CAM_RESET_Pin, GPIO_PIN_RESET);
@@ -93,6 +106,13 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(TP_RST_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SCCB_SCL_Pin SCCB_SDA_Pin */
+  GPIO_InitStruct.Pin = SCCB_SCL_Pin|SCCB_SDA_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LED_RED_Pin WIFI_WL_REG_ON_Pin */
   GPIO_InitStruct.Pin = LED_RED_Pin|WIFI_WL_REG_ON_Pin;
@@ -120,6 +140,14 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_BLUE_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PA8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF0_MCO;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : BT_WAKE_Pin BT_RST_N_Pin */
   GPIO_InitStruct.Pin = BT_WAKE_Pin|BT_RST_N_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
@@ -133,8 +161,15 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(BT_HOST_WAKE_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LCD_SCK_Pin LCD_MOSI_Pin */
-  GPIO_InitStruct.Pin = LCD_SCK_Pin|LCD_MOSI_Pin;
+  /*Configure GPIO pins : SPI_PANEL_RST_Pin SPI_PANEL_SCK_Pin */
+  GPIO_InitStruct.Pin = SPI_PANEL_RST_Pin|SPI_PANEL_SCK_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LCD_SPI_SCK_Pin LCD_SPI_CS_Pin */
+  GPIO_InitStruct.Pin = LCD_SPI_SCK_Pin|LCD_SPI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -146,12 +181,26 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(USER_KEY1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LCD_CS_Pin */
-  GPIO_InitStruct.Pin = LCD_CS_Pin;
+  /*Configure GPIO pin : LCD_SPI_MOSI_Pin */
+  GPIO_InitStruct.Pin = LCD_SPI_MOSI_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(LCD_CS_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(LCD_SPI_MOSI_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SPI_PANEL_RS_Pin SPI_PANEL_CS_Pin SPI_PANEL_MOSI_Pin */
+  GPIO_InitStruct.Pin = SPI_PANEL_RS_Pin|SPI_PANEL_CS_Pin|SPI_PANEL_MOSI_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : CAM_RST_Pin */
+  GPIO_InitStruct.Pin = CAM_RST_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(CAM_RST_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : CAM_RESET_Pin */
   GPIO_InitStruct.Pin = CAM_RESET_Pin;

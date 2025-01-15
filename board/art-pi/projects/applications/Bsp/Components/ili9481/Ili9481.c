@@ -1,54 +1,54 @@
 /*
- * Ili9481.c
+ * ili9481.c
  *
  *  Created on: 2024年8月21日
  *      Author: huang
  */
 
-#include "Ili9481.h"
+#include "ili9481.h"
 
 static void SPI_WriteByte(uint8_t byte)
 {
     uint8_t n;
     for(n = 0; n < 8; n++)
     {
-        if(byte & 0x80) HAL_GPIO_WritePin(LCD_MOSI_GPIO_Port, LCD_MOSI_Pin, GPIO_PIN_SET);
-        else HAL_GPIO_WritePin(LCD_MOSI_GPIO_Port, LCD_MOSI_Pin, GPIO_PIN_RESET);
+        if(byte & 0x80) HAL_GPIO_WritePin(LCD_SPI_MOSI_GPIO_Port, LCD_SPI_MOSI_Pin, GPIO_PIN_SET);
+        else HAL_GPIO_WritePin(LCD_SPI_MOSI_GPIO_Port, LCD_SPI_MOSI_Pin, GPIO_PIN_RESET);
         byte <<= 1;
-        HAL_GPIO_WritePin(LCD_SCK_GPIO_Port, LCD_SCK_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(LCD_SCK_GPIO_Port, LCD_SCK_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(LCD_SPI_SCK_GPIO_Port, LCD_SPI_SCK_Pin, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(LCD_SPI_SCK_GPIO_Port, LCD_SPI_SCK_Pin, GPIO_PIN_SET);
     }
 }
 
 static void SPI_WriteComm(uint8_t cmd)
 {
-    HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LCD_MOSI_GPIO_Port, LCD_MOSI_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LCD_SCK_GPIO_Port, LCD_SCK_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LCD_SCK_GPIO_Port, LCD_SCK_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LCD_SPI_CS_GPIO_Port, LCD_SPI_CS_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LCD_SPI_MOSI_GPIO_Port, LCD_SPI_MOSI_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LCD_SPI_SCK_GPIO_Port, LCD_SPI_SCK_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LCD_SPI_SCK_GPIO_Port, LCD_SPI_SCK_Pin, GPIO_PIN_SET);
     SPI_WriteByte(cmd);
-    HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LCD_SPI_CS_GPIO_Port, LCD_SPI_CS_Pin, GPIO_PIN_SET);
 }
 
 static void SPI_WriteData(uint8_t data)
 {
-    HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LCD_MOSI_GPIO_Port, LCD_MOSI_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LCD_SCK_GPIO_Port, LCD_SCK_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LCD_SCK_GPIO_Port, LCD_SCK_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LCD_SPI_CS_GPIO_Port, LCD_SPI_CS_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LCD_SPI_MOSI_GPIO_Port, LCD_SPI_MOSI_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LCD_SPI_SCK_GPIO_Port, LCD_SPI_SCK_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LCD_SPI_SCK_GPIO_Port, LCD_SPI_SCK_Pin, GPIO_PIN_SET);
     SPI_WriteByte(data);
-    HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LCD_SPI_CS_GPIO_Port, LCD_SPI_CS_Pin, GPIO_PIN_SET);
 }
 
-void Ili9481_init(void)
+void ili9481_init(void)
 {
     HAL_GPIO_WritePin(TP_RST_GPIO_Port, TP_RST_Pin, GPIO_PIN_RESET);
     HAL_Delay(20);
     HAL_GPIO_WritePin(TP_RST_GPIO_Port, TP_RST_Pin, GPIO_PIN_SET);
 
-    HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LCD_SPI_CS_GPIO_Port, LCD_SPI_CS_Pin, GPIO_PIN_SET);
     HAL_Delay(20);
-    HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LCD_SPI_CS_GPIO_Port, LCD_SPI_CS_Pin, GPIO_PIN_RESET);
 
     SPI_WriteComm(0x11);
     HAL_Delay(20);

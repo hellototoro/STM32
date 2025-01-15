@@ -84,7 +84,8 @@ list(FILTER touchgfx_include_DIRS EXCLUDE REGEX ".*/simulator/.*")
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
-    Bsp/Components/ili9481/Ili9481.c
+    Bsp/Components/ili9481/ili9481.c
+    Bsp/Components/st7789/st7789.c
     Bsp/Components/sdram/sdram.c
     Bsp/Components/sdcard/sdcard_test.c
     Bsp/Components/ft5xx6/Ft5xx6.cpp
@@ -108,6 +109,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
     Bsp/Components/ili9481
+    Bsp/Components/st7789
     Bsp/Components/sdram
     Bsp/Components/sdcard
     Bsp/Components/ft5xx6

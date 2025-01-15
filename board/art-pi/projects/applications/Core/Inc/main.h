@@ -62,6 +62,8 @@ void Error_Handler(void);
 #define SD_CARD_DETECT_GPIO_Port GPIOD
 #define TP_RST_Pin GPIO_PIN_3
 #define TP_RST_GPIO_Port GPIOD
+#define SCCB_SCL_Pin GPIO_PIN_15
+#define SCCB_SCL_GPIO_Port GPIOH
 #define LED_RED_Pin GPIO_PIN_15
 #define LED_RED_GPIO_Port GPIOC
 #define TP_IRQ_Pin GPIO_PIN_12
@@ -69,6 +71,8 @@ void Error_Handler(void);
 #define WIFI_HOST_WAKE_Pin GPIO_PIN_3
 #define WIFI_HOST_WAKE_GPIO_Port GPIOE
 #define WIFI_HOST_WAKE_EXTI_IRQn EXTI3_IRQn
+#define SCCB_SDA_Pin GPIO_PIN_13
+#define SCCB_SDA_GPIO_Port GPIOH
 #define WIFI_WL_REG_ON_Pin GPIO_PIN_13
 #define WIFI_WL_REG_ON_GPIO_Port GPIOC
 #define LED_BLUE_Pin GPIO_PIN_8
@@ -79,18 +83,30 @@ void Error_Handler(void);
 #define BT_RST_N_GPIO_Port GPIOI
 #define BT_HOST_WAKE_Pin GPIO_PIN_0
 #define BT_HOST_WAKE_GPIO_Port GPIOC
-#define LCD_SCK_Pin GPIO_PIN_0
-#define LCD_SCK_GPIO_Port GPIOJ
+#define SPI_PANEL_RST_Pin GPIO_PIN_2
+#define SPI_PANEL_RST_GPIO_Port GPIOH
+#define LCD_SPI_SCK_Pin GPIO_PIN_0
+#define LCD_SPI_SCK_GPIO_Port GPIOJ
+#define SPI_PANEL_SCK_Pin GPIO_PIN_3
+#define SPI_PANEL_SCK_GPIO_Port GPIOH
 #define USER_KEY1_Pin GPIO_PIN_4
 #define USER_KEY1_GPIO_Port GPIOH
-#define LCD_CS_Pin GPIO_PIN_15
-#define LCD_CS_GPIO_Port GPIOI
-#define LCD_MOSI_Pin GPIO_PIN_1
-#define LCD_MOSI_GPIO_Port GPIOJ
+#define LCD_SPI_MOSI_Pin GPIO_PIN_15
+#define LCD_SPI_MOSI_GPIO_Port GPIOI
+#define LCD_SPI_CS_Pin GPIO_PIN_1
+#define LCD_SPI_CS_GPIO_Port GPIOJ
+#define SPI_PANEL_RS_Pin GPIO_PIN_2
+#define SPI_PANEL_RS_GPIO_Port GPIOB
+#define CAM_RST_Pin GPIO_PIN_13
+#define CAM_RST_GPIO_Port GPIOD
+#define SPI_PANEL_CS_Pin GPIO_PIN_1
+#define SPI_PANEL_CS_GPIO_Port GPIOB
 #define CAM_RESET_Pin GPIO_PIN_3
 #define CAM_RESET_GPIO_Port GPIOA
 #define SPI_FLASH_CS_Pin GPIO_PIN_4
 #define SPI_FLASH_CS_GPIO_Port GPIOA
+#define SPI_PANEL_MOSI_Pin GPIO_PIN_0
+#define SPI_PANEL_MOSI_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
