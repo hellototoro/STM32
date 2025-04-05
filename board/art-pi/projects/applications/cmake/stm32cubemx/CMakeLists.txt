@@ -1,294 +1,191 @@
 cmake_minimum_required(VERSION 3.22)
-
-project(stm32cubemx)
-add_library(stm32cubemx INTERFACE)
-
 # Enable CMake support for ASM, C and C++ languages
 enable_language(C CXX ASM)
-
-target_compile_definitions(stm32cubemx INTERFACE 
+# STM32CubeMX generated symbols (macros)
+set(MX_Defines_Syms 
 	USE_PWR_LDO_SUPPLY 
 	USE_HAL_DRIVER 
 	STM32H750xx
     $<$<CONFIG:Debug>:DEBUG>
 )
 
-target_include_directories(stm32cubemx INTERFACE
-    ../../Core/Inc
-    ../../FATFS/Target
-    ../../FATFS/App
-    ../../TouchGFX/App
-    ../../TouchGFX/target/generated
-    ../../TouchGFX/target
-    ../../Drivers/STM32H7xx_HAL_Driver/Inc
-    ../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy
-    ../../Middlewares/Third_Party/FreeRTOS/Source/include
-    ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
-    ../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
-    ../../Middlewares/Third_Party/FatFs/src
-    ../../Drivers/CMSIS/Device/ST/STM32H7xx/Include
-    ../../Drivers/CMSIS/Include
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/include/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-freertos-integration/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/include/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/include/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_log/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/JSON_parser/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/linked_list/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_string/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/arpa
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/net
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/sys
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/stdc
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/apps
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/priv
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/prot
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/COMPONENT_FREERTOS/
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include
+# STM32CubeMX generated include paths
+set(MX_Include_Dirs
+    ${CMAKE_SOURCE_DIR}/Core/Inc
+    ${CMAKE_SOURCE_DIR}/FATFS/Target
+    ${CMAKE_SOURCE_DIR}/FATFS/App
+    ${CMAKE_SOURCE_DIR}/TouchGFX/App
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target/generated
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Inc
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/include
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src
+    ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32H7xx/Include
+    ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Include
 )
 
-target_sources(stm32cubemx INTERFACE
-    ../../Core/Src/main.c
-    ../../Core/Src/gpio.c
-    ../../Core/Src/freertos.c
-    ../../Core/Src/crc.c
-    ../../Core/Src/dcmi.c
-    ../../Core/Src/dma.c
-    ../../Core/Src/dma2d.c
-    ../../Core/Src/eth.c
-    ../../Core/Src/fdcan.c
-    ../../Core/Src/fmc.c
-    ../../Core/Src/i2c.c
-    ../../Core/Src/ltdc.c
-    ../../Core/Src/memorymap.c
-    ../../Core/Src/sdmmc.c
-    ../../Core/Src/spi.c
-    ../../Core/Src/tim.c
-    ../../Core/Src/usart.c
-    ../../Core/Src/usb_otg.c
-    ../../Core/Src/stm32h7xx_it.c
-    ../../Core/Src/stm32h7xx_hal_msp.c
-    ../../Core/Src/stm32h7xx_hal_timebase_tim.c
-    ../../FATFS/Target/bsp_driver_sd.c
-    ../../FATFS/Target/sd_diskio.c
-    ../../FATFS/Target/fatfs_platform.c
-    ../../FATFS/App/fatfs.c
-    ../../TouchGFX/target/TouchGFXHAL.cpp
-    ../../TouchGFX/target/STM32TouchController.cpp
-    ../../TouchGFX/target/TouchGFXGPIO.cpp
-    ../../TouchGFX/target/generated/TouchGFXConfiguration.cpp
-    ../../TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp
-    ../../TouchGFX/target/generated/STM32DMA.cpp
-    ../../TouchGFX/target/generated/OSWrappers.cpp
-    ../../TouchGFX/App/app_touchgfx.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hsem.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dcmi.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma2d.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_fdcan.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_fmc.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nor.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sram.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nand.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sdram.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_delayblock.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mmc.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mmc_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd_ex.c
-    ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c
-    ../../Core/Src/system_stm32h7xx.c
-    ../../Middlewares/Third_Party/FatFs/src/diskio.c
-    ../../Middlewares/Third_Party/FatFs/src/ff.c
-    ../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
-    ../../Middlewares/Third_Party/FatFs/src/option/syscall.c
-    ../../Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/croutine.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/list.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/queue.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/tasks.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/timers.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
-    ../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/cy_ethernetif.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/cy_lwip_dhcp_server.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/cy_network_mw_core.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-freertos-integration/arch/sys_arch.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_common.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_sdio_protocol.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_spi_protocol.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_emusbh_impl.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_usb_protocol.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_ap.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_buffer_api.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_cdc_bdc.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_chip.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_chip_constants.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_clm.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_debug.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_events.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_logging.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_management.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_network_if.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_proto.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_resource_if.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_sdpcm.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_thread.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_utils.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_wifi.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_wifi_api.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_wifi_p2p.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_commonring.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_flowring.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_ring.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp/whd_resources.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/cy_wcm.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_log/cy_log.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/JSON_parser/cy_json_parser.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/linked_list/cy_linked_list.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_string/cy_string_utils.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/cy_nw_helper_common.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/COMPONENT_LWIP/cy_nw_helper.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/cybsp_wifi.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/COMPONENT_LWIP/cy_network_buffer_lwip.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/api_lib.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/api_msg.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/err.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/if_api.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/netbuf.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/netdb.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/netifapi.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/sockets.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/tcpip.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/altcp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/altcp_alloc.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/altcp_tcp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/def.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/dns.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/inet_chksum.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/init.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ip.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/autoip.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/dhcp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/etharp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/icmp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/igmp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/ip4.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/ip4_addr.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/ip4_frag.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/dhcp6.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/ethip6.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/icmp6.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/inet6.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/ip6.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/ip6_addr.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/ip6_frag.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/mld6.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/nd6.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/mem.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/memp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/netif.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/pbuf.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/raw.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/stats.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/sys.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/tcp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/tcp_in.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/tcp_out.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/timeouts.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/udp.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/netif/ethernet.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Src/cyhal_system.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Src/wifi_bt_if.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_gpio.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_lptimer.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_sdio.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_spi.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_trng.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_uart.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_syspm.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/btstack-integration/COMPONENT_HCI-UART/firmware/COMPONENT_43438/COMPONENT_AW-CU427-P/w_bt_firmware_controller.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/cyabs_freertos_helpers.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/cyabs_rtos_freertos.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/cyabs_freertos_common.c
-    ../../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/cy_worker_thread.c
-    ../../Core/Src/sysmem.c
-    ../../Core/Src/syscalls.c
-    ../../startup_stm32h750xx.s
+# STM32CubeMX generated application sources
+set(MX_Application_Src
+    ${CMAKE_SOURCE_DIR}/TouchGFX/App/app_touchgfx.c
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target/generated/TouchGFXConfiguration.cpp
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target/generated/STM32DMA.cpp
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target/generated/OSWrappers.cpp
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target/TouchGFXHAL.cpp
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target/STM32TouchController.cpp
+    ${CMAKE_SOURCE_DIR}/TouchGFX/target/TouchGFXGPIO.cpp
+    ${CMAKE_SOURCE_DIR}/FATFS/App/fatfs.c
+    ${CMAKE_SOURCE_DIR}/FATFS/Target/bsp_driver_sd.c
+    ${CMAKE_SOURCE_DIR}/FATFS/Target/sd_diskio.c
+    ${CMAKE_SOURCE_DIR}/FATFS/Target/fatfs_platform.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/main.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/gpio.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/freertos.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/crc.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/dcmi.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/dma.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/dma2d.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/eth.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/fdcan.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/fmc.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/i2c.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/ltdc.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/memorymap.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/sdmmc.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/spi.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/tim.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/usart.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/usb_otg.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/stm32h7xx_it.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/stm32h7xx_hal_msp.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/stm32h7xx_hal_timebase_tim.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/sysmem.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/syscalls.c
+    ${CMAKE_SOURCE_DIR}/startup_stm32h750xx.s
 )
 
-target_link_directories(stm32cubemx INTERFACE
+# STM32 HAL/LL Drivers
+set(STM32_Drivers_Src
+    ${CMAKE_SOURCE_DIR}/Core/Src/system_stm32h7xx.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hsem.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dcmi.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma2d.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_fdcan.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_fmc.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nor.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sram.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nand.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sdram.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_delayblock.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mmc.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mmc_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd_ex.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c
 )
 
-target_link_libraries(stm32cubemx INTERFACE
+# Drivers Midllewares
+
+
+set(FreeRTOS_Src
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/croutine.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/list.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/queue.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/timers.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
+)
+set(FatFs_Src
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src/diskio.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src/ff.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src/option/syscall.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
 )
 
-# Validate that STM32CubeMX code is compatible with C standard
-if(CMAKE_C_STANDARD LESS 11)
-    message(ERROR "Generated code requires C11 or higher")
-endif()
+# Link directories setup
+set(MX_LINK_DIRS
 
+)
+# Project static libraries
+set(MX_LINK_LIBS 
+    STM32_Drivers
+    FreeRTOS	FatFs	
+)
+# Interface library for includes and symbols
+add_library(stm32cubemx INTERFACE)
+target_include_directories(stm32cubemx INTERFACE ${MX_Include_Dirs})
+target_compile_definitions(stm32cubemx INTERFACE ${MX_Defines_Syms})
+
+# Create STM32_Drivers static library
+add_library(STM32_Drivers OBJECT)
+target_sources(STM32_Drivers PRIVATE ${STM32_Drivers_Src})
+target_link_libraries(STM32_Drivers PUBLIC stm32cubemx)
 # Validate that STM32CubeMX code is compatible with C++ standard
 if(CMAKE_CXX_STANDARD LESS 11)
     message(ERROR "Generated code requires C++11 or higher")
+endif()
+
+# Create FreeRTOS static library
+add_library(FreeRTOS OBJECT)
+target_sources(FreeRTOS PRIVATE ${FreeRTOS_Src})
+target_link_libraries(FreeRTOS PUBLIC stm32cubemx)
+
+# Create FatFs static library
+add_library(FatFs OBJECT)
+target_sources(FatFs PRIVATE ${FatFs_Src})
+target_link_libraries(FatFs PUBLIC stm32cubemx)
+
+# Add STM32CubeMX generated application sources to the project
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MX_Application_Src})
+
+# Link directories setup
+target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MX_LINK_DIRS})
+
+# Add libraries to the project
+target_link_libraries(${CMAKE_PROJECT_NAME} ${MX_LINK_LIBS})
+
+# Add the map file to the list of files to be removed with 'clean' target
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES ADDITIONAL_CLEAN_FILES ${CMAKE_PROJECT_NAME}.map)
+
+# Validate that STM32CubeMX code is compatible with C standard
+if((CMAKE_C_STANDARD EQUAL 90) OR (CMAKE_C_STANDARD EQUAL 99))
+    message(ERROR "Generated code requires C11 or higher")
 endif()

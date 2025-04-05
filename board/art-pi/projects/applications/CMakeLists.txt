@@ -11,7 +11,9 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
-
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ON)
 
 # Define the build type
 if(NOT CMAKE_BUILD_TYPE)
@@ -27,12 +29,12 @@ include("cmake/gcc-arm-none-eabi.cmake")
 # Enable compile command to ease indexing with e.g. clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
-# Enable CMake support for ASM and C languages
-enable_language(C CXX ASM)
-
 # Core project settings
 project(${CMAKE_PROJECT_NAME})
 message("Build type: " ${CMAKE_BUILD_TYPE})
+
+# Enable CMake support for ASM, C and C++ languages
+enable_language(C CXX ASM)
 
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME})
@@ -40,46 +42,13 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
+# Add touchgfx generated sources and libraries
+add_subdirectory(cmake/touchgfx)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
 )
-
-# Root TouchGFX folder - depends on where CMakeLists.txt is located
-set(root_tgfx_dir TouchGFX)
-
-# Setup all necessary include directories
-# These are used by compiler to search for C or C++ headers
-set(touchgfx_include_DIRS
-
-    # Application includes
-    ${root_tgfx_dir}/gui/include
-    ${root_tgfx_dir}/generated/gui_generated/include
-    ${root_tgfx_dir}/generated/images/include
-    ${root_tgfx_dir}/generated/bitmaps/include
-    ${root_tgfx_dir}/generated/fonts/include
-    ${root_tgfx_dir}/generated/texts/include
-    ${root_tgfx_dir}/generated/videos/include
-
-    # When running simulator but project started as STM32 project
-    ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/include
-    ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/include/common
-    ${root_tgfx_dir}/../Middlewares/ST/touchgfx/framework/common/include
-)
-
-# Search all source files in to be part of the build
-# Use the GLOB to scan everything in the gui and generated folders
-# These are essential for generic TouchGFX build
-file(GLOB_RECURSE graphics_core_generated_SRCS
-    ${root_tgfx_dir}/generated/*.cpp
-    ${root_tgfx_dir}/gui/*.cpp
-    ${root_tgfx_dir}/gui/*.c
-)
-
-set(graphics_core_generated_SRCS ${graphics_core_generated_SRCS})
-
-list(FILTER graphics_core_generated_SRCS EXCLUDE REGEX ".*/simulator/.*")
-list(FILTER touchgfx_include_DIRS EXCLUDE REGEX ".*/simulator/.*")
 
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
@@ -96,13 +65,12 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     FreeRTOS_CLI/app_cli.c
     FreeRTOS_CLI/cli_commands.c
     # FreeRTOS_CLI/serial.c
-    Core/Src/wifi_task.c
+    # Core/Src/wifi_task.c
 
-    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/43438A1_bin.c
-    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/43438A1-mfgtest_bin.c
-    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/43438A1_clm_blob.c
-    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/43438A1-mfgtest_clm_blob.c
-    ${graphics_core_generated_SRCS}
+    # Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/43438A1_bin.c
+    # Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/43438A1-mfgtest_bin.c
+    # Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/43438A1_clm_blob.c
+    # Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/43438A1-mfgtest_clm_blob.c
 )
 
 # Add include paths
@@ -119,11 +87,10 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     Middlewares/Third_Party/FreeRTOS/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI
     FreeRTOS_CLI
 
-    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438
-    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438
-    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/nvram/COMPONENT_43438/COMPONENT_AW-CU427-P
-    Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/nvram_deprecated/TARGET_CYW9P62S2_M2BASE_4373
-    ${touchgfx_include_DIRS}
+    # Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438
+    # Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438
+    # Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/nvram/COMPONENT_43438/COMPONENT_AW-CU427-P
+    # Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/nvram_deprecated/TARGET_CYW9P62S2_M2BASE_4373
 )
 
 # Add project symbols (macros)
@@ -131,14 +98,13 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined symbols
     USE_FULL_ASSERT
     # Enable using CY_HAL for rtos-abstraction
-    CY_USING_HAL
-    CYBSP_WIFI_CAPABLE
+    # CY_USING_HAL
+    # CYBSP_WIFI_CAPABLE
 )
 
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
-    ${CMAKE_SOURCE_DIR}/Middlewares/ST/touchgfx/lib/core/cortex_m7/gcc/libtouchgfx-float-abi-hard.a
 
     # Add user defined libraries
 )

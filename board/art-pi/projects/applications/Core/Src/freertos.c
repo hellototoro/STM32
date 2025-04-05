@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -122,7 +122,7 @@ void MX_FREERTOS_Init(void) {
   };
   osThreadNew(TouchGFX_Task, NULL, &touchGFX_attributes);
 
-  WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
+  // WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
 
   consolseTaskInit();
   /* USER CODE END RTOS_THREADS */
