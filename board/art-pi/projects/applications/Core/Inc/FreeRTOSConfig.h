@@ -186,6 +186,9 @@ standard names. */
 #define configCOMMAND_INT_MAX_OUTPUT_SIZE         200
 #endif
 
+#define CY_USING_HAL          1
+#define CYBSP_WIFI_CAPABLE    1
+
 /* USER CODE END Defines */
 
 #endif /* FREERTOS_CONFIG_H */

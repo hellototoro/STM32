@@ -122,7 +122,7 @@ void MX_FREERTOS_Init(void) {
   };
   osThreadNew(TouchGFX_Task, NULL, &touchGFX_attributes);
 
-  // WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
+  WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
 
   consolseTaskInit();
   /* USER CODE END RTOS_THREADS */

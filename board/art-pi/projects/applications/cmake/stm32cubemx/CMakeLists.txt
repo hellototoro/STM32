@@ -25,6 +25,52 @@ set(MX_Include_Dirs
     ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src
     ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32H7xx/Include
     ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Include
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/include/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-freertos-integration/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/include/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/include/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_log/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/JSON_parser/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/linked_list/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_string/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/arpa
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/net
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/sys
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/stdc
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/apps
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/priv
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/prot
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/nvram/COMPONENT_43438/COMPONENT_AW-CU427-P/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/COMPONENT_FREERTOS/
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include
 )
 
 # STM32CubeMX generated application sources
@@ -132,6 +178,116 @@ set(FreeRTOS_Src
     ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
     ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
 )
+set(Connectivity_Src
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/cyabs_freertos_helpers.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/cyabs_rtos_freertos.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/cyabs_freertos_common.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/cy_worker_thread.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/btstack-integration/COMPONENT_HCI-UART/firmware/COMPONENT_43438/COMPONENT_AW-CU427-P/w_bt_firmware_controller.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Src/cyhal_system.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Src/wifi_bt_if.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_gpio.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_lptimer.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_sdio.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_spi.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_trng.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_uart.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Src/stm32_cyhal_syspm.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/43438A1_bin.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/firmware/COMPONENT_43438/43438A1-mfgtest_bin.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/43438A1-mfgtest_clm_blob.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources/clm/COMPONENT_43438/43438A1_clm_blob.c
+    #${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/btstack-integration/COMPONENT_HCI-UART/firmware/COMPONENT_43439/COMPONENT_MURATA-1YN/w_bt_firmware_controller.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/api_lib.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/api_msg.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/err.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/if_api.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/netbuf.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/netdb.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/netifapi.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/sockets.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/api/tcpip.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/altcp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/altcp_alloc.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/altcp_tcp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/def.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/dns.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/inet_chksum.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/init.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ip.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/autoip.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/dhcp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/etharp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/icmp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/igmp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/ip4.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/ip4_addr.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv4/ip4_frag.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/dhcp6.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/ethip6.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/icmp6.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/inet6.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/ip6.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/ip6_addr.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/ip6_frag.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/mld6.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/ipv6/nd6.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/mem.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/memp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/netif.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/pbuf.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/raw.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/stats.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/sys.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/tcp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/tcp_in.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/tcp_out.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/timeouts.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/core/udp.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/netif/ethernet.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/cybsp_wifi.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/COMPONENT_LWIP/cy_network_buffer_lwip.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_log/cy_log.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/JSON_parser/cy_json_parser.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/linked_list/cy_linked_list.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_string/cy_string_utils.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/cy_nw_helper_common.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/COMPONENT_LWIP/cy_nw_helper.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/cy_wcm.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_common.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_sdio_protocol.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_spi_protocol.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_emusbh_impl.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/whd_bus_usb_protocol.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_ap.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_buffer_api.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_cdc_bdc.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_chip.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_chip_constants.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_clm.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_debug.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_events.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_logging.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_management.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_network_if.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_proto.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_resource_if.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_sdpcm.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_thread.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_utils.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_wifi.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_wifi_api.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_wifi_p2p.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_commonring.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_flowring.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/whd_ring.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp/whd_resources.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/cy_ethernetif.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/cy_lwip_dhcp_server.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/cy_network_mw_core.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-freertos-integration/arch/sys_arch.c
+)
 set(FatFs_Src
     ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src/diskio.c
     ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FatFs/src/ff.c
@@ -147,7 +303,7 @@ set(MX_LINK_DIRS
 # Project static libraries
 set(MX_LINK_LIBS 
     STM32_Drivers
-    FreeRTOS	FatFs	
+    FreeRTOS	Connectivity	FatFs	
 )
 # Interface library for includes and symbols
 add_library(stm32cubemx INTERFACE)
@@ -167,6 +323,11 @@ endif()
 add_library(FreeRTOS OBJECT)
 target_sources(FreeRTOS PRIVATE ${FreeRTOS_Src})
 target_link_libraries(FreeRTOS PUBLIC stm32cubemx)
+
+# Create Connectivity static library
+add_library(Connectivity OBJECT)
+target_sources(Connectivity PRIVATE ${Connectivity_Src})
+target_link_libraries(Connectivity PUBLIC stm32cubemx)
 
 # Create FatFs static library
 add_library(FatFs OBJECT)
