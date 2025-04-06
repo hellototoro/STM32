@@ -7,9 +7,6 @@
 		{
 			"name": "bootloader",
 			"path": "board/art-pi/projects/bootloader"
-		},
-		{
-			"path": "board/art-pi/projects/test"
 		}
 	],
 	"settings": {

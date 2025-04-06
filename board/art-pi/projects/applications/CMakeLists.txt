@@ -42,6 +42,28 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
+# 向子模块 Connectivity 传递 symbols 和头文件目录以及源文件
+set(COMPONENT_43438_DIR ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources)
+
+target_compile_definitions(Connectivity PRIVATE
+    # Enable using CY_HAL for rtos-abstraction
+    CY_USING_HAL=1
+    CYBSP_WIFI_CAPABLE=1
+)
+
+target_include_directories(Connectivity PRIVATE
+    ${COMPONENT_43438_DIR}/firmware/COMPONENT_43438/
+    ${COMPONENT_43438_DIR}/clm/COMPONENT_43438/
+    ${COMPONENT_43438_DIR}/nvram/COMPONENT_43438/COMPONENT_AW-CU427-P/
+)
+
+target_sources(Connectivity PRIVATE
+    ${COMPONENT_43438_DIR}/firmware/COMPONENT_43438/43438A1_bin.c
+    ${COMPONENT_43438_DIR}/firmware/COMPONENT_43438/43438A1-mfgtest_bin.c
+    ${COMPONENT_43438_DIR}/clm/COMPONENT_43438/43438A1-mfgtest_clm_blob.c
+    ${COMPONENT_43438_DIR}/clm/COMPONENT_43438/43438A1_clm_blob.c
+)
+
 # Add touchgfx generated sources and libraries
 add_subdirectory(cmake/touchgfx)
 
@@ -87,9 +109,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined symbols
     USE_FULL_ASSERT
-    # Enable using CY_HAL for rtos-abstraction
-    # CY_USING_HAL
-    # CYBSP_WIFI_CAPABLE
 )
 
 # Add linked libraries
