@@ -11,6 +11,7 @@
 #include "cmsis_os.h"
 #include "app_cli.h"
 #include "cli_commands.h"
+#include "FreeRTOS_CLI.h"
 #include "main.h"
 
 #define MAX_INPUT_LENGTH 50
