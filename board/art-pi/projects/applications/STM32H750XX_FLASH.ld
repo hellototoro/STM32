@@ -53,7 +53,7 @@
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = ORIGIN(DTCMRAM) + LENGTH(DTCMRAM);    /* end of RAM */
+_estack = ORIGIN(RAM_D1) + LENGTH(RAM_D1);    /* end of RAM */
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0x8000;      /* required amount of heap  */
 _Min_Stack_Size = 0x400; /* required amount of stack */
@@ -61,12 +61,15 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-DTCMRAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 128K
-RAM (xrw)      : ORIGIN = 0x24000000, LENGTH = 512K
-RAM_D2 (xrw)      : ORIGIN = 0x30000000, LENGTH = 288K
-RAM_D3 (xrw)      : ORIGIN = 0x38000000, LENGTH = 64K
-ITCMRAM (xrw)      : ORIGIN = 0x00000000, LENGTH = 64K
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 128K
+ITCMRAM (xrw)   : ORIGIN = 0x00000000, LENGTH = 64K   /* 64Kb of ITCM RAM */
+DTCMRAM (xrw)   : ORIGIN = 0x20000000, LENGTH = 128K  /* 128Kb of DTCM RAM */
+RAM_D1 (xrw)    : ORIGIN = 0x24000000, LENGTH = 512K  /* 512Kb of SRAM1 in domain 1*/
+RAM1_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 128K  /* 128Kb of SRAM1 in domain 2*/
+RAM2_D2 (xrw)   : ORIGIN = 0x30020000, LENGTH = 128K  /* 128Kb of SRAM2 in domain 2*/
+RAM3_D2 (xrw)   : ORIGIN = 0x30040000, LENGTH = 32K   /* 32Kb of SRAM3 in domain 2*/
+RAM4_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K   /* 64Kb SRAM4 in domain 3*/
+RAMB_D3 (xrw)   : ORIGIN = 0x38800000, LENGTH = 4K    /* 4Kb of backup SRAM in domain 3, aka RTC RAM */
+QFLASH (rx)     : ORIGIN = 0x90000000, LENGTH = 8192K /* 8MB of QSPI Flash memory */
 }
 
 /* Define output sections */
@@ -78,7 +81,7 @@ SECTIONS
     . = ALIGN(4);
     KEEP(*(.isr_vector)) /* Startup code */
     . = ALIGN(4);
-  } >FLASH
+  } >QFLASH
 
   /* The program code and other data goes into FLASH */
   .text :
@@ -95,7 +98,7 @@ SECTIONS
 
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
-  } >FLASH
+  } >QFLASH
 
   /* Constant data goes into FLASH */
   .rodata :
@@ -104,14 +107,14 @@ SECTIONS
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
     . = ALIGN(4);
-  } >FLASH
+  } >QFLASH
 
   .ARM.extab (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
     . = ALIGN(4);
     *(.ARM.extab* .gnu.linkonce.armextab.*)
     . = ALIGN(4);
-  } >FLASH
+  } >QFLASH
 
   .ARM (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
@@ -120,7 +123,7 @@ SECTIONS
     *(.ARM.exidx*)
     __exidx_end = .;
     . = ALIGN(4);
-  } >FLASH
+  } >QFLASH
 
   .preinit_array (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
@@ -129,7 +132,7 @@ SECTIONS
     KEEP (*(.preinit_array*))
     PROVIDE_HIDDEN (__preinit_array_end = .);
     . = ALIGN(4);
-  } >FLASH
+  } >QFLASH
 
   .init_array (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
@@ -139,7 +142,7 @@ SECTIONS
     KEEP (*(.init_array*))
     PROVIDE_HIDDEN (__init_array_end = .);
     . = ALIGN(4);
-  } >FLASH
+  } >QFLASH
 
   .fini_array (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
@@ -149,7 +152,7 @@ SECTIONS
     KEEP (*(.fini_array*))
     PROVIDE_HIDDEN (__fini_array_end = .);
     . = ALIGN(4);
-  } >FLASH
+  } >QFLASH
 
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
@@ -166,7 +169,7 @@ SECTIONS
 
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
-  } >DTCMRAM AT> FLASH
+  } >RAM_D1 AT> QFLASH
 
 
   /* Uninitialized data section */
@@ -183,7 +186,7 @@ SECTIONS
     . = ALIGN(4);
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
-  } >DTCMRAM
+  } >RAM_D1
 
   /* User_heap_stack section, used to check that there is enough RAM left */
   ._user_heap_stack :
@@ -194,7 +197,7 @@ SECTIONS
     . = . + _Min_Heap_Size;
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
-  } >DTCMRAM
+  } >RAM_D1
 
 
 
