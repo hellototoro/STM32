@@ -1,0 +1,17 @@
+-I
+Core\Inc
+
+-I
+Drivers\STM32H7xx_HAL_Driver\Inc
+
+-I
+Drivers\CMSIS\Device\ST\STM32H7xx\Include
+
+-I
+Drivers\CMSIS\Include
+
+-D
+STM32H750xx
+
+-D
+__GNUC__

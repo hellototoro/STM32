@@ -71,6 +71,8 @@ static void MX_GPIO_Init(void);
 static void MX_QUADSPI_Init(void);
 static void MX_UART4_Init(void);
 /* USER CODE BEGIN PFP */
+static void CPU_CACHE_Enable(void);
+static void CPU_CACHE_Disable(void);
 
 /* USER CODE END PFP */
 
@@ -92,7 +94,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  CPU_CACHE_Enable();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -116,20 +118,13 @@ int main(void)
   MX_QUADSPI_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
-  printf("\
-                    _______  __________   ________________                       \r\n\
-           /\\      | .----\\\\ ----------  /____  ___  ____/       /   ___ ___ ____\r\n\
-          //\\\\     ||      ||    ||          / /  / /           /__ /  //  /  /  \r\n\
-         //  \\\\    ||_____//     ||         / /  / /           /__//__//__/  /   \r\n\
-        //____\\\\   | ---- /      ||        / /  / /   _        /  ___  ___      /\r\n\
-       //------\\\\  ||    \\\\      ||       / /  / /   / /      /  /  / ___/  ___/ \r\n\
-      //        \\\\ ||     \\\\     ||  ____/ /   \\ \\__/ /      /__/__/ /__/_ /__/  \r\n\
-     //          \\\\||      \\\\    || /_____/     \\____/                           \r\n");
-
-  printf("art-pi boot loader\r\n");
+  printf("art-pi bootloader\r\n");
   printf("booting...\r\n");
   W25QXX_Init();
   W25Q_Memory_Mapped_Enable();
+
+  CPU_CACHE_Disable();
+
   /* Disable Systick interrupt */
   SysTick->CTRL = 0;
 
@@ -320,6 +315,33 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+/**
+  * @brief  CPU L1-Cache enable.
+  * @param  None
+  * @retval None
+  */
+static void CPU_CACHE_Enable(void)
+{
+  /* Enable I-Cache */
+  SCB_EnableICache();
+
+  /* Enable D-Cache */
+  SCB_EnableDCache();
+}
+
+/**
+  * @brief  CPU L1-Cache disable.
+  * @param  None
+  * @retval None
+  */
+static void CPU_CACHE_Disable(void)
+{
+  /* Disable I-Cache */
+  SCB_DisableICache();
+
+  /* Disable D-Cache */
+  SCB_DisableDCache();
+}
 
 /* USER CODE END 4 */
 

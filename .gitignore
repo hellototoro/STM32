@@ -3,3 +3,4 @@ old/
 STM32CubeH7/
 *build/
 DynamicGraph/
+*.cache/
