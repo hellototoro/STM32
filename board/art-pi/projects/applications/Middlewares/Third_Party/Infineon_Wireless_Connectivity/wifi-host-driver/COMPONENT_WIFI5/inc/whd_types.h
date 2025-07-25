@@ -24,21 +24,11 @@
 
 #include "cybsp.h"
 #include "cy_result.h"
+#include "cyhal_hw_types.h"
+#include "cyhal_gpio.h"
 
 #ifndef INCLUDED_WHD_TYPES_H_
 #define INCLUDED_WHD_TYPES_H_
-
-#ifndef WHD_USE_CUSTOM_HAL_IMPL
-    #include "cyhal_hw_types.h"
-    #include "cyhal_gpio.h"
-#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
-    #include "cyhal_sdio.h"
-#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
-    #include "cyhal_spi.h"
-#elif (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_M2M_INTERFACE)
-    #include "cyhal_m2m.h"
-#endif
-#endif /* ifndef WHD_USE_CUSTOM_HAL_IMPL */
 
 #ifdef __cplusplus
 extern "C"
