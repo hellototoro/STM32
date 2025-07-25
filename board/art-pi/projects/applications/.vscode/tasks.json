@@ -16,15 +16,15 @@
             "args": [
                 "--connect",
                 "port=swd",
-                "--write",
+                "--download",
                 "${command:cmake.launchTargetPath}",
                 "0x90000000",
-                // "-v",
+                // Let CMake extension decide executable: "${command:cmake.launchTargetPath}",
                 "-el",
                 "${workspaceFolder}\\..\\..\\ExternalLoader\\ART-Pi_W25Q64.stldr",
                 "-hardRst",
                 "-rst",
-                "--start"
+                "--start" // Start execution
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -36,11 +36,10 @@
             "dependsOrder": "sequence",
             "dependsOn": [
                 "CMake: clean rebuild",
-                "CubeProg: Flash project (SWD)"
-            ],
-            "problemMatcher": []
+                "CubeProg: Flash project (SWD)",
+            ]
         },
-        {
+                {
             "type": "cmake",
             "label": "CMake: clean rebuild",
             "command": "cleanRebuild",
@@ -56,9 +55,7 @@
             "type": "shell",
             "label": "CubeProg: List all available communication interfaces",
             "command": "STM32_Programmer_CLI",
-            "args": [
-                "--list"
-            ],
+            "args": ["--list"],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
