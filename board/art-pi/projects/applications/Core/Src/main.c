@@ -38,6 +38,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "print.h"
+#include "lvgl_port.h"
+#include "lvgl/demos/lv_demos.h"
 
 /* USER CODE END Includes */
 
@@ -134,12 +136,15 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   MX_TIM5_Init();
-  MX_TouchGFX_Init();
+  // MX_TouchGFX_Init();
   /* Call PreOsInit function */
-  MX_TouchGFX_PreOSInit();
+  // MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
+  lvgl_port_init();
   printf("[info application]Hello main!\r\n");
 
+  lv_demo_benchmark();
+  // lv_demo_widgets();
   /* USER CODE END 2 */
 
   /* Init scheduler */

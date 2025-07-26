@@ -27,7 +27,7 @@
 
 #include "Ft5xx6.hpp"
 
-Ft5xx6 touchPad(I2C_Handle);
+// Ft5xx6 touchPad(I2C_Handle);
 
 void STM32TouchController::init()
 {
@@ -35,7 +35,7 @@ void STM32TouchController::init()
      * Initialize touch controller and driver
      *
      */
-    touchPad.init();
+    // touchPad.init();
 }
 
 bool STM32TouchController::sampleTouch(int32_t& x, int32_t& y)
@@ -50,14 +50,14 @@ bool STM32TouchController::sampleTouch(int32_t& x, int32_t& y)
      * By default sampleTouch is called every tick, this can be adjusted by HAL::setTouchSampleRate(int8_t);
      *
      */
-    uint16_t xRaw, yRaw;
-    uint8_t points = touchPad.readData(xRaw, yRaw);
-    if (0 <points && points < 6) {
-        y = xRaw;
-        x = yRaw;
-        printf("x = %ld, y = %ld\r\n", x, y);
-        return true;
-    }
+    // uint16_t xRaw, yRaw;
+    // uint8_t points = touchPad.readData(xRaw, yRaw);
+    // if (0 <points && points < 6) {
+    //     y = xRaw;
+    //     x = yRaw;
+    //     printf("x = %ld, y = %ld\r\n", x, y);
+    //     return true;
+    // }
     return false;
 }
 

@@ -1,4 +1,4 @@
 [submodule "board/art-pi/projects/applications/lvgl"]
 	path = board/art-pi/projects/applications/lvgl
 	url = https://github.com/lvgl/lvgl.git
-	branch = release/v9.2
+	branch = master

@@ -23,7 +23,6 @@ endif()
 # Set the project name
 set(CMAKE_PROJECT_NAME applications)
 
-
 # Enable compile command to ease indexing with e.g. clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
@@ -65,6 +64,11 @@ target_sources(Connectivity PRIVATE
 # Add touchgfx generated sources and libraries
 add_subdirectory(cmake/touchgfx)
 
+# 添加 LVGL 子模块
+set(LV_CONF_PATH "${CMAKE_SOURCE_DIR}/lv_conf.h")
+add_subdirectory(lvgl)
+target_link_libraries(lvgl PUBLIC stm32cubemx)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -86,6 +90,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     FreeRTOS_CLI/cli_commands.c
     # FreeRTOS_CLI/serial.c
     Core/Src/wifi_task.c
+    Core/Src/lvgl_port.cpp
 )
 
 # Add include paths
@@ -109,9 +114,16 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     USE_FULL_ASSERT
 )
 
+# Remove wrong libob.a library dependency when using cpp files
+list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
+
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
 
     # Add user defined libraries
+    lvgl
+    lvgl::demos
+    lvgl::examples
+    lvgl::thorvg
 )

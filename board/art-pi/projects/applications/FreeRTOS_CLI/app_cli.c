@@ -127,7 +127,7 @@ void StartCliTask(void *pvParameters)
     }
 }
 
-void consolseTaskInit(void)
+void consoleTaskInit(void)
 {
     HAL_UART_Receive_IT(&huart4, (uint8_t *)&huart4.Instance->RDR, 1);
     //start the command line task

@@ -19,7 +19,7 @@ extern "C" {
 // void vRegisterCLICommands(void);
 // void vCommandConsoleTask(void *pvParameters);
 
-void consolseTaskInit(void);
+void consoleTaskInit(void);
 
 #ifdef __cplusplus
 }

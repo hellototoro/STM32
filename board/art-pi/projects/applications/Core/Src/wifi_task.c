@@ -600,7 +600,7 @@ void SDMMC2_IRQHandler(void)
  *  void
  *
  **************************************************************************************************/
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-    stm32_cyhal_gpio_irq_handler(GPIO_Pin);
-}
+// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+// {
+//     stm32_cyhal_gpio_irq_handler(GPIO_Pin);
+// }

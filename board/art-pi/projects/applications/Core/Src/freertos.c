@@ -28,6 +28,7 @@
 #include "fatfs.h"
 #include "app_touchgfx.h"
 #include "app_cli.h"
+#include "lvgl.h"
 
 /* USER CODE END Includes */
 
@@ -67,6 +68,8 @@ const osThreadAttr_t defaultTask_attributes = {
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 extern void WiFiTask(void *argument);
+void Lvgl_tick_handler(void *argument);
+void Lvgl_timer_handler(void *argument);
 
 /* USER CODE END FunctionPrototypes */
 
@@ -108,23 +111,37 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  static const osThreadAttr_t sdcard_attributes = {
-    .name = "sdcardTask",
-    .stack_size = configMINIMAL_STACK_SIZE * 2,
+  // static const osThreadAttr_t sdcard_attributes = {
+  //   .name = "sdcardTask",
+  //   .stack_size = configMINIMAL_STACK_SIZE * 2,
+  //   .priority = (osPriority_t) osPriorityNormal,
+  // };
+  // osThreadNew(FS_AppThread, NULL, &sdcard_attributes);
+
+  // static const osThreadAttr_t touchGFX_attributes = {
+  //   .name = "TouchGFXTask",
+  //   .stack_size = configMINIMAL_STACK_SIZE * 16,
+  //   .priority = (osPriority_t) osPriorityNormal,
+  // };
+  // osThreadNew(TouchGFX_Task, NULL, &touchGFX_attributes);
+
+  // WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
+
+  // static const osThreadAttr_t Lvgl_tick_handler_attributes = {
+  //   .name = "Lvgl_tick_handler",
+  //   .stack_size = 128 * 2,
+  //   .priority = (osPriority_t) osPriorityNormal,
+  // };
+  // osThreadNew(Lvgl_tick_handler, NULL, &Lvgl_tick_handler_attributes);
+
+  static const osThreadAttr_t Lvgl_timer_attributes = {
+    .name = "Lvgl_timer",
+    .stack_size = 16* 1024,
     .priority = (osPriority_t) osPriorityNormal,
   };
-  osThreadNew(FS_AppThread, NULL, &sdcard_attributes);
+  osThreadNew(Lvgl_timer_handler, NULL, &Lvgl_timer_attributes);
 
-  static const osThreadAttr_t touchGFX_attributes = {
-    .name = "TouchGFXTask",
-    .stack_size = configMINIMAL_STACK_SIZE * 16,
-    .priority = (osPriority_t) osPriorityNormal,
-  };
-  osThreadNew(TouchGFX_Task, NULL, &touchGFX_attributes);
-
-  WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
-
-  consolseTaskInit();
+  consoleTaskInit();
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -155,6 +172,31 @@ void StartDefaultTask(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+void Lvgl_tick_handler(void *argument)
+{
+  /* USER CODE BEGIN Lvgl_tick_handler */
+  (void) argument;
+  /* Infinite loop */
+  for(;;)
+  {
+    lv_tick_inc(10);
+    osDelay(10); // 每1毫秒调用一次 lv_tick_inc
+  }
+  /* USER CODE END Lvgl_tick_handler */
+}
+
+void Lvgl_timer_handler(void *argument)
+{
+  /* USER CODE BEGIN Lvgl_timer_handler */
+  (void) argument;
+  /* Infinite loop */
+  for(;;)
+  {
+    lv_timer_handler();
+    osDelay(1); // 每5毫秒调用一次 lv_timer_handler
+  }
+  /* USER CODE END Lvgl_timer_handler */
+}
 
 /* USER CODE END Application */
 
