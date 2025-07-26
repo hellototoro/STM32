@@ -61,9 +61,6 @@ target_sources(Connectivity PRIVATE
     ${COMPONENT_43438_DIR}/clm/COMPONENT_43438/43438A1_clm_blob.c
 )
 
-# Add touchgfx generated sources and libraries
-add_subdirectory(cmake/touchgfx)
-
 # 添加 LVGL 子模块
 set(LV_CONF_PATH "${CMAKE_SOURCE_DIR}/lv_conf.h")
 add_subdirectory(lvgl)

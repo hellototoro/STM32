@@ -26,7 +26,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "fatfs.h"
-#include "app_touchgfx.h"
 #include "app_cli.h"
 #include "lvgl.h"
 
@@ -117,13 +116,6 @@ void MX_FREERTOS_Init(void) {
   //   .priority = (osPriority_t) osPriorityNormal,
   // };
   // osThreadNew(FS_AppThread, NULL, &sdcard_attributes);
-
-  // static const osThreadAttr_t touchGFX_attributes = {
-  //   .name = "TouchGFXTask",
-  //   .stack_size = configMINIMAL_STACK_SIZE * 16,
-  //   .priority = (osPriority_t) osPriorityNormal,
-  // };
-  // osThreadNew(TouchGFX_Task, NULL, &touchGFX_attributes);
 
   // WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
 
