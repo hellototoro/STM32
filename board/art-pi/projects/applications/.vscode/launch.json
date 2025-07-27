@@ -17,21 +17,21 @@
             "interface": "swd",
             "serialNumber": "",        //Set ST-Link ID if you use multiple at the same time
             "runToEntryPoint": "main",
-            "svdFile": "${config:STM32VSCodeExtension.cubeCLT.path}/STMicroelectronics_CMSIS_SVD/STM32H750.svd",
+            "svdFile": "${workspaceFolder}/debug/svd/STM32H750x.svd",
             "v1": false,               //Change it depending on ST Link version
-            "serverpath": "${config:STM32VSCodeExtension.cubeCLT.path}/STLink-gdb-server/bin/ST-LINK_gdbserver",
-            "stm32cubeprogrammer":"${config:STM32VSCodeExtension.cubeCLT.path}/STM32CubeProgrammer/bin",
-            "stlinkPath": "${config:STM32VSCodeExtension.cubeCLT.path}/STLink-gdb-server/bin/ST-LINK_gdbserver",
-            "armToolchainPath": "${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin",
-            "gdbPath":"${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin/arm-none-eabi-gdb",
+            // "serverpath": "path/to/ST-LINK_gdbserver", //可执行文件路径
+            // "stm32cubeprogrammer":"path/to//STM32CubeProgrammer/bin", //可执行文件目录
+            // "stlinkPath": "path/to/ST-LINK_gdbserver", //可执行文件路径
+            // "armToolchainPath": "path/to/GNU-tools-for-STM32/bin", //可执行文件目录
+            // "gdbPath":"path/to/arm-none-eabi-gdb", //可执行文件路径
             "serverArgs": [
                 "-m","0",
-                "--extload","${workspaceFolder}\\..\\..\\ExternalLoader\\ART-Pi_W25Q64.stldr",
+                /* If you use external loader, add additional arguments */
+                "--extload","${workspaceFolder}/../../ExternalLoader/ART-Pi_W25Q64.stldr",
             ],
-            "showDevDebugOutput": "raw"
             //"preLaunchTask": "Build + Flash"
-            /* If you use external loader, add additional arguments */
-            //"serverArgs": ["--extload", "path/to/ext/loader.stldr"],
+            "showDevDebugOutput": "raw",
+            "rtos": "FreeRTOS", // Optional: Specify RTOS if used
         },
         {
             "name": "Attach to ST-Link",
@@ -46,19 +46,19 @@
             "interface": "swd",
             "serialNumber": "",        //Set ST-Link ID if you use multiple at the same time
             "runToEntryPoint": "main",
-            "svdFile": "${config:STM32VSCodeExtension.cubeCLT.path}/STMicroelectronics_CMSIS_SVD/STM32H750.svd",
+            "svdFile": "${workspaceFolder}/debug/svd/STM32H750x.svd",
             "v1": false,               //Change it depending on ST Link version
-            "serverpath": "${config:STM32VSCodeExtension.cubeCLT.path}/STLink-gdb-server/bin/ST-LINK_gdbserver",
-            "stm32cubeprogrammer":"${config:STM32VSCodeExtension.cubeCLT.path}/STM32CubeProgrammer/bin",
-            "stlinkPath": "${config:STM32VSCodeExtension.cubeCLT.path}/STLink-gdb-server/bin/ST-LINK_gdbserver",
-            "armToolchainPath": "${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin",
-            "gdbPath":"${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin/arm-none-eabi-gdb",
+            // "serverpath": "path/to/ST-LINK_gdbserver", //可执行文件路径
+            // "stm32cubeprogrammer":"path/to//STM32CubeProgrammer/bin", //可执行文件目录
+            // "stlinkPath": "path/to/ST-LINK_gdbserver", //可执行文件路径
+            // "armToolchainPath": "path/to/GNU-tools-for-STM32/bin", //可执行文件目录
+            // "gdbPath":"path/to/arm-none-eabi-gdb", //可执行文件路径
             "serverArgs": [
                 "-m","0",
+                /* If you use external loader, add additional arguments */
+                // "--extload","${workspaceFolder}/../../ExternalLoader/ART-Pi_W25Q64.stldr",
             ],
             "showDevDebugOutput": "raw"
-            /* If you use external loader, add additional arguments */
-            //"serverArgs": ["--extload", "path/to/ext/loader.stldr"],
         }
     ]
 }

@@ -20,5 +20,10 @@ ART-PI是RT-Thread基于STM32H7系列出品的一款非常优秀的开源硬件�
 - [x] SDRAM
 - [x] spi flash
 - [x] SD Card
-- [ ] LCD
-- [ ] WiFi & BLE
+- [x] LCD
+- [x] WiFi
+- [ ] BLE
+
+## 相关资料链接
+
+1. [MPU配置](https://shequ.stmicroelectronics.cn/thread-641003-1-1.html)
