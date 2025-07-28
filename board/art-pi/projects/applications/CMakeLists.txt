@@ -124,3 +124,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     lvgl::examples
     lvgl::thorvg
 )
+
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.elf ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin
+    COMMENT "Generating ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin from ${CMAKE_PROJECT_NAME}.elf"
+)
