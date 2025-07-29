@@ -168,6 +168,13 @@ standard names. */
 /* USER CODE BEGIN Defines */
 /* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */
 
+#define configAPPLICATION_ALLOCATED_HEAP 1
+
+#ifdef configTOTAL_HEAP_SIZE
+  #undef configTOTAL_HEAP_SIZE
+#endif
+#define configTOTAL_HEAP_SIZE ((size_t)(128 * 1024)) // 128K
+
 /* 获取系统运行时间 */
 #define RUN_TIME_VIEW 1
 #if RUN_TIME_VIEW

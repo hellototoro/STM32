@@ -22,6 +22,7 @@ extern "C" {
  **********************/
 
 void lvgl_port_init(void);
+void read_tp_data(void);
 
 /**********************
  *      MACROS

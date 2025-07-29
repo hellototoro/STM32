@@ -215,7 +215,7 @@ void EXTI15_10_IRQHandler(void)
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
 
   /* USER CODE END EXTI15_10_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_12);
+  HAL_GPIO_EXTI_IRQHandler(TP_IRQ_Pin);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
   /* USER CODE END EXTI15_10_IRQn 1 */
@@ -292,5 +292,17 @@ void DMA2D_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+extern void stm32_cyhal_gpio_irq_handler(uint32_t gpio);
+extern void read_tp_data(void);
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin == TP_IRQ_Pin) {
+    read_tp_data();
+  } else if (GPIO_Pin == WIFI_HOST_WAKE_Pin) {
+    stm32_cyhal_gpio_irq_handler(GPIO_Pin);
+  } else {
+    // Handle other GPIO interrupts if necessary
+  }
+}
 
 /* USER CODE END 1 */

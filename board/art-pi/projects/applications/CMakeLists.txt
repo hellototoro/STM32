@@ -69,6 +69,7 @@ target_link_libraries(lvgl PUBLIC stm32cubemx)
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
+    ${CMAKE_SOURCE_DIR}/ldscript
 )
 
 # Add sources to executable
@@ -125,7 +126,36 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     lvgl::thorvg
 )
 
-add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.elf ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin
-    COMMENT "Generating ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin from ${CMAKE_PROJECT_NAME}.elf"
+set(BIN_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
+
+add_custom_target(create_bin_dir
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${BIN_OUTPUT_DIR}
 )
+add_dependencies(${CMAKE_PROJECT_NAME} create_bin_dir)
+
+set(GENERATE_IFLASH_BIN FALSE CACHE BOOL "Generate IFLASH binary")
+if(GENERATE_IFLASH_BIN)
+    set(LD_OPTIONS "--remove-section=.isr_vector" CACHE STRING "Section to remove from IFLASH binary")
+endif()
+
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME}
+    POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O binary
+    ${LD_OPTIONS}
+    ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.elf
+    ${BIN_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}_qspi.bin
+    COMMENT "Generating ${BIN_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}_qspi.bin"
+    VERBATIM
+)
+
+if(GENERATE_IFLASH_BIN)
+    add_custom_command(TARGET ${CMAKE_PROJECT_NAME}
+        POST_BUILD
+        COMMAND ${CMAKE_OBJCOPY} -O binary
+        --only-section=.isr_vector 
+        ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.elf
+        ${BIN_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}_iflash.bin
+        COMMENT "Generating ${BIN_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}_iflash.bin"
+        VERBATIM
+    )
+endif()

@@ -95,21 +95,18 @@ static void lvgl_touchscreen_read(lv_indev_t *indev, lv_indev_data_t *data) {
   }
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-  if (GPIO_Pin == TP_IRQ_Pin) {
-    touch_irq = 1;
-
-    uint16_t xRaw, yRaw;
-    uint8_t points = touchPad.readData(xRaw, yRaw);
-    if (0 < points && points < 6) {
-      last_y = xRaw;
-      last_x = yRaw;
-      last_state = LV_INDEV_STATE_PRESSED;
-      // printf("x = %ld, y = %ld\r\n", last_x, last_y);
-      //   return true;
-    } else {
-      last_state = LV_INDEV_STATE_RELEASED;
-    }
+void read_tp_data(void)
+{
+  touch_irq = 1;
+  uint16_t xRaw, yRaw;
+  uint8_t points = touchPad.readData(xRaw, yRaw);
+  if (0 < points && points < 6) {
+    last_y = xRaw;
+    last_x = yRaw;
+    last_state = LV_INDEV_STATE_PRESSED;
+    // printf("x = %ld, y = %ld\r\n", last_x, last_y);
+  } else {
+    last_state = LV_INDEV_STATE_RELEASED;
   }
 }
 #endif

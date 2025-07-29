@@ -48,6 +48,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+__attribute__((used, section(".ram_d2_bss"))) uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+
 osThreadId_t WiFi_TaskHandle;
 const osThreadAttr_t WiFi_Task_attributes = {
   .name = "WiFi_Task",
@@ -110,21 +112,14 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  // static const osThreadAttr_t sdcard_attributes = {
-  //   .name = "sdcardTask",
-  //   .stack_size = configMINIMAL_STACK_SIZE * 2,
-  //   .priority = (osPriority_t) osPriorityNormal,
-  // };
-  // osThreadNew(FS_AppThread, NULL, &sdcard_attributes);
+  static const osThreadAttr_t sdcard_attributes = {
+    .name = "sdcardTask",
+    .stack_size = configMINIMAL_STACK_SIZE * 2,
+    .priority = (osPriority_t) osPriorityNormal,
+  };
+  osThreadNew(FS_AppThread, NULL, &sdcard_attributes);
 
-  // WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
-
-  // static const osThreadAttr_t Lvgl_tick_handler_attributes = {
-  //   .name = "Lvgl_tick_handler",
-  //   .stack_size = 128 * 2,
-  //   .priority = (osPriority_t) osPriorityNormal,
-  // };
-  // osThreadNew(Lvgl_tick_handler, NULL, &Lvgl_tick_handler_attributes);
+  WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
 
   static const osThreadAttr_t Lvgl_timer_attributes = {
     .name = "Lvgl_timer",

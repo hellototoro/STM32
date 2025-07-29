@@ -58,6 +58,7 @@ _estack = ORIGIN(RAM_D1) + LENGTH(RAM_D1);    /* end of RAM */
 _Min_Heap_Size = 0x8000;      /* required amount of heap  */
 _Min_Stack_Size = 0x400; /* required amount of stack */
 
+INCLUDE bootloader.ld
 /* Specify the memory areas */
 MEMORY
 {
@@ -70,6 +71,7 @@ MEMORY
   RAM4_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K   /* 64Kb SRAM4 in domain 3*/
   RAMB_D3 (xrw)   : ORIGIN = 0x38800000, LENGTH = 4K    /* 4Kb of backup SRAM in domain 3, aka RTC RAM */
   QFLASH (rx)     : ORIGIN = 0x90000000, LENGTH = 8192K /* 8MB of QSPI Flash memory */
+  IFLASH (rx)     : ORIGIN = meta_flash_end, LENGTH = internal_flash_size - boot_flash_size - meta_flash_size /* Internal Flash memory */
 }
 
 /* Define output sections */
@@ -243,7 +245,23 @@ SECTIONS
     . = ALIGN(8);
   } >RAM_D1
 
+  .ram_d2_data (NOLOAD) :
+  {
+    . = ALIGN(4);
+    _sram1_d2_data = .; /* create a global symbol at SRAM1 D2 data start */
+    *(.ram_d2_data)     /* .ram_d2_data sections */
+    *(.ram_d2_data*)    /* .ram_d2_data* sections */
+    . = ALIGN(4);
+  } >RAM1_D2 AT> QFLASH
 
+  .ram_d2_bss (NOLOAD) :
+  {
+    . = ALIGN(4);
+    _sram1_d2_bss = .; /* create a global symbol at SRAM1 D2 bss start */
+    *(.ram_d2_bss)     /* .ram_d2_bss sections */
+    *(.ram_d2_bss*)    /* .ram_d2_bss* sections */
+    . = ALIGN(4);
+  } >RAM1_D2
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
