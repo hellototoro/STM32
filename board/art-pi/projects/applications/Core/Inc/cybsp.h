@@ -36,7 +36,7 @@
 #define CYBSP_USB_INTERFACE     (3)
 
 /**
-	MiddleWare name : Infineon.AIROC-Wi-Fi-Bluetooth-STM32.1.7.0
+	MiddleWare name : Infineon.AIROC-Wi-Fi-Bluetooth-STM32.1.7.1
 	MiddleWare fileName : cybsp.h
 	MiddleWare version :
 */
