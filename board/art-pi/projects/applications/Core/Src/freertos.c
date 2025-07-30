@@ -48,7 +48,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-__attribute__((used, section(".ram_d2_bss"))) uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+__attribute__((used, section(".rtos_stack"))) uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
 
 osThreadId_t WiFi_TaskHandle;
 const osThreadAttr_t WiFi_Task_attributes = {

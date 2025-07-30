@@ -48,22 +48,20 @@
 **
 *****************************************************************************
 */
+INCLUDE system_heap_stack.ld
+INCLUDE bootloader.ld
 
 /* Entry Point */
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = ORIGIN(RAM_D1) + LENGTH(RAM_D1);    /* end of RAM */
-/* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0x8000;      /* required amount of heap  */
-_Min_Stack_Size = 0x400; /* required amount of stack */
+_estack = dtcm_ram_start + dtcm_ram_size;
 
-INCLUDE bootloader.ld
 /* Specify the memory areas */
 MEMORY
 {
   ITCMRAM (xrw)   : ORIGIN = 0x00000000, LENGTH = 64K   /* 64Kb of ITCM RAM */
-  DTCMRAM (xrw)   : ORIGIN = 0x20000000, LENGTH = 128K  /* 128Kb of DTCM RAM */
+  DTCMRAM (xrw)   : ORIGIN = dtcm_ram_start, LENGTH = dtcm_ram_size
   RAM_D1 (xrw)    : ORIGIN = 0x24000000, LENGTH = 512K  /* 512Kb of SRAM1 in domain 1*/
   RAM1_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 128K  /* 128Kb of SRAM1 in domain 2*/
   RAM2_D2 (xrw)   : ORIGIN = 0x30020000, LENGTH = 128K  /* 128Kb of SRAM2 in domain 2*/
@@ -234,6 +232,15 @@ SECTIONS
   PROVIDE( __bss_start = __tbss_start );
   PROVIDE( __bss_size = __bss_end - __bss_start );
 
+  .rtos_stack (NOLOAD) :
+  {
+    /* . = ALIGN(4); */
+    _srtos_stack = .; /* create a global symbol at SRAM1 D2 bss start */
+    *(.rtos_stack)     /* .rtos_stack sections */
+    *(.rtos_stack*)    /* .rtos_stack* sections */
+    /* . = ALIGN(4); */
+  } >DTCMRAM
+
   /* User_heap_stack section, used to check that there is enough RAM left */
   ._user_heap_stack (NOLOAD) :
   {
@@ -243,7 +250,7 @@ SECTIONS
     . = . + _Min_Heap_Size;
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
-  } >RAM_D1
+  } >DTCMRAM
 
   .ram_d2_data (NOLOAD) :
   {

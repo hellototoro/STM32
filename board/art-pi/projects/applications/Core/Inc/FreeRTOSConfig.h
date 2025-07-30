@@ -173,7 +173,7 @@ standard names. */
 #ifdef configTOTAL_HEAP_SIZE
   #undef configTOTAL_HEAP_SIZE
 #endif
-#define configTOTAL_HEAP_SIZE ((size_t)(128 * 1024)) // 128K
+#define configTOTAL_HEAP_SIZE ((size_t)(90 * 1024)) // 90K
 
 /* 获取系统运行时间 */
 #define RUN_TIME_VIEW 1
