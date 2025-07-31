@@ -1,0 +1,14 @@
+SET(SOURCES components/ui_comp_settingname.c
+    components/ui_comp.c
+    screens/ui_Home.c
+    screens/ui_Settings.c
+    ui.c
+    components/ui_comp_hook.c
+    ui_helpers.c
+    images/ui_img_images_settings_setting_png.c
+    images/ui_img_images_settings_wifi_png.c
+    images/ui_img_images_settings_r_arrow_png.c
+    images/ui_img_images_settings_bt_png.c
+    images/ui_img_images_settings_setting128_png.c)
+
+add_library(ui ${SOURCES})

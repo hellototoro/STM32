@@ -23,6 +23,8 @@ endif()
 # Set the project name
 set(CMAKE_PROJECT_NAME applications)
 
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+
 # Enable compile command to ease indexing with e.g. clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
@@ -62,9 +64,18 @@ target_sources(Connectivity PRIVATE
 )
 
 # 添加 LVGL 子模块
-set(LV_CONF_PATH "${CMAKE_SOURCE_DIR}/lv_conf.h")
+set(CONFIG_LV_BUILD_DEMOS OFF)
+set(CONFIG_LV_BUILD_EXAMPLES OFF)
+set(LV_BUILD_CONF_PATH "${CMAKE_SOURCE_DIR}/lv_conf.h")
 add_subdirectory(lvgl)
 target_link_libraries(lvgl PUBLIC stm32cubemx)
+
+add_subdirectory(App/ui)
+target_link_libraries(ui PUBLIC lvgl)
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+    # Add user defined include paths
+    App/ui
+)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -82,7 +93,6 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Bsp/Components/ft5xx6/Ft5xx6.cpp
     Bsp/Components/w25qxx/w25qxx.c
     MyDrivers/hw_iic/hw_iic.cpp
-    MyDrivers/print/print.c
     Middlewares/Third_Party/FreeRTOS/FreeRTOS-Plus/Source/FreeRTOS-Plus-CLI/FreeRTOS_CLI.c
     FreeRTOS_CLI/app_cli.c
     FreeRTOS_CLI/cli_commands.c
@@ -121,9 +131,10 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
     lvgl
-    lvgl::demos
-    lvgl::examples
-    lvgl::thorvg
+    # lvgl::demos
+    # lvgl::examples
+    # lvgl::thorvg
+    ui
 )
 
 set(BIN_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)

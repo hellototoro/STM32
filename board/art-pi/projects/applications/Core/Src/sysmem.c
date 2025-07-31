@@ -23,6 +23,9 @@
 /* Includes */
 #include <errno.h>
 #include <stdint.h>
+#include "usart.h"
+
+static UART_HandleTypeDef *UartHandle = &huart4;
 
 /**
  * Pointer to the current high watermark of the heap usage
@@ -76,4 +79,18 @@ void *_sbrk(ptrdiff_t incr)
   __sbrk_heap_end += incr;
 
   return (void *)prev_heap_end;
+}
+
+int _write(int file, char *data, int len)
+{
+    UNUSED(file);
+    // Transmit data using UART2
+    for (int i = 0; i < len; i++)
+    {
+        // Send the character
+         UartHandle->Instance->TDR = (uint8_t)data[i];
+        // Wait for the transmit buffer to be empty
+        while (!(__HAL_UART_GET_FLAG(UartHandle, UART_FLAG_TC)));// UART_FLAG_TXE
+    }
+    return len;
 }

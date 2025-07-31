@@ -6,7 +6,7 @@
 #include "cmsis_os2.h"
 #include "lvgl.h"
 #include "main.h"
-#include "print.h"
+#include <stdio.h>
 
 #define LV_USE_INDEV_TOUCH 1
 
