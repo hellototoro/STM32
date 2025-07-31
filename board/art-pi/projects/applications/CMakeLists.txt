@@ -42,7 +42,7 @@ add_executable(${CMAKE_PROJECT_NAME})
 add_subdirectory(cmake/stm32cubemx)
 
 # 向子模块 Connectivity 传递 symbols 和头文件目录以及源文件
-set(COMPONENT_43438_DIR ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/wifi-host-driver/COMPONENT_WIFI5/resources)
+set(COMPONENT_43438_DIR ${CMAKE_SOURCE_DIR}/Bsp/Components/ap6212)
 
 target_compile_definitions(Connectivity PRIVATE
     # Enable using CY_HAL for rtos-abstraction
