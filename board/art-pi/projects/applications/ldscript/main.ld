@@ -1,76 +1,9 @@
-/*
-******************************************************************************
-**
-
-**  File        : LinkerScript.ld
-**
-**  Author		: STM32CubeMX
-**
-**  Abstract    : Linker script for STM32H750XBHx series
-**                128Kbytes FLASH and 1056Kbytes RAM
-**
-**                Set heap size, stack size and stack location according
-**                to application requirements.
-**
-**                Set memory bank area and size if external memory is used.
-**
-**  Target      : STMicroelectronics STM32
-**
-**  Distribution: The file is distributed “as is,” without any warranty
-**                of any kind.
-**
-*****************************************************************************
-** @attention
-**
-** <h2><center>&copy; COPYRIGHT(c) 2025 STMicroelectronics</center></h2>
-**
-** Redistribution and use in source and binary forms, with or without modification,
-** are permitted provided that the following conditions are met:
-**   1. Redistributions of source code must retain the above copyright notice,
-**      this list of conditions and the following disclaimer.
-**   2. Redistributions in binary form must reproduce the above copyright notice,
-**      this list of conditions and the following disclaimer in the documentation
-**      and/or other materials provided with the distribution.
-**   3. Neither the name of STMicroelectronics nor the names of its contributors
-**      may be used to endorse or promote products derived from this software
-**      without specific prior written permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-** AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-** IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-** DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-** FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-** DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-** SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-** CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-** OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-**
-*****************************************************************************
-*/
+INCLUDE memory_layout.ld
 INCLUDE system_heap_stack.ld
-INCLUDE bootloader.ld
+INCLUDE lvgl_fb_symbol.ld
 
 /* Entry Point */
 ENTRY(Reset_Handler)
-
-/* Highest address of the user mode stack */
-_estack = dtcm_ram_start + dtcm_ram_size;
-
-/* Specify the memory areas */
-MEMORY
-{
-  ITCMRAM (xrw)   : ORIGIN = 0x00000000, LENGTH = 64K   /* 64Kb of ITCM RAM */
-  DTCMRAM (xrw)   : ORIGIN = dtcm_ram_start, LENGTH = dtcm_ram_size
-  RAM_D1 (xrw)    : ORIGIN = 0x24000000, LENGTH = 512K  /* 512Kb of SRAM1 in domain 1*/
-  RAM1_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 128K  /* 128Kb of SRAM1 in domain 2*/
-  RAM2_D2 (xrw)   : ORIGIN = 0x30020000, LENGTH = 128K  /* 128Kb of SRAM2 in domain 2*/
-  RAM3_D2 (xrw)   : ORIGIN = 0x30040000, LENGTH = 32K   /* 32Kb of SRAM3 in domain 2*/
-  RAM4_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K   /* 64Kb SRAM4 in domain 3*/
-  RAMB_D3 (xrw)   : ORIGIN = 0x38800000, LENGTH = 4K    /* 4Kb of backup SRAM in domain 3, aka RTC RAM */
-  QFLASH (rx)     : ORIGIN = 0x90000000, LENGTH = 8192K /* 8MB of QSPI Flash memory */
-  IFLASH (rx)     : ORIGIN = meta_flash_end, LENGTH = internal_flash_size - boot_flash_size - meta_flash_size /* Internal Flash memory */
-}
 
 /* Define output sections */
 SECTIONS
@@ -225,7 +158,7 @@ SECTIONS
       . = ALIGN(4);
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
-      PROVIDE( __bss_end = .);
+    PROVIDE( __bss_end = .);
   } >RAM_D1
   PROVIDE( __non_tls_bss_start = ADDR(.bss) );
 
@@ -252,23 +185,25 @@ SECTIONS
     . = ALIGN(8);
   } >DTCMRAM
 
-  .ram_d2_data (NOLOAD) :
+  .ram1_d2_data (NOLOAD) :
   {
     . = ALIGN(4);
     _sram1_d2_data = .; /* create a global symbol at SRAM1 D2 data start */
-    *(.ram_d2_data)     /* .ram_d2_data sections */
-    *(.ram_d2_data*)    /* .ram_d2_data* sections */
+    *(.ram1_d2_data)     /* .ram1_d2_data sections */
+    *(.ram1_d2_data*)    /* .ram1_d2_data* sections */
     . = ALIGN(4);
   } >RAM1_D2 AT> QFLASH
 
-  .ram_d2_bss (NOLOAD) :
+  .ram1_d2_bss (NOLOAD) : ALIGN(4)
   {
+    *(.ram1_d2_bss)     /* .ram1_d2_bss sections */
+    *(.ram1_d2_bss*)    /* .ram1_d2_bss* sections */
     . = ALIGN(4);
-    _sram1_d2_bss = .; /* create a global symbol at SRAM1 D2 bss start */
-    *(.ram_d2_bss)     /* .ram_d2_bss sections */
-    *(.ram_d2_bss*)    /* .ram_d2_bss* sections */
-    . = ALIGN(4);
+    _eram1_d2_bss = .; /* create a global symbol at SRAM1 D2 bss start */
   } >RAM1_D2
+
+  INCLUDE lvgl_fb_section.ld
+  INCLUDE eth_section.ld
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

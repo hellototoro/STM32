@@ -57,15 +57,10 @@ void lvgl_port_init(void) {
 
   lv_tick_set_cb(osKernelGetTickCount);
 
-#if 1
-  static __attribute__((
-      aligned(32))) uint8_t buf_direct_2[MY_DISP_HOR_RES * MY_DISP_VER_RES * 2];
-  lv_st_ltdc_create_direct((void *)SDRAM_BANK_ADDR, buf_direct_2, 0);
-#else
-  static __attribute__((aligned(32))) uint8_t buf_partial_1[800 * 480];
-  static __attribute__((aligned(32))) uint8_t buf_partial_2[800 * 480];
-  lv_st_ltdc_create_partial(buf_partial_1, buf_partial_2, 800 * 480, 0);
-#endif
+  extern uint32_t lvgl_fb1;
+  extern uint32_t lvgl_fb2;
+
+  lv_st_ltdc_create_direct((void *)&lvgl_fb1, (void *)&lvgl_fb2, 0);
 
 #if LV_USE_INDEV_TOUCH
   touchPad.init();
@@ -81,6 +76,7 @@ void lvgl_port_init(void) {
 
 #if LV_USE_INDEV_TOUCH
 static void lvgl_touchscreen_read(lv_indev_t *indev, lv_indev_data_t *data) {
+  UNUSED(indev);
   /*Use the saved coordinates if there were an interrupt*/
   if (touch_irq) {
     /* reset interrupt flag */
