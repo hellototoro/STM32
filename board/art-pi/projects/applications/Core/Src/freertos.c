@@ -123,7 +123,7 @@ void MX_FREERTOS_Init(void) {
 
   static const osThreadAttr_t Lvgl_timer_attributes = {
     .name = "Lvgl_timer",
-    .stack_size = 16* 1024,
+    .stack_size = configMINIMAL_STACK_SIZE * 32,
     .priority = (osPriority_t) osPriorityNormal,
   };
   osThreadNew(Lvgl_timer_handler, NULL, &Lvgl_timer_attributes);
@@ -159,19 +159,6 @@ void StartDefaultTask(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-void Lvgl_tick_handler(void *argument)
-{
-  /* USER CODE BEGIN Lvgl_tick_handler */
-  (void) argument;
-  /* Infinite loop */
-  for(;;)
-  {
-    lv_tick_inc(10);
-    osDelay(10); // 每1毫秒调用一次 lv_tick_inc
-  }
-  /* USER CODE END Lvgl_tick_handler */
-}
-
 void Lvgl_timer_handler(void *argument)
 {
   /* USER CODE BEGIN Lvgl_timer_handler */
@@ -180,7 +167,7 @@ void Lvgl_timer_handler(void *argument)
   for(;;)
   {
     lv_timer_handler();
-    osDelay(1); // 每5毫秒调用一次 lv_timer_handler
+    osDelay(5); // 每5毫秒调用一次 lv_timer_handler
   }
   /* USER CODE END Lvgl_timer_handler */
 }

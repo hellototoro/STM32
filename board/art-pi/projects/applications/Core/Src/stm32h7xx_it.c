@@ -292,8 +292,8 @@ void DMA2D_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-extern void stm32_cyhal_gpio_irq_handler(uint32_t gpio);
 extern void read_tp_data(void);
+extern void stm32_cyhal_gpio_irq_handler(uint32_t gpio);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == TP_IRQ_Pin) {

@@ -6,6 +6,7 @@
 #include "cmsis_os2.h"
 #include "lvgl.h"
 #include "main.h"
+#include <cstddef>
 #include <stdio.h>
 
 #define LV_USE_INDEV_TOUCH 1
@@ -78,31 +79,21 @@ void lvgl_port_init(void) {
 static void lvgl_touchscreen_read(lv_indev_t *indev, lv_indev_data_t *data) {
   UNUSED(indev);
   /*Use the saved coordinates if there were an interrupt*/
-  if (touch_irq) {
+  uint16_t xRaw, yRaw;
+  uint8_t points = touchPad.readData(xRaw, yRaw);
+  if (0 < points && points < 6) {
     /* reset interrupt flag */
-    touch_irq = 0;
-    data->point.x = last_x;
-    data->point.y = last_y;
-    data->state = last_state;
+    data->point.x = yRaw;
+    data->point.y = xRaw;
+    data->state = LV_INDEV_STATE_PRESSED;
   }
   /*If there is no interrupt the touch is released*/
   else {
-    last_state = LV_INDEV_STATE_RELEASED;
+    data->state = LV_INDEV_STATE_RELEASED;
   }
 }
 
 void read_tp_data(void)
 {
-  touch_irq = 1;
-  uint16_t xRaw, yRaw;
-  uint8_t points = touchPad.readData(xRaw, yRaw);
-  if (0 < points && points < 6) {
-    last_y = xRaw;
-    last_x = yRaw;
-    last_state = LV_INDEV_STATE_PRESSED;
-    // printf("x = %ld, y = %ld\r\n", last_x, last_y);
-  } else {
-    last_state = LV_INDEV_STATE_RELEASED;
-  }
 }
 #endif

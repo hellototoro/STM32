@@ -39,6 +39,7 @@
 #include <stdio.h>
 #include "lvgl_port.h"
 #include "ui.h"
+// #include "lvgl/demos/lv_demos.h"
 
 /* USER CODE END Includes */
 
@@ -248,7 +249,7 @@ void PeriphCommonClock_Config(void)
   PeriphClkInitStruct.PLL3.PLL3N = 160;
   PeriphClkInitStruct.PLL3.PLL3P = 4;
   PeriphClkInitStruct.PLL3.PLL3Q = 2;
-  PeriphClkInitStruct.PLL3.PLL3R = 100;
+  PeriphClkInitStruct.PLL3.PLL3R = 84;
   PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
   PeriphClkInitStruct.PLL3.PLL3FRACN = 0;

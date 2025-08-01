@@ -58,6 +58,7 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 #define SDRAM_BANK_ADDR (0xC0000000UL)
+#define LTDC_FB_ADDR SDRAM_BANK_ADDR
 #define SD_CARD_DETECT_Pin GPIO_PIN_5
 #define SD_CARD_DETECT_GPIO_Port GPIOD
 #define TP_RST_Pin GPIO_PIN_3
