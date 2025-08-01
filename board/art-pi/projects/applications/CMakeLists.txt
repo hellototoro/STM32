@@ -64,9 +64,9 @@ target_sources(Connectivity PRIVATE
 )
 
 # 添加 LVGL 子模块
-set(CONFIG_LV_BUILD_DEMOS OFF)
-set(CONFIG_LV_BUILD_EXAMPLES OFF)
-set(LV_BUILD_CONF_PATH "${CMAKE_SOURCE_DIR}/lv_conf.h")
+set(CONFIG_LV_BUILD_DEMOS ON)
+set(CONFIG_LV_BUILD_EXAMPLES ON)
+set(LV_BUILD_CONF_PATH "${CMAKE_SOURCE_DIR}/Core/Inc/lv_conf.h")
 add_subdirectory(lvgl)
 target_link_libraries(lvgl PUBLIC stm32cubemx)
 
@@ -131,9 +131,9 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
     lvgl
-    # lvgl::demos
-    # lvgl::examples
-    # lvgl::thorvg
+    lvgl::demos
+    lvgl::examples
+    lvgl::thorvg
     ui
 )
 

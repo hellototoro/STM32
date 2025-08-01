@@ -56,7 +56,7 @@ static volatile lv_indev_state_t last_state = LV_INDEV_STATE_RELEASED;
 void lvgl_port_init(void) {
   lv_init();
 
-  lv_tick_set_cb(osKernelGetTickCount);
+  lv_tick_set_cb(HAL_GetTick);
 
   extern uint32_t lvgl_fb1;
   extern uint32_t lvgl_fb2;

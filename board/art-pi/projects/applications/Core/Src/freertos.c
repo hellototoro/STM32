@@ -123,7 +123,7 @@ void MX_FREERTOS_Init(void) {
 
   static const osThreadAttr_t Lvgl_timer_attributes = {
     .name = "Lvgl_timer",
-    .stack_size = configMINIMAL_STACK_SIZE * 32,
+    .stack_size = 1024 * 8,
     .priority = (osPriority_t) osPriorityNormal,
   };
   osThreadNew(Lvgl_timer_handler, NULL, &Lvgl_timer_attributes);
