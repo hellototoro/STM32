@@ -1,10 +1,11 @@
-SET(SOURCES components/ui_comp_settingname.c
+SET(SOURCES components/ui_comp_settingitem.c
     components/ui_comp.c
     screens/ui_Home.c
     screens/ui_Settings.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
+    ui_events.c
     images/ui_img_images_settings_setting_png.c
     images/ui_img_images_settings_wifi_png.c
     images/ui_img_images_settings_r_arrow_png.c

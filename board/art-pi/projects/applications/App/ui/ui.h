@@ -32,11 +32,11 @@ extern lv_anim_t * touch_Animation(lv_obj_t * TargetObject, int delay);
 extern lv_obj_t * ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
-LV_IMG_DECLARE(ui_img_images_settings_setting_png)    // assets/images/settings/setting.png
-LV_IMG_DECLARE(ui_img_images_settings_wifi_png)    // assets/images/settings/wifi.png
-LV_IMG_DECLARE(ui_img_images_settings_r_arrow_png)    // assets/images/settings/r_arrow.png
-LV_IMG_DECLARE(ui_img_images_settings_bt_png)    // assets/images/settings/bt.png
-LV_IMG_DECLARE(ui_img_images_settings_setting128_png)    // assets/images/settings/setting128.png
+LV_IMG_DECLARE(ui_img_images_settings_setting_png);    // assets/images/settings/setting.png
+LV_IMG_DECLARE(ui_img_images_settings_wifi_png);    // assets/images/settings/wifi.png
+LV_IMG_DECLARE(ui_img_images_settings_r_arrow_png);    // assets/images/settings/r_arrow.png
+LV_IMG_DECLARE(ui_img_images_settings_bt_png);    // assets/images/settings/bt.png
+LV_IMG_DECLARE(ui_img_images_settings_setting128_png);    // assets/images/settings/setting128.png
 
 // UI INIT
 void ui_init(void);

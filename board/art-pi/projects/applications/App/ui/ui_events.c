@@ -3,12 +3,9 @@
 // LVGL version: 9.2.2
 // Project name: artpi
 
-#include "../ui.h"
+#include "ui.h"
 
-void ui_comp_SettingName_create_hook(lv_obj_t * comp)
+void OpenSettingItem(lv_event_t * e)
 {
-}
-
-void ui_comp_SettingItem_create_hook(lv_obj_t * comp)
-{
+	// Your code here
 }

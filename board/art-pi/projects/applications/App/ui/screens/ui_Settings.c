@@ -8,7 +8,9 @@
 lv_obj_t * ui_Settings = NULL;
 lv_obj_t * ui_title = NULL;
 lv_obj_t * ui_SettingList = NULL;
+lv_obj_t * ui_SettingItem1 = NULL;
 lv_obj_t * ui_SettingItem = NULL;
+lv_obj_t * ui_SettingItem2 = NULL;
 // event funtions
 void ui_event_Settings(lv_event_t * e)
 {
@@ -41,14 +43,22 @@ void ui_Settings_screen_init(void)
     lv_obj_set_width(ui_SettingList, 320);
     lv_obj_set_height(ui_SettingList, 420);
     lv_obj_set_align(ui_SettingList, LV_ALIGN_BOTTOM_MID);
-    lv_obj_set_flex_flow(ui_SettingList, LV_FLEX_FLOW_COLUMN_REVERSE);
+    lv_obj_set_flex_flow(ui_SettingList, LV_FLEX_FLOW_COLUMN_WRAP_REVERSE);
     lv_obj_set_flex_align(ui_SettingList, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
     lv_obj_remove_flag(ui_SettingList, LV_OBJ_FLAG_CLICKABLE);      /// Flags
     lv_obj_set_scroll_dir(ui_SettingList, LV_DIR_VER);
 
-    ui_SettingItem = ui_SettingName_create(ui_SettingList);
+    ui_SettingItem1 = ui_SettingItem_create(ui_SettingList);
+    lv_obj_set_x(ui_SettingItem1, 1);
+    lv_obj_set_y(ui_SettingItem1, -164);
+
+    ui_SettingItem = ui_SettingItem_create(ui_SettingList);
     lv_obj_set_x(ui_SettingItem, 1);
     lv_obj_set_y(ui_SettingItem, -164);
+
+    ui_SettingItem2 = ui_SettingItem_create(ui_SettingList);
+    lv_obj_set_x(ui_SettingItem2, 1);
+    lv_obj_set_y(ui_SettingItem2, -164);
 
     lv_obj_add_event_cb(ui_Settings, ui_event_Settings, LV_EVENT_ALL, NULL);
 
@@ -62,6 +72,8 @@ void ui_Settings_screen_destroy(void)
     ui_Settings = NULL;
     ui_title = NULL;
     ui_SettingList = NULL;
+    ui_SettingItem1 = NULL;
     ui_SettingItem = NULL;
+    ui_SettingItem2 = NULL;
 
 }

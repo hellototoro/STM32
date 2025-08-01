@@ -7,10 +7,12 @@
 		{
 			"name": "bootloader",
 			"path": "board/art-pi/projects/bootloader"
+		},
+		{
+			"path": "board/art-pi/projects/applications/simulation"
 		}
 	],
 	"settings": {
-		"cmake.languageSupport.dotnetPath": "C:\\Program Files\\dotnet\\dotnet.exe",
 		"files.associations": {
 			"*.h": "c",
 			"*.c": "c",
