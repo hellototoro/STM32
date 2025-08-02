@@ -63,12 +63,8 @@ set(LV_BUILD_CONF_PATH "${CMAKE_SOURCE_DIR}/Core/Inc/lv_conf.h")
 add_subdirectory(lvgl)
 target_link_libraries(lvgl PUBLIC stm32cubemx)
 
-add_subdirectory(App/ui)
-target_link_libraries(ui PUBLIC lvgl)
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user defined include paths
-    App/ui
-)
+add_subdirectory(App)
+target_link_libraries(App INTERFACE lvgl)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -124,10 +120,10 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
     lvgl
+    App
     lvgl::demos
     lvgl::examples
     lvgl::thorvg
-    ui
 )
 
 set(BIN_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
