@@ -80,7 +80,7 @@
 //
 #define LWIP_PROVIDE_ERRNO              (1)
 
-#ifndef __ICCARM__
+#ifndef __ARMCC_VERSION
 //
 // Use the timeval from the GCC library, not the one
 // from LWIP

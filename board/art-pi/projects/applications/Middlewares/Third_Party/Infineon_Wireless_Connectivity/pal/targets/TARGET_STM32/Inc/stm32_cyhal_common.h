@@ -89,7 +89,7 @@
 #endif /* defined (__DCACHE_PRESENT) && (__DCACHE_PRESENT == 1U) */
 
 /* Macro to ALIGN */
-#if defined (__ARMCC_VERSION) /* ARM Compiler */
+#if defined (__ICCARM__) /* ARM Compiler v5 */
     #define ALIGN_HAL_COMMON(buf, x) __align(x) buf
 #elif defined   (__GNUC__)    /* GNU Compiler */
     #define ALIGN_HAL_COMMON(buf, x)  buf __attribute__ ((aligned (x)))

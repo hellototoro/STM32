@@ -30,6 +30,8 @@
 #include "cyabs_rtos.h"
 #include "whd_types.h"
 #include "cyhal.h"
+#include "cyhal_system.h"
+#include "cyhal_sdio.h"
 
 #ifdef COMPONENT_CAT5
 #include "whd_int.h"

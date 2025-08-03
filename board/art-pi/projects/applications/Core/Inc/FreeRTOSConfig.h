@@ -193,6 +193,10 @@ standard names. */
 #define configCOMMAND_INT_MAX_OUTPUT_SIZE         200
 #endif
 
+#if defined(configUSE_NEWLIB_REENTRANT) && defined(__ARMCC_VERSION)
+#undef configUSE_NEWLIB_REENTRANT
+#endif
+
 /* USER CODE END Defines */
 
 #endif /* FREERTOS_CONFIG_H */
