@@ -8,7 +8,9 @@ set( CMAKE_C_FLAGS "-Wall -Wextra -Wno-unused -g" )
 set( CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused -g" )
 
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
-cmake_policy(SET CMP0079 NEW)  # 允许跨目录链接目标
+set(CMAKE_POLICY_DEFAULT_CMP0126 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0079 NEW) # 允许跨目录链接目标
+# cmake_policy(SET CMP0079 NEW) 
 
 # Enable CMake support for ASM, C and C++ languages
 enable_language(C CXX ASM)
