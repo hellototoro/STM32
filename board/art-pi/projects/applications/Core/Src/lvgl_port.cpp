@@ -3,11 +3,8 @@
  *********************/
 
 #include "lvgl_port.h"
-#include "cmsis_os2.h"
 #include "lvgl.h"
 #include "main.h"
-#include <cstddef>
-#include <stdio.h>
 
 #define LV_USE_INDEV_TOUCH 1
 
@@ -49,19 +46,37 @@ static volatile lv_indev_state_t last_state = LV_INDEV_STATE_RELEASED;
 #define MY_DISP_HOR_RES 320
 #define MY_DISP_VER_RES 480
 
+#define LV_DOUBLE_BUFFER 0
+
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
+#if defined(__ARMCC_VERSION)
+uint8_t lvgl_fb1[MY_DISP_HOR_RES * MY_DISP_VER_RES * 2] __attribute__((aligned(32)));
+#else
+extern uint8_t lvgl_fb1;
+#endif
 
 void lvgl_port_init(void) {
   lv_init();
 
   lv_tick_set_cb(HAL_GetTick);
 
-  extern uint32_t lvgl_fb1;
-  extern uint32_t lvgl_fb2;
+#if defined(__ARMCC_VERSION)
+  uint8_t *fb1 = (uint8_t *)lvgl_fb1;
+#else
 
-  lv_st_ltdc_create_direct((void *)&lvgl_fb1, (void *)&lvgl_fb2, 0);
+  uint8_t *fb1 = (uint8_t *)&lvgl_fb1;
+#endif
+
+  #if LV_DOUBLE_BUFFER
+  extern uint32_t lvgl_fb2;
+  uint8_t *fb2 = (uint8_t *)&lvgl_fb2;
+  #else
+  uint8_t *fb2 = NULL;
+  #endif
+
+  lv_st_ltdc_create_direct((void *)fb1, (void *)fb2, 0);
 
 #if LV_USE_INDEV_TOUCH
   touchPad.init();

@@ -14,7 +14,7 @@
 /* clang-format off */
 #if 1 /* Set this to "1" to enable content */
 
-/* #ifndef LV_CONF_H */
+#ifndef LV_CONF_H
 #define LV_CONF_H
 
 /* If you need to include anything here, do it inside the `__ASSEMBLY__` guard */
@@ -1418,6 +1418,6 @@
 
 /*--END OF LV_CONF_H--*/
 
-/* #endif */ /*LV_CONF_H*/
+#endif /*LV_CONF_H*/
 
 #endif /*End of "Content enable"*/

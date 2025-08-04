@@ -48,7 +48,11 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+#if defined(__ARMCC_VERSION)
+__attribute__((used)) uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+#else
 __attribute__((used, section(".rtos_stack"))) uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+#endif
 
 osThreadId_t WiFi_TaskHandle;
 const osThreadAttr_t WiFi_Task_attributes = {
@@ -119,7 +123,7 @@ void MX_FREERTOS_Init(void) {
   };
   osThreadNew(FS_AppThread, NULL, &sdcard_attributes);
 
-  WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
+  // WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
 
   static const osThreadAttr_t Lvgl_timer_attributes = {
     .name = "Lvgl_timer",

@@ -52,7 +52,7 @@
           <OutputName>applications</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>1</CreateHexFile>
+          <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath></ListingPath>
@@ -80,9 +80,9 @@
             <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
+            <RunUserProg1>1</RunUserProg1>
+            <RunUserProg2>0</RunUserProg2>
+            <UserProg1Name>fromelf --bin !L --output build/bin/application.bin</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -206,8 +206,8 @@
             <Ro1Chk>0</Ro1Chk>
             <Ro2Chk>0</Ro2Chk>
             <Ro3Chk>0</Ro3Chk>
-            <Ir1Chk>0</Ir1Chk>
-            <Ir2Chk>1</Ir2Chk>
+            <Ir1Chk>1</Ir1Chk>
+            <Ir2Chk>0</Ir2Chk>
             <Ra1Chk>0</Ra1Chk>
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
@@ -276,13 +276,13 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
-                <Size>0x20000</Size>
+                <StartAddress>0x90000000</StartAddress>
+                <Size>0x800000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
-                <StartAddress>0x90000000</StartAddress>
-                <Size>0x800000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT5>
               <OCR_RVCT6>
                 <Type>0</Type>
@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -323,13 +323,13 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>1</wLevel>
+            <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
             <uGnu>1</uGnu>
             <useXO>0</useXO>
-            <v6Lang>6</v6Lang>
+            <v6Lang>5</v6Lang>
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -338,9 +338,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_PWR_LDO_SUPPLY,USE_HAL_DRIVER,STM32H750xx</Define>
+              <Define>USE_PWR_LDO_SUPPLY,USE_HAL_DRIVER,STM32H750xx, CY_USING_HAL, CYBSP_WIFI_CAPABLE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../FATFS/Target;../FATFS/App;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;..\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;../Middlewares/Third_Party/FatFs/src;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-freertos-integration/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_log/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/JSON_parser/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/linked_list/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_string/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/COMPONENT_FREERTOS/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include;..\Bsp\Components\ili9481;..\Bsp\Components\ft5xx6;..\Bsp\Components\sdram;..\Bsp\Components\st7789;..\App\ui;..\FreeRTOS_CLI;..\Bsp\Components\ap6212\firmware\COMPONENT_43438;..\Bsp\Components\ap6212\clm\COMPONENT_43438;..\Bsp\Components\ap6212\nvram\COMPONENT_43438\COMPONENT_AW-CU427-P;..\MyDrivers\hw_iic</IncludePath>
+              <IncludePath>../Core/Inc;../FATFS/Target;../FATFS/App;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;..\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F;../Middlewares/Third_Party/FatFs/src;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-freertos-integration/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_log/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/JSON_parser/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/linked_list/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_string/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/COMPONENT_FREERTOS/;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp;../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include;..\Bsp\Components\ili9481;..\Bsp\Components\ft5xx6;..\Bsp\Components\sdram;..\Bsp\Components\st7789;..\App\ui;..\FreeRTOS_CLI;..\Bsp\Components\ap6212\firmware\COMPONENT_43438;..\Bsp\Components\ap6212\clm\COMPONENT_43438;..\Bsp\Components\ap6212\nvram\COMPONENT_43438\COMPONENT_AW-CU427-P;..\MyDrivers\hw_iic;..\App\ui;..\Middlewares\Third_Party\FreeRTOS\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -371,7 +371,7 @@
             <TextAddressRange></TextAddressRange>
             <DataAddressRange></DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>..\ldscript\linker.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -863,6 +863,11 @@
               <FileName>port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F\port.c</FilePath>
+            </File>
+            <File>
+              <FileName>FreeRTOS_CLI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\FreeRTOS\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI\FreeRTOS_CLI.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -7553,10 +7558,123 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>app_cli.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS_CLI\app_cli.c</FilePath>
+            </File>
+            <File>
+              <FileName>cli_commands.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FreeRTOS_CLI\cli_commands.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/ui</GroupName>
+          <Files>
+            <File>
+              <FileName>ui_helpers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\ui_helpers.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\ui.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_comp_hook.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\components\ui_comp_hook.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_font_Big_Number.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\fonts\ui_font_Big_Number.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_font_Bold_Font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\fonts\ui_font_Bold_Font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_img_arrow_right_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_img_arrow_right_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_img_bg_1_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_img_bg_1_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_img_btc_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_img_btc_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_img_card_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_img_card_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_img_eth_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_img_eth_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_img_pos_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_img_pos_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_img_qr_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_img_qr_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_img_xrp_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_img_xrp_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_img_ok_png.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\images\ui_img_ok_png.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_POS_S1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\screens\ui_POS_S1.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_POS_S2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\screens\ui_POS_S2.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_POS_S3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\screens\ui_POS_S3.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_POS_S4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\screens\ui_POS_S4.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_POS_S5.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\ui\screens\ui_POS_S5.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS-Compiler</GroupName>
         </Group>
         <Group>
           <GroupName>::LVGL</GroupName>
@@ -7566,10 +7684,47 @@
   </Targets>
 
   <RTE>
-    <apis/>
+    <apis>
+      <api Capiversion="1.1.0" Cclass="CMSIS-Compiler" Cgroup="STDOUT" condition="CortexDevice" exclusive="1">
+        <package name="CMSIS-Compiler" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="2.1.0"/>
+        <targetInfos>
+          <targetInfo name="applications"/>
+        </targetInfos>
+      </api>
+    </apis>
     <components>
+      <component Cclass="CMSIS-Compiler" Cgroup="CORE" Cvendor="ARM" Cversion="1.1.0" condition="ARMCC CortexDevice" ymlID="CMSIS-Compiler:CORE">
+        <package name="CMSIS-Compiler" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="2.1.0"/>
+        <targetInfos>
+          <targetInfo name="applications"/>
+        </targetInfos>
+      </component>
+      <component Capiversion="1.1.0" Cclass="CMSIS-Compiler" Cgroup="STDOUT" Csub="Custom" Cvendor="ARM" Cversion="1.1.0" condition="CORE" custom="1" ymlID="CMSIS-Compiler:STDOUT:Custom">
+        <package name="CMSIS-Compiler" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="2.1.0"/>
+        <targetInfos>
+          <targetInfo name="applications"/>
+        </targetInfos>
+      </component>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="6.1.1" condition="ARMv6_7_8-M Device" ymlID="CMSIS:CORE">
         <package name="CMSIS" schemaVersion="1.7.40" url="https://www.keil.com/pack/" vendor="ARM" version="6.2.0"/>
+        <targetInfos>
+          <targetInfo name="applications"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Demos" Csub="Assets" Cvendor="LVGL" Cversion="9.3.0" condition="LVGL-Essential" ymlID="LVGL&amp;LVGL9:Demos:Assets">
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.3.0"/>
+        <targetInfos>
+          <targetInfo name="applications"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Demos" Csub="Benchmark" Cvendor="LVGL" Cversion="9.3.0" condition="Demo-Benchmark" ymlID="LVGL&amp;LVGL9:Demos:Benchmark">
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.3.0"/>
+        <targetInfos>
+          <targetInfo name="applications"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Demos" Csub="Widgets" Cvendor="LVGL" Cversion="9.3.0" condition="LVGL-Essential-Assets" ymlID="LVGL&amp;LVGL9:Demos:Widgets">
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.3.0"/>
         <targetInfos>
           <targetInfo name="applications"/>
         </targetInfos>

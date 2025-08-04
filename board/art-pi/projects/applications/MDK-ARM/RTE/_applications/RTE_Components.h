@@ -9,6 +9,15 @@
 #ifndef RTE_COMPONENTS_H
 #define RTE_COMPONENTS_H
 
+/* ARM::CMSIS-Compiler:STDOUT:Custom@1.1.0 */
+#define RTE_CMSIS_Compiler_STDOUT                /* CMSIS-Compiler STDOUT */
+#define RTE_CMSIS_Compiler_STDOUT_Custom         /* CMSIS-Compiler STDOUT: Custom */
+/* LVGL::LVGL&LVGL9:Demos:Benchmark@9.3.0 */
+/*! \brief enable demo:benchmark */
+#define LV_USE_DEMO_BENCHMARK           1
+/* LVGL::LVGL&LVGL9:Demos:Widgets@9.3.0 */
+/*! \brief enable demo:widgets support */
+#define LV_USE_DEMO_WIDGETS             1
 /* LVGL::LVGL&LVGL9:Display&ST LTDC@9.3.0 */
 /* use display driver for ST LTDC */
 #define LV_USE_ST_LTDC    1

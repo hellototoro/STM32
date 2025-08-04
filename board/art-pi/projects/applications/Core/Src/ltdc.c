@@ -72,7 +72,13 @@ void MX_LTDC_Init(void)
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-  pLayerCfg.FBStartAdress = LTDC_FB_ADDR;
+#if defined(__ARMCC_VERSION)
+  extern uint8_t lvgl_fb1[];
+  pLayerCfg.FBStartAdress = (uint32_t)lvgl_fb1;
+#else
+  extern uint32_t lvgl_fb1;
+  pLayerCfg.FBStartAdress = (uint32_t)&lvgl_fb1;
+#endif
   pLayerCfg.ImageWidth = 320;
   pLayerCfg.ImageHeight = 480;
   pLayerCfg.Backcolor.Blue = 0;

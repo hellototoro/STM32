@@ -1,9 +1,9 @@
+/* Entry Point */
+ENTRY(Reset_Handler)
+
 INCLUDE memory_layout.ld
 INCLUDE system_heap_stack.ld
 INCLUDE lvgl_fb_symbol.ld
-
-/* Entry Point */
-ENTRY(Reset_Handler)
 
 /* Define output sections */
 SECTIONS
@@ -86,6 +86,8 @@ SECTIONS
     PROVIDE_HIDDEN (__fini_array_end = .);
     . = ALIGN(4);
   } >QFLASH
+
+  INCLUDE lvgl_fb_section.ld
 
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
@@ -202,7 +204,6 @@ SECTIONS
     _eram1_d2_bss = .; /* create a global symbol at SRAM1 D2 bss start */
   } >RAM1_D2
 
-  INCLUDE lvgl_fb_section.ld
   INCLUDE eth_section.ld
 
   /* Remove information from the standard libraries */

@@ -39,7 +39,7 @@
 #include <stdio.h>
 #include "lvgl_port.h"
 #include "ui.h"
-// #include "lvgl/demos/lv_demos.h"
+#include "demos/lv_demos.h"
 
 /* USER CODE END Includes */
 
@@ -75,6 +75,14 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+#if defined(__ARMCC_VERSION)
+#include "retarget_stdout.h"
+#define PUTCHAR_PROTOTYPE int stdout_putchar(int ch)
+#else
+/* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+   set to 'Yes') calls __io_putchar() */
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif /* __CC_ARM */
 
 /* USER CODE END 0 */
 
@@ -262,6 +270,13 @@ void PeriphCommonClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+PUTCHAR_PROTOTYPE
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the USART1 and Loop until the end of transmission */
+  HAL_UART_Transmit(&huart4, (uint8_t *)&ch, 1, 0xFFFF);
+  return ch;
+}
 
 /* USER CODE END 4 */
 

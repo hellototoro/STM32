@@ -1,5 +1,12 @@
 # application
 
+## 内存布局
+
+
+![H7 的系统架构](res/STM32H7_SystemArchitecture.png)
+
+sram_d1 : 300k(320 * 480 * 2) for lvgl framebuffer
+
 ## lvgl 配置说明
 
 1. LV_ST_LTDC_USE_DMA2D_FLUSH 选项：

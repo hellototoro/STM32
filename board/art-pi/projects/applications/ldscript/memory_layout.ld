@@ -4,7 +4,7 @@ MEMORY
 {
   ITCMRAM (xrw)   : ORIGIN = 0x00000000, LENGTH = 64K   /* 64Kb of ITCM RAM */
 
-  /* DTCM RAM used to main stack, heap and rtos heap */
+  /* DTCM RAM used to main heap/stack and rtos heap */
   DTCMRAM (xrw)   : ORIGIN = 0x20000000, LENGTH = 128K
 
   /* SRAM1 in domain 1 is default ram */
@@ -16,7 +16,9 @@ MEMORY
   RAM3_D2 (xrw)   : ORIGIN = 0x30040000, LENGTH = 32K   /* 32Kb of SRAM3 in domain 2*/
   RAM4_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K   /* 64Kb SRAM4 in domain 3*/
   RAMB_D3 (xrw)   : ORIGIN = 0x38800000, LENGTH = 4K    /* 4Kb of backup SRAM in domain 3, aka RTC RAM */
-  QFLASH (rx)     : ORIGIN = 0x90000000, LENGTH = 8192K /* 8MB of QSPI Flash memory */
+
+  /* QSPI Flash memory */
+  QFLASH (rx)     : ORIGIN = 0x90000000, LENGTH = 8M /* 8MB of QSPI Flash memory */
 
   /* External SDRAM used to lvgl framebuffer */
   SDRAM (xrw)     : ORIGIN = 0xC0000000, LENGTH = 32M /* 32Mb of SDRAM */

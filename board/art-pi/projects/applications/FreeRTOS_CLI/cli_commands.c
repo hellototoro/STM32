@@ -73,7 +73,7 @@ static BaseType_t cmd_add(char *pcWriteBuffer, size_t xWriteBufferLen,
     int32_t xResultValue = xValue1 + xValue2;
     // convert the result to a string
     char cResultString[10];
-    itoa(xResultValue, cResultString, 10);
+    snprintf(cResultString, sizeof(cResultString), "%d", xResultValue);
     // copy the result to the write buffer
     strcpy(pcWriteBuffer, cResultString);
     

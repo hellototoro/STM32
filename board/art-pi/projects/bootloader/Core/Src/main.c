@@ -31,7 +31,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"
+#include <stdio.h>
 // #include "memory.h"
 # include "w25qxx.h"
 /* USER CODE END Includes */
@@ -80,20 +80,13 @@ static void CPU_CACHE_Disable(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 #if defined(__ARMCC_VERSION)
-#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#include "retarget_stdout.h"
+#define PUTCHAR_PROTOTYPE int stdout_putchar(int ch)
 #else
 /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
    set to 'Yes') calls __io_putchar() */
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #endif /* __CC_ARM */
-
-PUTCHAR_PROTOTYPE {
-  /* Place your implementation of fputc here */
-  /* e.g. write a character to the USART1 and Loop until the end of transmission
-   */
-  HAL_UART_Transmit(&huart4, (uint8_t *)&ch, 1, 0xFFFF);
-  return ch;
-}
 
 /* USER CODE END 0 */
 
@@ -350,6 +343,14 @@ static void CPU_CACHE_Disable(void)
 
   /* Disable D-Cache */
   SCB_DisableDCache();
+}
+
+PUTCHAR_PROTOTYPE
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the USART1 and Loop until the end of transmission */
+  HAL_UART_Transmit(&huart4, (uint8_t *)&ch, 1, 0xFFFF);
+  return ch;
 }
 
 /* USER CODE END 4 */
