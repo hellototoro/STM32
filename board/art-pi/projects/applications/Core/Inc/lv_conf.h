@@ -590,12 +590,12 @@
  * https://fonts.google.com/specimen/Montserrat */
 #define LV_FONT_MONTSERRAT_8  0
 #define LV_FONT_MONTSERRAT_10 0
-#define LV_FONT_MONTSERRAT_12 0
+#define LV_FONT_MONTSERRAT_12 1
 #define LV_FONT_MONTSERRAT_14 1
 #define LV_FONT_MONTSERRAT_16 0
 #define LV_FONT_MONTSERRAT_18 1
 #define LV_FONT_MONTSERRAT_20 1
-#define LV_FONT_MONTSERRAT_22 0
+#define LV_FONT_MONTSERRAT_22 1
 #define LV_FONT_MONTSERRAT_24 1
 #define LV_FONT_MONTSERRAT_26 1
 #define LV_FONT_MONTSERRAT_28 0
@@ -1310,7 +1310,7 @@
 #define LV_USE_ST_LTDC    1
 #if LV_USE_ST_LTDC
     /* Only used for partial. */
-    #define LV_ST_LTDC_USE_DMA2D_FLUSH 1
+    #define LV_ST_LTDC_USE_DMA2D_FLUSH 0
 #endif
 
 /** Driver for NXP ELCDIF */
@@ -1375,13 +1375,13 @@
     #define LV_USE_DEMO_STRESS 0
 
     /** Music player demo */
-    #define LV_USE_DEMO_MUSIC 0
+    #define LV_USE_DEMO_MUSIC 1
     #if LV_USE_DEMO_MUSIC
-        #define LV_DEMO_MUSIC_SQUARE    0
-        #define LV_DEMO_MUSIC_LANDSCAPE 0
-        #define LV_DEMO_MUSIC_ROUND     0
-        #define LV_DEMO_MUSIC_LARGE     0
-        #define LV_DEMO_MUSIC_AUTO_PLAY 0
+        #define LV_DEMO_MUSIC_SQUARE    1
+        #define LV_DEMO_MUSIC_LANDSCAPE 1
+        #define LV_DEMO_MUSIC_ROUND     1
+        #define LV_DEMO_MUSIC_LARGE     1
+        #define LV_DEMO_MUSIC_AUTO_PLAY 1
     #endif
 
     /** Vector graphic demo */

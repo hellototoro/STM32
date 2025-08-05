@@ -55,6 +55,7 @@ static volatile lv_indev_state_t last_state = LV_INDEV_STATE_RELEASED;
 uint8_t lvgl_fb1[MY_DISP_HOR_RES * MY_DISP_VER_RES * 2] __attribute__((aligned(32)));
 #else
 extern uint8_t lvgl_fb1;
+extern uint8_t lvgl_fb2;
 #endif
 
 void lvgl_port_init(void) {
@@ -64,17 +65,14 @@ void lvgl_port_init(void) {
 
 #if defined(__ARMCC_VERSION)
   uint8_t *fb1 = (uint8_t *)lvgl_fb1;
-#else
-
-  uint8_t *fb1 = (uint8_t *)&lvgl_fb1;
-#endif
-
-  #if LV_DOUBLE_BUFFER
-  extern uint32_t lvgl_fb2;
-  uint8_t *fb2 = (uint8_t *)&lvgl_fb2;
-  #else
   uint8_t *fb2 = NULL;
-  #endif
+#else
+  uint8_t *fb1 = (uint8_t *)&lvgl_fb1;
+  uint8_t *fb2 = NULL;
+#if LV_DOUBLE_BUFFER
+  fb2 = (uint8_t *)&lvgl_fb2;
+#endif /* LV_DOUBLE_BUFFER */
+#endif /* __ARMCC_VERSION */
 
   lv_st_ltdc_create_direct((void *)fb1, (void *)fb2, 0);
 
