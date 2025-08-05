@@ -18,9 +18,12 @@ set(CMAKE_PROJECT_NAME applications)
 
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 set(CMAKE_POLICY_DEFAULT_CMP0126 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0177 NEW)
 
 # Enable compile command to ease indexing with e.g. clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+
+set(LVGL_VERSION_MAJOR 8)
 
 # Core project settings
 project(${CMAKE_PROJECT_NAME})
@@ -58,14 +61,24 @@ target_sources(Connectivity PRIVATE
 )
 
 # 添加 LVGL 子模块
-set(CONFIG_LV_BUILD_DEMOS ON)
-set(CONFIG_LV_BUILD_EXAMPLES ON)
-set(LV_BUILD_CONF_PATH "${CMAKE_SOURCE_DIR}/Core/Inc/lv_conf.h")
+if(LVGL_VERSION_MAJOR GREATER 8)
+    set(CONFIG_LV_BUILD_DEMOS ON)
+    set(CONFIG_LV_BUILD_EXAMPLES ON)
+    set(LV_BUILD_CONF_PATH "${CMAKE_SOURCE_DIR}/Core/Inc/lv_conf.h")
+else()
+    set(LV_CONF_PATH "${CMAKE_SOURCE_DIR}/Core/Inc/lv_conf.h")
+endif()
 add_subdirectory(lvgl)
 target_link_libraries(lvgl PUBLIC stm32cubemx)
 
-add_subdirectory(App)
-target_link_libraries(App INTERFACE lvgl)
+set(Libs "")
+if(LVGL_VERSION_MAJOR GREATER 8)
+    message("Using LVGL version 9 or higher")
+    add_subdirectory(App)
+    target_link_libraries(App INTERFACE lvgl)
+    list(APPEND Libs App)
+    list(APPEND Libs lvgl::thorvg)
+endif()
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -121,10 +134,9 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
     lvgl
-    App
+    ${Libs}
     lvgl::demos
     lvgl::examples
-    lvgl::thorvg
 )
 
 set(BIN_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)

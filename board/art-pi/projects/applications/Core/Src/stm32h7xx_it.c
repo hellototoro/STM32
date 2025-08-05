@@ -22,6 +22,8 @@
 #include "stm32h7xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "lvgl_port.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -297,7 +299,9 @@ extern void stm32_cyhal_gpio_irq_handler(uint32_t gpio);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == TP_IRQ_Pin) {
+#if LV_USE_INDEV_TOUCH
     read_tp_data();
+#endif
   } else if (GPIO_Pin == WIFI_HOST_WAKE_Pin) {
     stm32_cyhal_gpio_irq_handler(GPIO_Pin);
   } else {

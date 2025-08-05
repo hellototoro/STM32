@@ -27,6 +27,7 @@ void read_tp_data(void);
 /**********************
  *      MACROS
  **********************/
+#define LV_USE_INDEV_TOUCH 0
 
 #ifdef __cplusplus
 } /*extern "C"*/

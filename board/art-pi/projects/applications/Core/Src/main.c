@@ -38,7 +38,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "lvgl_port.h"
-#include "ui.h"
+// #include "ui.h"
 #include "demos/lv_demos.h"
 
 /* USER CODE END Includes */
@@ -148,9 +148,9 @@ int main(void)
   lvgl_port_init();
   printf("[info application]Hello main!\r\n");
 
-  // lv_demo_benchmark();
+  lv_demo_benchmark();
   // lv_demo_widgets();
-  ui_init();
+  // ui_init();
   /* USER CODE END 2 */
 
   /* Init scheduler */

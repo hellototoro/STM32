@@ -126,11 +126,20 @@ void MX_FREERTOS_Init(void) {
   // WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
 
   static const osThreadAttr_t Lvgl_timer_attributes = {
-    .name = "Lvgl_timer",
-    .stack_size = 1024 * 8,
-    .priority = (osPriority_t) osPriorityNormal,
+      .name = "Lvgl_timer",
+      .stack_size = 1024 * 8,
+      .priority = (osPriority_t)osPriorityNormal,
   };
   osThreadNew(Lvgl_timer_handler, NULL, &Lvgl_timer_attributes);
+
+#if LVGL_VERSION_MAJOR < 9
+  static const osThreadAttr_t Lvgl_tick_attributes = {
+      .name = "Lvgl_tick",
+      .stack_size = 1024 * 8,
+      .priority = (osPriority_t)osPriorityNormal,
+  };
+  osThreadNew(Lvgl_tick_handler, NULL, &Lvgl_tick_attributes);
+#endif
 
   consoleTaskInit();
   /* USER CODE END RTOS_THREADS */
@@ -175,6 +184,19 @@ void Lvgl_timer_handler(void *argument)
   }
   /* USER CODE END Lvgl_timer_handler */
 }
+
+#if LVGL_VERSION_MAJOR < 9
+void Lvgl_tick_handler(void *argument) {
+  /* USER CODE BEGIN Lvgl_tick_handler */
+  (void)argument;
+  /* Infinite loop */
+  for (;;) {
+    lv_tick_inc(5);
+    osDelay(5);
+  }
+  /* USER CODE END Lvgl_tick_handler */
+}
+#endif
 
 /* USER CODE END Application */
 
