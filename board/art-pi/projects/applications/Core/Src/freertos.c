@@ -123,7 +123,7 @@ void MX_FREERTOS_Init(void) {
   };
   osThreadNew(FS_AppThread, NULL, &sdcard_attributes);
 
-  // WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
+  WiFi_TaskHandle = osThreadNew(WiFiTask, NULL, &WiFi_Task_attributes);
 
   static const osThreadAttr_t Lvgl_timer_attributes = {
     .name = "Lvgl_timer",
