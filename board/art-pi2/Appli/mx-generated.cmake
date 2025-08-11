@@ -9,50 +9,6 @@ set(MX_Defines_Syms
 # STM32CubeMX generated include paths
 set(MX_Include_Dirs
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Inc
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/include/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-network-interface-integration/source/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/lwip-freertos-integration/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/include/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/src/bus_protocols/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/include/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_log/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/JSON_parser/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/linked_list/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/cy_string/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/connectivity-utilities/network/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/whd-bsp-integration
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/arpa
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/net
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/posix/sys
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/compat/stdc
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/apps
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/priv
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/LwIP/src/include/lwip/prot
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/source/COMPONENT_FREERTOS/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include/COMPONENT_FREERTOS/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/hal/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/common/Inc
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/targets/TARGET_STM32/Inc
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/core-lib/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-connection-manager/source/COMPONENT_43438
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/inc
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/wifi-host-driver/COMPONENT_WIFI5/resources/resource_imp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/Third_Party/Infineon_Wireless_Connectivity/pal/abstraction-rtos/include
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Inc
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Inc/Legacy
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/CMSIS/Device/ST/STM32H7RSxx/Include
@@ -71,18 +27,20 @@ set(MX_Application_Src
 # STM32 HAL/LL Drivers
 set(STM32_Drivers_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/system_stm32h7rsxx.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_dma.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_dma_ex.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_cortex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_rcc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_rcc_ex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_flash.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_flash_ex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_gpio.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_dma.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_dma_ex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_pwr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_pwr_ex.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_cortex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_exti.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_uart.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Drivers/STM32H7RSxx_HAL_Driver/Src/stm32h7rsxx_hal_uart_ex.c
 )
 
 # Drivers Midllewares

@@ -13,6 +13,15 @@
 		},
 		{
 			"path": "board/art-pi2/Boot"
+		},
+		{
+			"path": "board/art-pi2"
+		},
+		{
+			"path": "board/art-pi2/Appli"
+		},
+		{
+			"path": "board/art-pi2/ExtMemLoader"
 		}
 	],
 	"settings": {
@@ -28,6 +37,7 @@
 		},
 		"clangd.arguments": [
 			"--compile-commands-dir=${workspaceFolder}/build"
-		]
+		],
+		"cortex-debug.variableUseNaturalFormat": false
 	}
 }

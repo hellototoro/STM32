@@ -19,8 +19,8 @@
                 "--download",
                 "${command:cmake.launchTargetPath}",
                 // Let CMake extension decide executable: "${command:cmake.launchTargetPath}",
-                "-hardRst",
-                "-rst",
+                "-hardRst", // Hardware reset - if rst pin is connected
+                "-rst", // Software reset (backup)
                 "--start" // Start execution
             ],
             "options": {

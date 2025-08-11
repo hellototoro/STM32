@@ -26,7 +26,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(STM32_MCU_FLAGS  "-mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard " )
 
 #Linker options
-set(STM32_LINKER_SCRIPT stm32h7r7xx_flash.ld)
+set(STM32_LINKER_SCRIPT stm32h7rsxx_ROMxspi2.ld)
+# set(STM32_LINKER_SCRIPT stm32h7rsxx_RAMxspi1_ROMxspi2.ld)
 set(STM32_LINKER_OPTION  )
 
 # Set the project name
@@ -79,11 +80,19 @@ if((CMAKE_C_STANDARD EQUAL 90) OR (CMAKE_C_STANDARD EQUAL 99))
     message(ERROR "Generated code requires C11 or higher")
 endif()
 
+set(BIN_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
 
+add_custom_target(create_bin_dir
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${BIN_OUTPUT_DIR}
+)
+add_dependencies(${CMAKE_PROJECT_NAME} create_bin_dir)
 
-
-
-
-
-
-
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME}
+    POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O binary
+    ${LD_OPTIONS}
+    ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.elf
+    ${BIN_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}.bin
+    COMMENT "Generating ${BIN_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}.bin"
+    VERBATIM
+)

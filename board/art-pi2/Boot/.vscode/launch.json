@@ -13,7 +13,7 @@
             // Or fixed file path: "${workspaceFolder}/path/to/filename.elf"
             "request": "launch",
             "servertype": "stlink",
-            "device": "STM32H7R7L8H6H", //MCU used
+            "device": "STM32H7R7L8HxH", //MCU used
             "interface": "swd",
             "serialNumber": "",        //Set ST-Link ID if you use multiple at the same time
             "runToEntryPoint": "main",
@@ -25,7 +25,7 @@
             // "armToolchainPath": "path/to/GNU-tools-for-STM32/bin", //可执行文件目录
             // "gdbPath":"path/to/arm-none-eabi-gdb", //可执行文件路径
             "serverArgs": [
-                "-m","0",
+                "-m","1",
                 /* If you use external loader, add additional arguments */
                 //"serverArgs": ["--extload", "path/to/ext/loader.stldr"],
             ],
@@ -41,7 +41,7 @@
             // Or fixed file path: "${workspaceFolder}/path/to/filename.elf"
             "request": "attach",
             "servertype": "stlink",
-            "device": "STM32H7R7L8H6H", //MCU used
+            "device": "STM32H7R7L8HxH", //MCU used
             "interface": "swd",
             "serialNumber": "",        //Set ST-Link ID if you use multiple at the same time
             "runToEntryPoint": "main",
@@ -53,7 +53,7 @@
             // "armToolchainPath": "path/to/GNU-tools-for-STM32/bin", //可执行文件目录
             // "gdbPath":"path/to/arm-none-eabi-gdb", //可执行文件路径
             "serverArgs": [
-                "-m","0",
+                "-m","1",
                 /* If you use external loader, add additional arguments */
                 // "--extload","${workspaceFolder}/../../ExternalLoader/ART-Pi_W25Q64.stldr",
             ],
