@@ -59,6 +59,4 @@ void Error_Handler(void);
 
 /* USER CODE END Private defines */
 
-#define ADC1_PA3_Pin GPIO_PIN_3
-#define ADC1_PA3_GPIO_Port GPIOA
 #endif /* EXTMEMLOADER_INIT_H */

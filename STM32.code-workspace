@@ -35,9 +35,6 @@
 			"compare": "c",
 			"typeinfo": "c"
 		},
-		"clangd.arguments": [
-			"--compile-commands-dir=${workspaceFolder}/build"
-		],
 		"cortex-debug.variableUseNaturalFormat": false
 	}
 }

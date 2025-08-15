@@ -33,7 +33,7 @@
 */
 
 #define EXTMEM_DRIVER_NOR_SFDP   1
-#define EXTMEM_DRIVER_PSRAM      1
+#define EXTMEM_DRIVER_PSRAM      0
 #define EXTMEM_DRIVER_SDCARD     0
 #define EXTMEM_DRIVER_USER       0
 
@@ -64,8 +64,7 @@ extern XSPI_HandleTypeDef hxspi2;
   * @{
   */
 enum {
-  EXTMEMORY_1  = 0, /*!< ID=0 for the first external memory  */
-  EXTMEMORY_2  = 1, /*!< ID=1 for the second external memory */
+  EXTMEMORY_1  = 0 /*!< ID=0 for the first memory  */
 };
 
 /*

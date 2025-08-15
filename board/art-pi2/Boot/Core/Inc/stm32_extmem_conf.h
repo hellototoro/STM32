@@ -33,7 +33,7 @@
 */
 
 #define EXTMEM_DRIVER_NOR_SFDP   1
-#define EXTMEM_DRIVER_PSRAM      1
+#define EXTMEM_DRIVER_PSRAM      0
 #define EXTMEM_DRIVER_SDCARD     0
 #define EXTMEM_DRIVER_USER       0
 
@@ -54,7 +54,6 @@
 /* USER CODE END INCLUDE */
 /* Private variables ---------------------------------------------------------*/
 extern XSPI_HandleTypeDef hxspi2;
-extern XSPI_HandleTypeDef hxspi1;
 
 /* USER CODE BEGIN PV */
 
@@ -65,8 +64,7 @@ extern XSPI_HandleTypeDef hxspi1;
   * @{
   */
 enum {
-  EXTMEMORY_1  = 0, /*!< ID=0 for the first external memory  */
-  EXTMEMORY_2  = 1, /*!< ID=1 for the second external memory */
+  EXTMEMORY_1  = 0 /*!< ID=0 for the first memory  */
 };
 
 /*
@@ -83,9 +81,9 @@ enum {
   * @{
   */
 
-extern EXTMEM_DefinitionTypeDef extmem_list_config[2];
+extern EXTMEM_DefinitionTypeDef extmem_list_config[1];
 #if defined(EXTMEM_C)
-EXTMEM_DefinitionTypeDef extmem_list_config[2];
+EXTMEM_DefinitionTypeDef extmem_list_config[1];
 #endif /* EXTMEM_C */
 
 /**
@@ -101,7 +99,9 @@ EXTMEM_DefinitionTypeDef extmem_list_config[2];
  * -- Insert your variables declaration here --
  */
 /* USER CODE BEGIN VARIABLES */
-
+#include <stdio.h>
+#define EXTMEM_DRIVER_NOR_SFDP_DEBUG_LEVEL 4
+#define EXTMEM_MACRO_DEBUG printf
 /* USER CODE END VARIABLES */
 
 /*

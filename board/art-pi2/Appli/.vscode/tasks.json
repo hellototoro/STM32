@@ -17,7 +17,7 @@
                 "--connect",
                 "port=swd",
                 "--download",
-                "${command:cmake.launchTargetPath}",
+                "${workspaceFolder}/build/Debug/art-pi2_Appli.bin",
                 "0x70000000",
                 // Let CMake extension decide executable: "${command:cmake.launchTargetPath}",
                 "-el",

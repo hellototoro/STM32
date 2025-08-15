@@ -45,7 +45,6 @@
 
 UART_HandleTypeDef huart4;
 
-XSPI_HandleTypeDef hxspi1;
 XSPI_HandleTypeDef hxspi2;
 
 /* USER CODE BEGIN PV */
@@ -57,7 +56,6 @@ void SystemClock_Config(void);
 static void MPU_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_UART4_Init(void);
-static void MX_XSPI1_Init(void);
 static void MX_XSPI2_Init(void);
 static void MX_SBS_Init(void);
 /* USER CODE BEGIN PFP */
@@ -81,6 +79,33 @@ PUTCHAR_PROTOTYPE {
    */
   HAL_UART_Transmit(&huart4, (uint8_t *)&ch, 1, 0xFFFF);
   return ch;
+}
+
+int JumpToAppli(void) {
+  typedef void (*pFunction)(void);
+  pFunction JumpToApp;
+  uint32_t Application_vector;
+
+  /* Suspend SysTick */
+  HAL_SuspendTick();
+
+  /* Disable I-Cache---------------------------------------------------------*/
+  SCB_DisableICache(); // TODO SCB_Disables Cache and jump success
+
+  /* Disable D-Cache---------------------------------------------------------*/
+  SCB_DisableDCache();
+
+  /* Apply offsets for image location and vector table offset */
+  //  Application_vector += EXTMEM_XIP_IMAGE_OFFSET + EXTMEM_HEADER_OFFSET;
+  Application_vector = XSPI2_BASE;
+  SCB->VTOR = (uint32_t)Application_vector;
+  JumpToApp = (pFunction)(*(__IO uint32_t *)(Application_vector + 4u));
+
+  __set_MSP(*(__IO uint32_t *)Application_vector);
+  __set_CONTROL(0);
+
+  JumpToApp();
+  return 0;
 }
 
 /* USER CODE END 0 */
@@ -126,15 +151,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_UART4_Init();
-  MX_XSPI1_Init();
   MX_XSPI2_Init();
   MX_SBS_Init();
   MX_EXTMEM_MANAGER_Init();
   /* USER CODE BEGIN 2 */
-  printf("art-pi2 bootloader\r\n");
-  printf("booting...\r\n");
-  SCB_DisableICache();
-  SCB_DisableDCache();
+  printf("art-pi2 bootloader\n");
+  printf("booting...\n");
+  JumpToAppli();
+
   /* USER CODE END 2 */
 
   /* Launch the application */
@@ -145,8 +169,6 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) {
-    printf("art-pi bootloader\r\n");
-    HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -187,13 +209,13 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL1.PLLFractional = 0;
   RCC_OscInitStruct.PLL2.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL2.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL2.PLLM = 4;
-  RCC_OscInitStruct.PLL2.PLLN = 83;
+  RCC_OscInitStruct.PLL2.PLLM = 6;
+  RCC_OscInitStruct.PLL2.PLLN = 100;
   RCC_OscInitStruct.PLL2.PLLP = 2;
   RCC_OscInitStruct.PLL2.PLLQ = 2;
   RCC_OscInitStruct.PLL2.PLLR = 2;
   RCC_OscInitStruct.PLL2.PLLS = 3;
-  RCC_OscInitStruct.PLL2.PLLT = 3;
+  RCC_OscInitStruct.PLL2.PLLT = 2;
   RCC_OscInitStruct.PLL2.PLLFractional = 0;
   RCC_OscInitStruct.PLL3.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -290,56 +312,6 @@ static void MX_UART4_Init(void)
 }
 
 /**
-  * @brief XSPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_XSPI1_Init(void)
-{
-
-  /* USER CODE BEGIN XSPI1_Init 0 */
-
-  /* USER CODE END XSPI1_Init 0 */
-
-  XSPIM_CfgTypeDef sXspiManagerCfg = {0};
-
-  /* USER CODE BEGIN XSPI1_Init 1 */
-
-  /* USER CODE END XSPI1_Init 1 */
-  /* XSPI1 parameter configuration*/
-  hxspi1.Instance = XSPI1;
-  hxspi1.Init.FifoThresholdByte = 2;
-  hxspi1.Init.MemoryMode = HAL_XSPI_SINGLE_MEM;
-  hxspi1.Init.MemoryType = HAL_XSPI_MEMTYPE_APMEM_16BITS;
-  hxspi1.Init.MemorySize = HAL_XSPI_SIZE_32GB;
-  hxspi1.Init.ChipSelectHighTimeCycle = 5;
-  hxspi1.Init.FreeRunningClock = HAL_XSPI_FREERUNCLK_DISABLE;
-  hxspi1.Init.ClockMode = HAL_XSPI_CLOCK_MODE_0;
-  hxspi1.Init.WrapSize = HAL_XSPI_WRAP_32_BYTES;
-  hxspi1.Init.ClockPrescaler = 0;
-  hxspi1.Init.SampleShifting = HAL_XSPI_SAMPLE_SHIFT_NONE;
-  hxspi1.Init.DelayHoldQuarterCycle = HAL_XSPI_DHQC_ENABLE;
-  hxspi1.Init.ChipSelectBoundary = HAL_XSPI_BONDARYOF_8KB;
-  hxspi1.Init.MaxTran = 0;
-  hxspi1.Init.Refresh = 0;
-  hxspi1.Init.MemorySelect = HAL_XSPI_CSSEL_NCS1;
-  if (HAL_XSPI_Init(&hxspi1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sXspiManagerCfg.nCSOverride = HAL_XSPI_CSSEL_OVR_NCS1;
-  sXspiManagerCfg.IOPort = HAL_XSPIM_IOPORT_1;
-  if (HAL_XSPIM_Config(&hxspi1, &sXspiManagerCfg, HAL_XSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN XSPI1_Init 2 */
-
-  /* USER CODE END XSPI1_Init 2 */
-
-}
-
-/**
   * @brief XSPI2 Initialization Function
   * @param None
   * @retval None
@@ -358,11 +330,11 @@ static void MX_XSPI2_Init(void)
   /* USER CODE END XSPI2_Init 1 */
   /* XSPI2 parameter configuration*/
   hxspi2.Instance = XSPI2;
-  hxspi2.Init.FifoThresholdByte = 4;
+  hxspi2.Init.FifoThresholdByte = 1;
   hxspi2.Init.MemoryMode = HAL_XSPI_SINGLE_MEM;
-  hxspi2.Init.MemoryType = HAL_XSPI_MEMTYPE_MICRON;
-  hxspi2.Init.MemorySize = HAL_XSPI_SIZE_32GB;
-  hxspi2.Init.ChipSelectHighTimeCycle = 2;
+  hxspi2.Init.MemoryType = HAL_XSPI_MEMTYPE_MACRONIX;
+  hxspi2.Init.MemorySize = HAL_XSPI_SIZE_512MB;
+  hxspi2.Init.ChipSelectHighTimeCycle = 4;
   hxspi2.Init.FreeRunningClock = HAL_XSPI_FREERUNCLK_DISABLE;
   hxspi2.Init.ClockMode = HAL_XSPI_CLOCK_MODE_0;
   hxspi2.Init.WrapSize = HAL_XSPI_WRAP_NOT_SUPPORTED;
@@ -394,9 +366,7 @@ static void MX_XSPI2_Init(void)
   * @param None
   * @retval None
   */
-static void MX_GPIO_Init(void)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
+static void MX_GPIO_Init(void) {
   /* USER CODE BEGIN MX_GPIO_Init_1 */
 
   /* USER CODE END MX_GPIO_Init_1 */
@@ -405,15 +375,6 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPION_CLK_ENABLE();
-  __HAL_RCC_GPIOO_CLK_ENABLE();
-  __HAL_RCC_GPIOP_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-
-  /*Configure GPIO pin : ADC1_PA3_Pin */
-  GPIO_InitStruct.Pin = ADC1_PA3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(ADC1_PA3_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
@@ -466,15 +427,6 @@ static void MPU_Config(void)
   MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
-
-  HAL_MPU_ConfigRegion(&MPU_InitStruct);
-
-  /** Initializes and configures the Region and the memory to be protected
-  */
-  MPU_InitStruct.Number = MPU_REGION_NUMBER2;
-  MPU_InitStruct.BaseAddress = 0x90000000;
-  MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
-  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */

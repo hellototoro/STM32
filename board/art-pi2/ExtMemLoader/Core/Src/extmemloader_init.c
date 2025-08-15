@@ -57,9 +57,9 @@ XSPI_HandleTypeDef hxspi2;
 /* Private function prototypes -----------------------------------------------*/
 
 static void MX_GPIO_Init(void);
-static void MX_XSPI2_Init(void);
 static void MX_UART4_Init(void);
 static void MX_SBS_Init(void);
+static void MX_XSPI2_Init(void);
 static void SystemClock_Config(void);
 
 /* USER CODE BEGIN PFP */
@@ -119,11 +119,11 @@ uint32_t extmemloader_Init()
 
   MX_GPIO_Init();
 
-  MX_XSPI2_Init();
-
   MX_UART4_Init();
 
   MX_SBS_Init();
+
+  MX_XSPI2_Init();
 
   MX_EXTMEM_MANAGER_Init();
 
@@ -167,13 +167,13 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL1.PLLFractional = 0;
   RCC_OscInitStruct.PLL2.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL2.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL2.PLLM = 4;
-  RCC_OscInitStruct.PLL2.PLLN = 83;
+  RCC_OscInitStruct.PLL2.PLLM = 6;
+  RCC_OscInitStruct.PLL2.PLLN = 100;
   RCC_OscInitStruct.PLL2.PLLP = 2;
   RCC_OscInitStruct.PLL2.PLLQ = 2;
   RCC_OscInitStruct.PLL2.PLLR = 2;
   RCC_OscInitStruct.PLL2.PLLS = 3;
-  RCC_OscInitStruct.PLL2.PLLT = 3;
+  RCC_OscInitStruct.PLL2.PLLT = 2;
   RCC_OscInitStruct.PLL2.PLLFractional = 0;
   RCC_OscInitStruct.PLL3.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -288,11 +288,11 @@ static void MX_XSPI2_Init(void)
   /* USER CODE END XSPI2_Init 1 */
   /* XSPI2 parameter configuration*/
   hxspi2.Instance = XSPI2;
-  hxspi2.Init.FifoThresholdByte = 4;
+  hxspi2.Init.FifoThresholdByte = 1;
   hxspi2.Init.MemoryMode = HAL_XSPI_SINGLE_MEM;
-  hxspi2.Init.MemoryType = HAL_XSPI_MEMTYPE_MICRON;
-  hxspi2.Init.MemorySize = HAL_XSPI_SIZE_32GB;
-  hxspi2.Init.ChipSelectHighTimeCycle = 2;
+  hxspi2.Init.MemoryType = HAL_XSPI_MEMTYPE_MACRONIX;
+  hxspi2.Init.MemorySize = HAL_XSPI_SIZE_512MB;
+  hxspi2.Init.ChipSelectHighTimeCycle = 4;
   hxspi2.Init.FreeRunningClock = HAL_XSPI_FREERUNCLK_DISABLE;
   hxspi2.Init.ClockMode = HAL_XSPI_CLOCK_MODE_0;
   hxspi2.Init.WrapSize = HAL_XSPI_WRAP_NOT_SUPPORTED;
