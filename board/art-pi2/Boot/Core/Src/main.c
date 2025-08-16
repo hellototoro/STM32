@@ -81,33 +81,6 @@ PUTCHAR_PROTOTYPE {
   return ch;
 }
 
-int JumpToAppli(void) {
-  typedef void (*pFunction)(void);
-  pFunction JumpToApp;
-  uint32_t Application_vector;
-
-  /* Suspend SysTick */
-  HAL_SuspendTick();
-
-  /* Disable I-Cache---------------------------------------------------------*/
-  SCB_DisableICache(); // TODO SCB_Disables Cache and jump success
-
-  /* Disable D-Cache---------------------------------------------------------*/
-  SCB_DisableDCache();
-
-  /* Apply offsets for image location and vector table offset */
-  //  Application_vector += EXTMEM_XIP_IMAGE_OFFSET + EXTMEM_HEADER_OFFSET;
-  Application_vector = XSPI2_BASE;
-  SCB->VTOR = (uint32_t)Application_vector;
-  JumpToApp = (pFunction)(*(__IO uint32_t *)(Application_vector + 4u));
-
-  __set_MSP(*(__IO uint32_t *)Application_vector);
-  __set_CONTROL(0);
-
-  JumpToApp();
-  return 0;
-}
-
 /* USER CODE END 0 */
 
 /**
@@ -156,8 +129,9 @@ int main(void)
   MX_EXTMEM_MANAGER_Init();
   /* USER CODE BEGIN 2 */
   printf("art-pi2 bootloader\n");
-  printf("booting...\n");
-  JumpToAppli();
+  printf("booting...\n\n");
+  extern BOOTStatus_TypeDef JumpToApplication(void);
+  JumpToApplication();
 
   /* USER CODE END 2 */
 
@@ -366,7 +340,8 @@ static void MX_XSPI2_Init(void)
   * @param None
   * @retval None
   */
-static void MX_GPIO_Init(void) {
+static void MX_GPIO_Init(void)
+{
   /* USER CODE BEGIN MX_GPIO_Init_1 */
 
   /* USER CODE END MX_GPIO_Init_1 */
