@@ -10,6 +10,18 @@
 		},
 		{
 			"path": "board/art-pi/projects/applications/simulation"
+		},
+		{
+			"path": "board/art-pi2/Boot"
+		},
+		{
+			"path": "board/art-pi2"
+		},
+		{
+			"path": "board/art-pi2/Appli"
+		},
+		{
+			"path": "board/art-pi2/ExtMemLoader"
 		}
 	],
 	"settings": {
@@ -23,8 +35,6 @@
 			"compare": "c",
 			"typeinfo": "c"
 		},
-		"clangd.arguments": [
-			"--compile-commands-dir=${workspaceFolder}/build"
-		]
+		"cortex-debug.variableUseNaturalFormat": false
 	}
 }
