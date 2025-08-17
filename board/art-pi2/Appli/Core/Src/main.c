@@ -25,6 +25,10 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include "lvgl.h"
+#include "lvgl_port.h"
+#include "demos/lv_demos.h"
+
 
 /* USER CODE END Includes */
 
@@ -45,6 +49,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 
+DMA2D_HandleTypeDef hdma2d;
+
 I2C_HandleTypeDef hi2c2;
 
 LTDC_HandleTypeDef hltdc;
@@ -60,6 +66,7 @@ static void MX_GPIO_Init(void);
 static void MX_UART4_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_LTDC_Init(void);
+static void MX_DMA2D_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -127,22 +134,67 @@ int main(void)
   MX_UART4_Init();
   MX_I2C2_Init();
   MX_LTDC_Init();
+  MX_DMA2D_Init();
   /* USER CODE BEGIN 2 */
-  printf("art-pi2 application\r\n");
+  lvgl_port_init();
+  printf("[info application]Hello main!\r\n");
 
+  lv_demo_benchmark();
+  // lv_demo_widgets();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   // HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_RESET);
   while (1) {
-    HAL_GPIO_TogglePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin);
-    HAL_Delay(500);
+    lv_timer_handler();
+    // HAL_GPIO_TogglePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin);
+    HAL_Delay(5);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
+}
+
+/**
+  * @brief DMA2D Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_DMA2D_Init(void)
+{
+
+  /* USER CODE BEGIN DMA2D_Init 0 */
+
+  /* USER CODE END DMA2D_Init 0 */
+
+  /* USER CODE BEGIN DMA2D_Init 1 */
+
+  /* USER CODE END DMA2D_Init 1 */
+  hdma2d.Instance = DMA2D;
+  hdma2d.Init.Mode = DMA2D_M2M;
+  hdma2d.Init.ColorMode = DMA2D_OUTPUT_RGB565;
+  hdma2d.Init.OutputOffset = 0;
+  hdma2d.LayerCfg[1].InputOffset = 0;
+  hdma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
+  hdma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  hdma2d.LayerCfg[1].InputAlpha = 0;
+  hdma2d.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA;
+  hdma2d.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR;
+  hdma2d.LayerCfg[1].ChromaSubSampling = DMA2D_NO_CSS;
+  if (HAL_DMA2D_Init(&hdma2d) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_DMA2D_ConfigLayer(&hdma2d, 1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN DMA2D_Init 2 */
+
+  /* USER CODE END DMA2D_Init 2 */
+
 }
 
 /**
@@ -240,7 +292,7 @@ static void MX_LTDC_Init(void)
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-  pLayerCfg.FBStartAdress = 0;
+  pLayerCfg.FBStartAdress = (uint32_t)lvgl_get_fb(0);
   pLayerCfg.ImageWidth = 320;
   pLayerCfg.ImageHeight = 480;
   pLayerCfg.Backcolor.Blue = 0;

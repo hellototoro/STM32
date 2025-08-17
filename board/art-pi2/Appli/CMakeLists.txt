@@ -52,6 +52,16 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
 # Enable CMake support for ASM and C languages
 enable_language(C ASM)
 
+# 添加 LVGL 子模块
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0126 NEW)
+# set(CMAKE_POLICY_DEFAULT_CMP0079 NEW) # 允许跨目录链接目标
+set(CONFIG_LV_BUILD_DEMOS ON)
+set(CONFIG_LV_BUILD_EXAMPLES ON)
+set(LV_BUILD_CONF_PATH "${CMAKE_SOURCE_DIR}/Core/Inc/lv_conf.h")
+add_subdirectory(../../art-pi/projects/applications/lvgl ${BIN_OUTPUT_DIR}/lvgl)
+target_link_libraries(lvgl PUBLIC stm32cubemx)
+
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
@@ -61,6 +71,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    Core/Src/lvgl_port.cpp
     Bsp/Components/ili9481/ili9481.c
 )
 
@@ -70,8 +81,12 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 # Add linked libraries
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
+target_link_libraries(${CMAKE_PROJECT_NAME}
     # Add user defined libraries
+    lvgl
+    lvgl::demos
+    lvgl::examples
+    lvgl::thorvg
 )
 
 # Remove wrong libob.a library dependency when using cpp files

@@ -42,7 +42,7 @@
 /* #define HAL_CRC_MODULE_ENABLED   */
 /* #define HAL_CRYP_MODULE_ENABLED   */
 /* #define HAL_DCMIPP_MODULE_ENABLED   */
-/* #define HAL_DMA2D_MODULE_ENABLED   */
+#define HAL_DMA2D_MODULE_ENABLED
 /* #define HAL_DTS_MODULE_ENABLED   */
 /* #define HAL_ETH_MODULE_ENABLED   */
 /* #define HAL_FDCAN_MODULE_ENABLED   */
@@ -231,6 +231,7 @@
 #define USE_HAL_USART_REGISTER_CALLBACKS      0U
 #define USE_HAL_WWDG_REGISTER_CALLBACKS       0U
 #define USE_HAL_XSPI_REGISTER_CALLBACKS       0U
+#define USE_HAL_LTDC_REGISTER_CALLBACKS       1U
 
 /* ################## SPI peripheral configuration ########################## */
 
