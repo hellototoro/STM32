@@ -26,6 +26,16 @@ STM32/
 
 ## 子项目说明
 
+### 内存布局
+
+```text
+0x08000000 - 0x0801FFFF : Bootloader (128KB)
+0x90000000 - 0x907FFFFF : Applications (8MB QSPI Flash)
+0x20000000 - 0x2001FFFF : SRAM1 (128KB)
+0x30000000 - 0x30047FFF : SRAM2 (288KB) 
+0x38000000 - 0x3800FFFF : SRAM4 (64KB)
+```
+
 ### 1. Bootloader (引导程序)
 
 位置: `board/art-pi/projects/bootloader/`
@@ -160,39 +170,3 @@ STM32_Programmer_CLI --connect port=swd --download applications.elf 0x90000000 -
 - 任务间通信
 - 内存管理
 - 定时器服务
-
-## 编译说明
-
-### 警告优化
-
-项目经过链接警告优化:
-
-- ✅ CMake依赖修复 - 解决循环依赖
-- ✅ 编译器标志优化 - 禁用非关键警告
-
-### 内存布局
-
-```text
-0x08000000 - 0x0801FFFF : Bootloader (128KB)
-0x90000000 - 0x907FFFFF : Applications (8MB QSPI Flash)
-0x20000000 - 0x2001FFFF : SRAM1 (128KB)
-0x30000000 - 0x30047FFF : SRAM2 (288KB) 
-0x38000000 - 0x3800FFFF : SRAM4 (64KB)
-```
-
-## 许可证
-
-本项目采用开源许可证，具体请查看各子项目的许可证文件。
-
-## 贡献指南
-
-1. Fork 本项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建 Pull Request
-
-## 联系方式
-
-- 项目维护者: hellototoro
-- 问题反馈: 通过 GitHub Issues
