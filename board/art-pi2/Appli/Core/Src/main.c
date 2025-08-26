@@ -100,8 +100,6 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-  SCB_InvalidateDCache();
-  SCB_InvalidateICache();
 
   /* USER CODE END 1 */
 
@@ -136,8 +134,8 @@ int main(void)
   MX_LTDC_Init();
   MX_DMA2D_Init();
   /* USER CODE BEGIN 2 */
+  printf("\n\n[info application]Hello main!\r\n");
   lvgl_port_init();
-  printf("[info application]Hello main!\r\n");
 
   lv_demo_benchmark();
   // lv_demo_widgets();

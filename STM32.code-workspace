@@ -15,9 +15,6 @@
 			"path": "board/art-pi2/Boot"
 		},
 		{
-			"path": "board/art-pi2"
-		},
-		{
 			"path": "board/art-pi2/Appli"
 		},
 		{

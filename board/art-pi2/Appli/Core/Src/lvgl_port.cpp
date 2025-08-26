@@ -11,7 +11,6 @@
 #if LV_USE_INDEV_TOUCH
 #include "Ft5xx6.hpp"
 #endif
-
 /*********************
  *      DEFINES
  *********************/
@@ -54,8 +53,8 @@ static volatile lv_indev_state_t last_state = LV_INDEV_STATE_RELEASED;
 #if defined(__ARMCC_VERSION)
 uint8_t lvgl_fb1[MY_DISP_HOR_RES * MY_DISP_VER_RES * 2] __attribute__((aligned(32)));
 #else
-// extern uint8_t lvgl_fb1;
-uint8_t lvgl_fb1[MY_DISP_HOR_RES * MY_DISP_VER_RES * 2];
+extern uint8_t lvgl_fb1;
+// uint8_t lvgl_fb1[MY_DISP_HOR_RES * MY_DISP_VER_RES * 2];
 extern uint8_t lvgl_fb2;
 #endif
 
@@ -68,7 +67,7 @@ void lvgl_port_init(void) {
   uint8_t *fb1 = (uint8_t *)lvgl_fb1;
   uint8_t *fb2 = NULL;
 #else
-  uint8_t *fb1 = (uint8_t *)lvgl_fb1;
+  uint8_t *fb1 = (uint8_t *)&lvgl_fb2;
   uint8_t *fb2 = NULL;
 #if LV_DOUBLE_BUFFER
   fb2 = (uint8_t *)&lvgl_fb2;
@@ -87,7 +86,7 @@ void lvgl_port_init(void) {
 
 uint8_t *lvgl_get_fb(uint8_t layerIndex) {
   if (layerIndex == 0) {
-    return lvgl_fb1;
+    return (uint8_t *)&lvgl_fb2;
   }
   return NULL;
 }

@@ -35,6 +35,7 @@
 /* Entry Point */
 ENTRY(Reset_Handler)
 
+INCLUDE lvgl_fb_symbol.ld
 
 /* Memories definition */
 MEMORY
@@ -145,6 +146,8 @@ SECTIONS
     PROVIDE_HIDDEN (__fini_array_end = .);
     . = ALIGN(4);
   } >FLASH
+
+  INCLUDE lvgl_fb_section.ld
 
   /* Used by the startup to initialize data */
   _sidata = LOADADDR(.data);

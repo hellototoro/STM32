@@ -26,8 +26,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(STM32_MCU_FLAGS  "-mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard " )
 
 #Linker options
-set(STM32_LINKER_SCRIPT stm32h7rsxx_ROMxspi2.ld)
-# set(STM32_LINKER_SCRIPT stm32h7rsxx_RAMxspi1_ROMxspi2.ld)
+# set(STM32_LINKER_SCRIPT stm32h7rsxx_ROMxspi2.ld)
+set(STM32_LINKER_SCRIPT stm32h7rsxx_RAMxspi1_ROMxspi2.ld)
 set(STM32_LINKER_OPTION  )
 
 # Set the project name
@@ -78,6 +78,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
+    ${CMAKE_SOURCE_DIR}
 )
 
 # Add linked libraries
